@@ -6,6 +6,10 @@ checkout:
 machine:
   timezone: Asia/Tokyo
 
+test:
+  override:
+    - echo "No tests."
+
 dependencies:
   pre:
     - go get -v github.com/spf13/hugo
