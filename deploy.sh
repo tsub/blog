@@ -2,6 +2,9 @@
 
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
+# Clone github-pages repository.
+git clone git@github.com:tsub/tsub.github.io.git public
+
 # Build the project.
 hugo # if using a theme, replace by `hugo -t <yourtheme>`
 
@@ -22,3 +25,6 @@ git push origin master
 
 # Come Back
 cd ..
+
+# Clean directory
+rm -rf public
