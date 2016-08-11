@@ -1,0 +1,19 @@
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init --recursive
+
+machine:
+  timezone: Asia/Tokyo
+
+dependencies:
+  pre:
+    - go get -v github.com/spf13/hugo
+    - git config --global user.name "tsub"
+    - git config --global user.email "tsubasatakayama511@gmail.com"
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - ./deploy.sh
