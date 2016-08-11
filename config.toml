@@ -1,0 +1,15 @@
+baseurl = "http://blog.tsub.me/"
+languageCode = "ja"
+title = "tsub's blog"
+theme = "angels-ladder"
+
+[Params]
+subtitle = "雑なメモ"
+facebook = ""
+twitter = "https://twitter.com/_tsub_"
+github = "https://github.com/tsub"
+showsRSS = true
+profile = "/images/profile.jpg"
+copyright = "Copyright 2016 tsub"
+analytics = ""
+shareThis = ""
