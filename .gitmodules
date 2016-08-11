@@ -1,3 +1,7 @@
 [submodule "themes/angels-ladder"]
 	path = themes/angels-ladder
 	url = git@github.com:tsub/angels-ladder.git
+[submodule "public"]
+	path = public
+	url = git@github.com:tsub/tsub.github.io.git
+	branch = master
