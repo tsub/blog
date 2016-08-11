@@ -11,5 +11,5 @@ github = "https://github.com/tsub"
 showsRSS = true
 profile = "/images/profile.jpg"
 copyright = "Copyright 2016 tsub"
-analytics = ""
+analytics = "UA-63212158-2"
 shareThis = ""
