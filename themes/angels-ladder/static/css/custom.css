@@ -1,0 +1,17 @@
+.summary .meta {
+  margin-bottom: 0.5rem;
+}
+
+.summary > p {
+  line-height: 2.0em;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.summary > p a {
+  color: #29abe2 !important;
+}
+
+.summary > p img {
+  margin: 12px 0;
+}
