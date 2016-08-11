@@ -24,4 +24,10 @@ Hugoの場合はthemesディレクトリの中に各テーマのリポジトリ�
 今回使わせていただいたテーマは[angels-ladder](https://github.com/tanksuzuki/angels-ladder)というテーマです。
 ([forkして少しカスタマイズ](https://github.com/tsub/angels-ladder/tree/my-customized-theme)はしてますが)
 
+デプロイはCircleCIを使って自動デプロイしています。
+
+こちらの記事を参考にさせていただきました。
+
+[HugoとCircleCIでGitHub PagesにBlogを公開してみた](http://hori-ryota.com/blog/create-blog-with-hugo-and-circleci/)
+
 というわけで今後もよろしくお願いします
