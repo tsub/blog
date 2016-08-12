@@ -109,7 +109,7 @@ dockerforblogpost20160625_app_1 exited with code 0
 
 `http://localhost:8080`にアクセスしてnginxが立ち上がっているか確認しておきます。
 
-![nginx test](https://gyazo.com/2babcf88a2fa4a4093a337e80370ba81.jpg)
+[![](https://gyazo.com/2babcf88a2fa4a4093a337e80370ba81.jpg)](https://gyazo.com/2babcf88a2fa4a4093a337e80370ba81.jpg)
 
 ## 複数のdocker containerに対してテストする
 それでは、本題の複数のdocker containerに対してserverspecでテストを実行できる環境を作りましょう。
