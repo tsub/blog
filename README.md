@@ -10,6 +10,12 @@ $ brew install hugo
 $ hugo server
 ```
 
+## How to add new post
+
+```
+$ hugo new post/post-title.md
+```
+
 ## How to Deploy
 
 ```
