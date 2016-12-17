@@ -151,7 +151,7 @@ HBFavは単純にはてなブックマーク上でお気に入りに登録して
 
 自分からもどんどん共有していってお互いに良い感じに情報をシェアし合えるようになれるといいと思います。
 
-![slack](https://gyazo.com/8a2c3c544b98bed22eb1320db3afc28d.png)
+![slack](https://gyazo.com/a057d926f8fa7f0e164d80a6ca7b8620.png)
 
 ## 収集した情報を共有する
 
