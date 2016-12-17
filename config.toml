@@ -1,4 +1,4 @@
-baseurl = "http://blog.tsub.me/"
+baseurl = "https://blog.tsub.me/"
 languageCode = "ja"
 title = "tsub's blog"
 theme = "angels-ladder"
