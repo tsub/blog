@@ -11,7 +11,7 @@ title = "neovimのterminal emulatorが便利すぎた"
 
 例えばコードを書きつつ、rspecを実行したりpryやtigを使ったりなど、非常に便利です。
 
-[![](https://gyazo.com/ca4b9ef1599801f1948721befe274654.jpg)](https://gyazo.com/ca4b9ef1599801f1948721befe274654.jpg)
+[![](https://gyazo.com/ca4b9ef1599801f1948721befe274654.png)](https://gyazo.com/ca4b9ef1599801f1948721befe274654.png)
 
 <!--more-->
 
@@ -80,4 +80,4 @@ tnoremap <silent> jj <C-\><C-n>
 ## おまけ
 vimの中でemacsを起動する、という芸当もできます
 
-[![](https://gyazo.com/b97d25325e66dc121da6edb933354b2d.jpg)](https://gyazo.com/b97d25325e66dc121da6edb933354b2d.jpg)
+[![](https://gyazo.com/b97d25325e66dc121da6edb933354b2d.png)](https://gyazo.com/b97d25325e66dc121da6edb933354b2d.png)
