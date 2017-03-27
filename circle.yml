@@ -5,12 +5,19 @@ checkout:
 
 machine:
   timezone: Asia/Tokyo
+  services:
+    - docker
 
 dependencies:
   pre:
     - go get -v github.com/spf13/hugo
     - git config --global user.name $GIT_USER_NAME
     - git config --global user.email $GIT_USER_EMAIL
+  override:
+    - docker version
+    - docker info
+    - bin/build
+    - docker images
 
 test:
   override:
@@ -21,3 +28,7 @@ deployment:
     branch: master
     commands:
       - ./deploy.sh
+  release:
+    tag: /v[0-9]+(\.[0-9]+)*/
+    commands:
+      - bin/deploy
