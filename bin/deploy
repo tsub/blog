@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -x
+
+IMAGE_TAG=${CIRCLE_TAG:-latest}
+
+docker tag tsub/blog tsub/blog:${IMAGE_TAG}
+docker push tsub/blog:${IMAGE_TAG}
