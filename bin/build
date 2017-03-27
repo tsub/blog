@@ -1,0 +1,4 @@
+#!/bin/bash
+
+hugo
+docker build -t tsub/blog .
