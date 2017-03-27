@@ -21,7 +21,7 @@ dependencies:
 
 test:
   override:
-    - echo "No tests."
+    - docker run -it tsub/blog echo 'Success to build tsub/blog image.'
 
 deployment:
   master:
