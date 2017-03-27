@@ -1,0 +1,8 @@
+version: '3'
+services:
+  blog:
+    build: .
+    container_name: blog
+    image: tsub/blog
+    ports:
+      - 80:80
