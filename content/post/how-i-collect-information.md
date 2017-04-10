@@ -91,7 +91,7 @@ RSSリーダーに登録しているフィードはだいたい以下のパタ�
 
 あとは、__Qiitaの新着投稿__もわりと良くて、気になる技術カテゴリを一通り購読しておくだけでたくさんの知見を得られます。
 
-![reeder.app](https://gyazo.com/4d307d73e1091c5b6519d7a4e3ec5a1a.png)
+![reeder.app](https://i.gyazo.com/4d307d73e1091c5b6519d7a4e3ec5a1a.png)
 
 ### HBFav
 
@@ -113,7 +113,7 @@ HBFavは単純にはてなブックマーク上でお気に入りに登録して
 
 あまりはてなブックマーク側だけでお気に入り登録しているユーザーというのは少ないのでこの辺りは増やしていってもいいのかもしれません。
 
-![HBFav](https://gyazo.com/76ba8d587d1eb6acff28248e1b78d9e3.png)
+![HBFav](https://i.gyazo.com/76ba8d587d1eb6acff28248e1b78d9e3.png)
 
 ### Podcast
 
@@ -127,7 +127,7 @@ HBFavは単純にはてなブックマーク上でお気に入りに登録して
 
 またアニメの話題なども多く、気軽に楽しく聴いていられるのでオススメです。
 
-![overcast](https://gyazo.com/058f98bc36564f1c614d2fb532ab8327.png)
+![overcast](https://i.gyazo.com/058f98bc36564f1c614d2fb532ab8327.png)
 
 ### 勉強会、イベント参加
 
@@ -151,7 +151,7 @@ HBFavは単純にはてなブックマーク上でお気に入りに登録して
 
 自分からもどんどん共有していってお互いに良い感じに情報をシェアし合えるようになれるといいと思います。
 
-![slack](https://gyazo.com/a057d926f8fa7f0e164d80a6ca7b8620.png)
+![slack](https://i.gyazo.com/a057d926f8fa7f0e164d80a6ca7b8620.png)
 
 ## 収集した情報を共有する
 
@@ -169,7 +169,7 @@ HBFavは単純にはてなブックマーク上でお気に入りに登録して
 
 その他にも、GitHubでスターを付けるとPocketでブックマークされ、同じようにはてなブックマークでブクマされます。
 
-![share_with_pocket](https://gyazo.com/3ce40c3dfda371dc81c09ec0c064ed3c.png)
+![share_with_pocket](https://i.gyazo.com/3ce40c3dfda371dc81c09ec0c064ed3c.png)
 
 一度Pocketでブックマークしている理由は、後から記事を読み返したい時に検索して探したいからです。
 
