@@ -28,7 +28,7 @@ Bloxはこれを使った一例と言えます
 
 この記事ではBloxについて試してみて分かった内容や所感について書いていきます
 
-![Blox thumbnail](https://gyazo.com/4c00e85fca7b228d7aa0d5f1e6dd1d27.png)
+![Blox thumbnail](https://i.gyazo.com/4c00e85fca7b228d7aa0d5f1e6dd1d27.png)
 
 <!--more-->
 
@@ -156,7 +156,7 @@ $ aws --region ap-northeast-1 cloudformation create-stack \
 
 CloudFormation管理画面上でスタックのステータスがCREATE_COMPLETEになったらデプロイ完了です
 
-![CloudFormation Status](https://gyazo.com/52ad79c7fcee9719044fecadc351ddd9.png)
+![CloudFormation Status](https://i.gyazo.com/52ad79c7fcee9719044fecadc351ddd9.png)
 
 Bloxのエンドポイントを取得します。
 
@@ -176,13 +176,13 @@ BloxはAPI Gatewayを経由してAWSのIAM認証が可能です。
 
 認証にはAWS SignatureをサポートしているAPIクライアントの[Postman](https://www.getpostman.com/)を使うと便利です
 
-![Authenticate with Postman](https://gyazo.com/2a443a422e660c8a205cfab41191072b.png)
+![Authenticate with Postman](https://i.gyazo.com/2a443a422e660c8a205cfab41191072b.png)
 
 APIのテストとしてdaemon-schedulerのエンドポイントである`/v1/ping`を叩いてみます
 
 無事`200 OK`が返ってきました
 
-![API Test](https://gyazo.com/6e9d14a41b2bf427308879fea4e8f00b.png)
+![API Test](https://i.gyazo.com/6e9d14a41b2bf427308879fea4e8f00b.png)
 
 これでBloxのセットアップは完了です
 
@@ -226,7 +226,7 @@ $ ecs-cli compose up
 
 無事、クラスタ内でタスクが実行されました
 
-![Setup ECS cluster](https://gyazo.com/d4b8ce66e850b182d73f773e286d89ae.png)
+![Setup ECS cluster](https://i.gyazo.com/d4b8ce66e850b182d73f773e286d89ae.png)
 
 さて、それではdaemon-schedulerを触っていきます。
 
@@ -282,11 +282,11 @@ HTTP Response Code: 200
 
 試しにコンテナインスタンスの数を増やしてみましょう。
 
-![Increament cluster instance](https://gyazo.com/8e1085117f65077e197cf4a13e3c3e12.png)
+![Increament cluster instance](https://i.gyazo.com/8e1085117f65077e197cf4a13e3c3e12.png)
 
 新たに追加されたコンテナインスタンスでタスクが実行され始めました 👏
 
-![daemon-scheduler DEMO](https://gyazo.com/87c17323e02353dca7716ad07cbaa1ed.png)
+![daemon-scheduler DEMO](https://i.gyazo.com/87c17323e02353dca7716ad07cbaa1ed.png)
 
 このように、特に何もしなくともコンテナインスタンスが追加されるたびにdaemon-schedulerが自動で対象のタスクを実行してくれるようになります。
 
