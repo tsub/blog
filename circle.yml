@@ -9,8 +9,6 @@ machine:
     - docker
 
 dependencies:
-  pre:
-    - go get -v github.com/spf13/hugo
   override:
     - docker version
     - docker info
