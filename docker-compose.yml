@@ -1,8 +1,11 @@
 version: '3'
 services:
-  blog:
-    build: .
-    container_name: blog
-    image: tsub/blog
+  hugo:
+    build:
+      context: .
+      dockerfile: Dockerfile-hugo
+    command: [server, --bind=0.0.0.0]
+    container_name: hugo
+    image: tsub/blog:hugo
     ports:
-      - 80:80
+      - 80:1313
