@@ -2,5 +2,6 @@
 
 set -x
 
-hugo
+docker build -t tsub/blog:hugo -f Dockerfile-hugo .
+docker cp $(docker run -d tsub/blog:hugo):/app/public public
 docker build -t tsub/blog .

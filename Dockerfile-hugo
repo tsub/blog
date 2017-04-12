@@ -1,0 +1,16 @@
+FROM golang:1.8-alpine
+LABEL maintainer "tsubasatakayama511@gmail.com"
+
+ENV HUGO_DEPENDENCIES="git"
+
+RUN apk add --update --no-cache \
+        ${HUGO_DEPENDENCIES} && \
+    go get -v github.com/spf13/hugo && \
+    apk del --purge \
+        ${HUGO_DEPENDENCIES}
+
+COPY . /app
+WORKDIR /app
+RUN hugo
+
+ENTRYPOINT ["hugo"]

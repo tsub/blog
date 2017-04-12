@@ -6,18 +6,16 @@
 $ git clone git@github.com:tsub/blog.git
 $ cd blog
 $ git submodule update --init
-$ brew install hugo
-$ hugo server
+$ docker-compose up -d
 ```
 
 ## How to add new post
 
 ```
-$ hugo new post/post-title.md
+$ docker-compose run --rm hugo new post/post-title.md
 ```
 
 ## How to Deploy
 
-```
-$ ./deploy.sh
-```
+1. [Create a new release](https://github.com/tsub/blog/releases/new)
+2. Push [tsub/blog](https://hub.docker.com/r/tsub/blog/) image to DockerHub on CircleCI
