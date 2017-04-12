@@ -11,5 +11,6 @@ RUN apk add --update --no-cache \
 
 COPY . /app
 WORKDIR /app
+RUN hugo
 
 ENTRYPOINT ["hugo"]
