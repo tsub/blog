@@ -2,7 +2,7 @@
 
 set -x
 
-IMAGE_TAG=${CIRCLE_TAG:-latest}
+IMAGE_TAG=${1:-latest}
 
 docker tag tsub/blog tsub/blog:${IMAGE_TAG}
 docker push tsub/blog:${IMAGE_TAG}
