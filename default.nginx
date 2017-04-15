@@ -3,16 +3,20 @@ server {
   server_name localhost;
 
   location / {
+    if ($http_x_forwarded_proto != "https") {
+      return 301 https://$host$request_uri;
+    }
+
     root  /usr/share/nginx/html;
     index index.html index.htm;
+  }
+
+  location = /health {
+    return 204;
   }
 
   error_page 500 502 503 504 /50x.html;
   location = /50x.html {
     root /usr/share/nginx/html;
-  }
-
-  if ($http_x_forwarded_proto != "https") {
-    return 301 https://$host$request_uri;
   }
 }
