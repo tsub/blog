@@ -11,7 +11,7 @@ server {
     index index.html index.htm;
   }
 
-  location = /health {
+  location = /healthz {
     return 204;
   }
 
