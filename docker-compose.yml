@@ -8,6 +8,6 @@ services:
     container_name: hugo
     image: tsub/blog:hugo
     ports:
-      - 80:1313
+      - 1313:1313
     volumes:
       - .:/app
