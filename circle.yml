@@ -17,7 +17,7 @@ jobs:
           command: git submodule sync && git submodule update --init --recursive
       - run:
           name: Build tsub/blog image
-          command: bin/build
+          command: sh bin/build
       - run:
           name: Test tsub/blog image
           command: docker run -it tsub/blog echo 'Success to build tsub/blog image.'
