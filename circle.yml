@@ -1,28 +1,31 @@
-checkout:
-  post:
-    - git submodule sync
-    - git submodule update --init --recursive
-
-machine:
-  timezone: Asia/Tokyo
-  services:
-    - docker
-
-dependencies:
-  override:
-    - docker version
-    - docker info
-    - bin/build
-    - docker images
-
-test:
-  override:
-    - docker run -it tsub/blog echo 'Success to build tsub/blog image.'
-
-deployment:
-  release:
-    tag: /[0-9]+(\.[0-9]+)*/
-    commands:
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - bin/deploy
-      - bin/deploy $CIRCLE_TAG
+version: 2
+jobs:
+  build:
+    docker:
+      - image: alpine:3.5
+    working_directory: /home/circleci/blog
+    steps:
+      - setup_remote_docker:
+          # https://circleci.com/docs/2.0/docker-layer-caching/
+          reusable: true
+      - run:
+          name: Install System Dependencies
+          command: apk add --update --no-cache git openssh tar gzip ca-certificates
+      - checkout
+      - run:
+          name: Init git submodules
+          command: git submodule sync && git submodule update --init --recursive
+      - run:
+          name: Build tsub/blog image
+          command: bin/build
+      - run:
+          name: Test tsub/blog image
+          command: docker run -it tsub/blog echo 'Success to build tsub/blog image.'
+      - deploy:
+          name: Deploy tsub/blog image
+          command: |
+            if [ -n "${CIRCLE_TAG}" ]; then
+              docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+              bin/deploy
+              bin/deploy $CIRCLE_TAG
+            fi
