@@ -20,7 +20,9 @@ jobs:
           command: sh bin/build
       - run:
           name: Test tsub/blog image
-          command: docker run -it tsub/blog echo 'Success to build tsub/blog image.'
+          command: |
+            docker run -d --name blog tsub/blog
+            docker run --network container:blog appropriate/curl --retry 10 --retry-connrefused http://localhost/healthz
       - deploy:
           name: Deploy tsub/blog image
           command: |
