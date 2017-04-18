@@ -10,7 +10,7 @@ jobs:
           reusable: true
       - run:
           name: Install System Dependencies
-          command: apk add --update --no-cache git openssh tar gzip ca-certificates
+          command: apk add --update --no-cache git openssh tar gzip ca-certificates docker
       - checkout
       - run:
           name: Init git submodules
