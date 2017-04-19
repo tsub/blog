@@ -5,7 +5,7 @@
 ```
 $ git clone git@github.com:tsub/blog.git
 $ cd blog
-$ git submodule update --init
+$ bin/setup
 $ docker-compose up -d
 ```
 
