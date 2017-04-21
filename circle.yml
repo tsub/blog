@@ -10,7 +10,9 @@ jobs:
           reusable: true
       - run:
           name: Install System Dependencies
-          command: apk add --update --no-cache git openssh tar gzip ca-certificates
+          command: |
+            # https://circleci.com/docs/2.0/custom-images/#required-tools
+            apk add --update --no-cache git openssh tar gzip ca-certificates
       - run:
           name: Install Docker client
           command: |
