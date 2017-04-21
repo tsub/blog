@@ -23,7 +23,9 @@ jobs:
       - checkout
       - run:
           name: Init git submodules
-          command: git submodule sync && git submodule update --init --recursive
+          command: |
+            git submodule sync
+            git submodule update --init --recursive
       - run:
           name: Build tsub/blog image
           command: sh bin/build
