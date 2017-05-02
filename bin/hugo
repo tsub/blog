@@ -1,0 +1,5 @@
+#!/bin/sh
+
+ARGS=${@:-"--help"}
+
+docker-compose run --rm hugo $ARGS
