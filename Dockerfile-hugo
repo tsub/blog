@@ -1,16 +1,15 @@
 FROM frolvlad/alpine-glibc:alpine-3.6
 LABEL maintainer "tsubasatakayama511@gmail.com"
 
-ENV HUGO_DEPENDENCIES="git curl" \
-    HUGO_VERSION="0.26"
+ENV HUGO_VERSION="0.26"
 
-RUN apk add --update --no-cache \
-        ${HUGO_DEPENDENCIES} && \
+RUN apk add --update --no-cache --virtual build-dependencies \
+        git \
+        curl && \
     curl -fSL -o hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" && \
     tar -zxvf hugo.tar.gz -C /usr/local/bin && \
     rm hugo.tar.gz && \
-    apk del --purge \
-        ${HUGO_DEPENDENCIES}
+    apk del --purge build-dependencies
 
 COPY . /app
 WORKDIR /app
