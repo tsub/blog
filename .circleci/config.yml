@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Build tsub/blog image
           command: |
-            sh bin/build
+            bin/build
             docker save tsub/blog:latest -o blog.tar
       - persist_to_workspace:
           root: /home/circleci/blog
