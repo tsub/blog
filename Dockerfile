@@ -1,5 +1,5 @@
-FROM nginx:alpine
-LABEL maintainer "tsubasatakayama511@gmail.com"
+FROM nginx:1.13-alpine
+LABEL maintainer "tsub <tsubasatakayama511@gmail.com>"
 
-COPY public /usr/share/nginx/html
+COPY --from=tsub/blog:hugo /app/public /usr/share/nginx/html
 COPY default.nginx /etc/nginx/conf.d/default.conf

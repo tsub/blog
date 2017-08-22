@@ -1,3 +1,6 @@
+.circleci
 .git
 .gitignore
 .gitmodules
+Dockerfile
+Dockerfile-hugo
