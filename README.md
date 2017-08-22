@@ -6,7 +6,6 @@
 $ git clone git@github.com:tsub/blog.git
 $ cd blog
 $ bin/setup
-$ docker-compose up -d
 ```
 
 ## How to add new post
@@ -19,3 +18,11 @@ $ docker-compose run --rm hugo new post/post-title.md
 
 1. [Create a new release](https://github.com/tsub/blog/releases/new)
 2. Push [tsub/blog](https://hub.docker.com/r/tsub/blog/) image to DockerHub on CircleCI
+
+### Manual deployment
+
+```
+$ bin/build
+$ docker login
+$ bin/deploy <tag>
+```
