@@ -46,7 +46,7 @@ jobs:
           name: Test tsub/blog image
           command: |
             docker run -d --name blog tsub/blog
-            docker run --network container:blog appropriate/curl --retry 10 --retry-connrefused http://localhost/healthz
+            docker run --network container:blog appropriate/curl --retry 10 --retry-connrefused http://localhost
 
   deploy:
     docker: *docker
