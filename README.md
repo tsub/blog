@@ -11,7 +11,7 @@ $ bin/setup
 ## How to add new post
 
 ```
-$ docker-compose run --rm hugo new post/post-title.md
+$ bin/hugo new post/post-title.md
 ```
 
 ## How to Deploy
