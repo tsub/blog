@@ -1,14 +1,14 @@
 version: 2
 jobs:
   build:
-    docker:
+    docker: &docker
       - image: docker:17.03-git
     working_directory: /home/circleci/blog
     steps:
-      - setup_remote_docker:
+      - setup_remote_docker: &setup_remote_docker
           # https://circleci.com/docs/2.0/docker-layer-caching/
           reusable: true
-      - run:
+      - run: &install_system_dependencies
           name: Install System Dependencies
           command: |
             # https://circleci.com/docs/2.0/custom-images/#required-tools
@@ -21,17 +21,62 @@ jobs:
             git submodule update --init --recursive
       - run:
           name: Build tsub/blog image
-          command: sh bin/build
+          command: |
+            sh bin/build
+            docker save tsub/blog:latest -o blog.tar
+      - persist_to_workspace:
+          root: /home/circleci/blog
+          paths:
+            - themes
+            - blog.tar
+
+  test:
+    docker: *docker
+    working_directory: /home/circleci/blog
+    steps:
+      - setup_remote_docker: *setup_remote_docker
+      - run: *install_system_dependencies
+      - checkout
+      - attach_workspace: &attach_workspace
+          at: /home/circleci/blog
+      - run: &load_docker_image
+          name: Load docker image
+          command: docker load -i blog.tar
       - run:
           name: Test tsub/blog image
           command: |
             docker run -d --name blog tsub/blog
             docker run --network container:blog appropriate/curl --retry 10 --retry-connrefused http://localhost/healthz
+
+  deploy:
+    docker: *docker
+    working_directory: /home/circleci/blog
+    steps:
+      - setup_remote_docker: *setup_remote_docker
+      - run: *install_system_dependencies
+      - checkout
+      - attach_workspace: *attach_workspace
+      - run: *load_docker_image
       - deploy:
           name: Deploy tsub/blog image
           command: |
-            if [ -n "${CIRCLE_TAG}" ]; then
-              docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-              bin/deploy
-              bin/deploy $CIRCLE_TAG
-            fi
+            docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+            bin/deploy
+            bin/deploy $CIRCLE_TAG
+
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
