@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginx:1.13-alpine
 LABEL maintainer "tsub <tsubasatakayama511@gmail.com>"
 
 COPY --from=tsub/blog:hugo /app/public /usr/share/nginx/html
