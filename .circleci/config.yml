@@ -2,12 +2,13 @@ version: 2
 jobs:
   build:
     docker: &docker
-      - image: docker:17.03-git
+      - image: docker:17.06-git
     working_directory: /home/circleci/blog
     steps:
       - setup_remote_docker: &setup_remote_docker
           # ref: https://circleci.com/docs/2.0/docker-layer-caching/
           reusable: true
+          version: 17.06.0-ce
       - run: &install_system_dependencies
           name: Install System Dependencies
           command: |
