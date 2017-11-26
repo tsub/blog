@@ -31,24 +31,6 @@ jobs:
             - themes
             - blog.tar
 
-  test:
-    docker: *docker
-    working_directory: /home/circleci/blog
-    steps:
-      - setup_remote_docker: *setup_remote_docker
-      - run: *install_system_dependencies
-      - checkout
-      - attach_workspace: &attach_workspace
-          at: /home/circleci/blog
-      - run: &load_docker_image
-          name: Load docker image
-          command: docker load -i blog.tar
-      - run:
-          name: Test tsub/blog image
-          command: |
-            docker run -d --name blog tsub/blog
-            docker run --network container:blog appropriate/curl --retry 10 --retry-connrefused http://localhost
-
   deploy:
     docker: *docker
     working_directory: /home/circleci/blog
@@ -56,8 +38,11 @@ jobs:
       - setup_remote_docker: *setup_remote_docker
       - run: *install_system_dependencies
       - checkout
-      - attach_workspace: *attach_workspace
-      - run: *load_docker_image
+      - attach_workspace:
+          at: /home/circleci/blog
+      - run:
+          name: Load docker image
+          command: docker load -i blog.tar
       - deploy:
           name: Deploy tsub/blog image
           command: |
@@ -68,15 +53,12 @@ jobs:
 
 workflows:
   version: 2
-  build_test_deploy:
+  build_deploy:
     jobs:
       - build
-      - test:
-          requires:
-            - build
       - deploy:
           requires:
-            - test
+            - build
           filters:
             branches:
               only: master
