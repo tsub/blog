@@ -1,5 +1,6 @@
-FROM nginx:1.13-alpine
+FROM steveltn/https-portal:1
 LABEL maintainer "tsub <tsubasatakayama511@gmail.com>"
 
-COPY --from=tsub/blog:hugo /app/public /usr/share/nginx/html
-COPY default.nginx /etc/nginx/conf.d/default.conf
+ENV BLOG_DOMAIN="blog.tsub.me"
+
+COPY --from=tsub/blog:hugo /app/public /var/www/vhosts/${BLOG_DOMAIN}
