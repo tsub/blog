@@ -66,29 +66,17 @@ jobs:
             # Deploy tsub/blog:latest image
             bin/deploy
 
-            # Deploy tsub/blog:$CIRCLE_TAG image
-            bin/deploy $CIRCLE_TAG
-
 workflows:
   version: 2
   build_test_deploy:
     jobs:
-      - build:
-          # ref: https://circleci.com/docs/2.0/workflows/#git-tag-job-execution
-          filters:
-            tags:
-              only: /.*/
+      - build
       - test:
           requires:
             - build
-          filters:
-            tags:
-              only: /.*/
       - deploy:
           requires:
             - test
           filters:
-            tags:
-              only: /.*/
             branches:
-              ignore: /.*/
+              only: master
