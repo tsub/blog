@@ -1,7 +1,7 @@
 +++
 tags = ["AWS Lambda", "Go", "SAM", "CloudFormation"]
 date = "2018-01-31T23:15:00+09:00"
-title = "AWS Lamabda with Golang と SAM に入門した"
+title = "AWS Lambda with Golang と SAM に入門した"
 +++
 
 先日 AWS Lambda の Golang サポートがリリースされました。
