@@ -1,0 +1,36 @@
+version: '2'
+services:
+  nginx:
+    scale: 2
+    start_on_create: true
+  lb:
+    scale: 1
+    start_on_create: true
+    lb_config:
+      certs: []
+      config: |-
+        frontend 80
+        redirect scheme https code 301 if !{ ssl_fc }
+      default_cert: blog
+      port_rules:
+      - hostname: blog.tsub.me
+        path: ''
+        priority: 1
+        protocol: http
+        service: nginx
+        source_port: 80
+        target_port: 80
+      - hostname: blog.tsub.me
+        priority: 2
+        protocol: https
+        service: nginx
+        source_port: 443
+        target_port: 80
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 42
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      reinitializing_timeout: 60000
