@@ -65,6 +65,16 @@ jobs:
 
             # Deploy tsub/blog:latest image
             bin/deploy
+      - deploy:
+          name: Deploy tsub/blog image to production environment
+          command: |
+            # ref: https://circleci.com/docs/2.0/building-docker-images/#mounting-folders
+            docker create -v /rancher --name settings busybox /bin/true
+            docker cp rancher settings:/
+
+            docker run -it --volumes-from settings rancher/cli:v0.6.7 \
+              --url $RANCHER_ENDPOINT --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY \
+              up -d --upgrade --confirm-upgrade --pull --stack blog --rancher-file /rancher/rancher-compose.yml -f /rancher/docker-compose.yml nginx
 
 workflows:
   version: 2
