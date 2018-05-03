@@ -2,6 +2,5 @@
 
 set -eux
 
-git submodule update --init
-docker-compose build
+bin/build
 docker-compose up -d

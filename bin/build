@@ -2,5 +2,6 @@
 
 set -eux
 
-docker build -t tsub/blog:hugo -f Dockerfile-hugo .
-docker build -t tsub/blog .
+git submodule sync
+git submodule update --init --recursive
+docker-compose build
