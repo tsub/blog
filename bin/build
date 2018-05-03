@@ -2,4 +2,6 @@
 
 set -eux
 
-docker build -t tsub/blog:hugo .
+git submodule sync
+git submodule update --init --recursive
+docker-compose build

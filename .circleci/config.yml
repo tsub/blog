@@ -18,11 +18,6 @@ jobs:
             # ref: https://circleci.com/docs/2.0/custom-images/#required-tools
             apk add --update --no-cache openssh tar gzip ca-certificates
       - checkout
-      - run:
-          name: Init git submodules
-          command: |
-            git submodule sync
-            git submodule update --init --recursive
       - deploy:
           name: Deploy to GitHub Pages
           command: |
