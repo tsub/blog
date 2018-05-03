@@ -1,7 +1,7 @@
 FROM frolvlad/alpine-glibc:alpine-3.6
 LABEL maintainer "tsub <tsubasatakayama511@gmail.com>"
 
-ENV HUGO_VERSION="0.36.1"
+ENV HUGO_VERSION="0.40.2"
 
 RUN apk add --update --no-cache --virtual build-dependencies \
         git \
