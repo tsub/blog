@@ -2,7 +2,25 @@
 
 set -eux
 
-IMAGE_TAG=${1:-latest}
+git worktree add -B gh-pages public origin/gh-pages
 
-docker tag tsub/blog tsub/blog:${IMAGE_TAG}
-docker push tsub/blog:${IMAGE_TAG}
+bin/build
+docker run --name hugo tsub/blog:hugo
+docker cp hugo:/app/public ./
+docker rm hugo
+
+cd public
+
+if [ "$(git status --short)" = "" ]; then
+  echo "nothing to commit, working tree clean"
+  cd -
+  git worktree remove public
+  exit 0
+fi
+
+git add .
+git commit -m "Release"
+git push origin gh-pages
+cd -
+
+git worktree remove public
