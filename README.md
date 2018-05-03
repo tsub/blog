@@ -16,13 +16,11 @@ $ bin/hugo new post/post-title.md
 
 ## How to Deploy
 
-1. [Create a new release](https://github.com/tsub/blog/releases/new)
-2. Push [tsub/blog](https://hub.docker.com/r/tsub/blog/) image to DockerHub on CircleCI
+Hosted by GitHub Pages.
+When you commit to the `master` branch it will be deployed automatically.
 
 ### Manual deployment
 
 ```
-$ bin/build
-$ docker login
-$ bin/deploy <tag>
+$ bin/deploy
 ```
