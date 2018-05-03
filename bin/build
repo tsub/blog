@@ -2,5 +2,4 @@
 
 set -eux
 
-docker build -t tsub/blog:hugo -f Dockerfile-hugo .
-docker build -t tsub/blog .
+docker build -t tsub/blog:hugo .
