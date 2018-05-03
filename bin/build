@@ -4,4 +4,4 @@ set -eux
 
 git submodule sync
 git submodule update --init --recursive
-docker-compose build
+docker build -t tsub/blog:hugo .
