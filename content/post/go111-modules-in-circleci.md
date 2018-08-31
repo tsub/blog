@@ -16,7 +16,7 @@ title = "Go 1.11 の Modules (vgo) を CircleCI で使う"
 
 移行は簡単で、以下のコマンドを実行するだけです。
 
-```
+```sh
 $ export GO111MODULE=on
 $ go mod init
 $ go mod download # go.sum を生成するため
@@ -24,14 +24,14 @@ $ go mod download # go.sum を生成するため
 
 これによって `go.mod` と `go.sum` が生成されるためこれらを git の管理下に入れれば OK です。
 
-```
+```sh
 $ ls
 go.mod  go.sum  Gopkg.lock  Gopkg.toml  main.go
 ```
 
 後は dep 用のファイルを削除しましょう。
 
-```
+```sh
 $ rm -f Gopkg.*
 ```
 
@@ -43,14 +43,14 @@ $ rm -f Gopkg.*
 
 [CircleCI の公式イメージ](https://hub.docker.com/r/circleci/golang/)で Go 1.11 がインストールされたイメージが公開されているのでこれを使います。
 
-```
+```sh
 $ docker run -t circleci/golang:1.11.0 go version
 go version go1.11 linux/amd64
 ```
 
 `.circleci/config.yml` で `circleci/golang:1.11.0` を使い、`$GO111MODULE` に `on` を指定すれば良いです。
 
-```
+```yaml
 version: 2
 jobs:
   build:
@@ -73,7 +73,7 @@ jobs:
 
 そのため、CircleCI のキャッシュを使います。
 
-```
+```yaml
 version: 2
 jobs:
   build:
@@ -127,7 +127,7 @@ Modules でダウンロードした依存パッケージはプロジェクトの
 
 これに習って CircleCI の設定を書くと、以下のようになります。
 
-```
+```yaml
 version: 2
 jobs:
   build:
