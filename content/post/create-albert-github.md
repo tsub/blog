@@ -1,6 +1,6 @@
 +++
 tags = ["Albert", "Python"]
-date = 2018-10-28T18:35:00Z
+date = "2018-10-28T18:35:00+09:00"
 title = "Albert で GitHub リポジトリを開ける拡張を作った"
 +++
 
