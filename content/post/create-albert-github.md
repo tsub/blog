@@ -14,6 +14,8 @@ Alfred がないとストレスフルです。
 
 <i class="fa fa-github"></i> [tsub/albert\-github: Open GitHub repository in browser with Albert](https://github.com/tsub/albert-github)
 
+![image](https://gyazo.com/fff7125ea22e33c863f6fd535d7f2b8b.png)
+
 <!--more-->
 
 ## Albert の拡張を作る方法
