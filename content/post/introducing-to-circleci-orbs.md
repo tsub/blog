@@ -70,6 +70,10 @@ Orbs は使うだけでなく、誰でも公開することができます。
 
 が、公式チュートリアルの説明が若干分かりづらかったと思ったので、(おそらく) 最小の公開手順を載せておきます。
 
+1. CircleCI 2.1 を使えるようにするためにビルド対象のプロジェクトの Adbanced Settings で `Enable build processing (preview)` を On にする
+
+    [![image](https://gyazo.com/94ca61b1918d93e28d34b655516fda2b.png)](https://gyazo.com/94ca61b1918d93e28d34b655516fda2b.png)
+
 1. [https://circleci.com/gh/organizations/<オーガニゼーション名>/settings#security](#) から CircleCI のオーガニゼーションの管理者がサードパーティ Orb の利用を許可する
 
     ![image](https://gyazo.com/c5416c34c5b55a92dd7c998c46c82760.png)
@@ -78,6 +82,7 @@ Orbs は使うだけでなく、誰でも公開することができます。
     * すでにインストール済みの場合は `$ circleci update install` でアップデートしておくと良い
 1. [こちらから](https://circleci.com/account/api) CircleCI の Personal API Token を生成
 1. `$ circleci setup` を実行して Personal API Token を入力
+1. GitHub にリポジトリを作っておく
 1. `$ circleci namespace create <任意の Orb のネームスペース> <VCS プロパイダ名> <CircleCI のオーガニゼーション名>` を実行
     * 例: `$ circleci namespace create tsub github tsub`
 1. 公開したい Orb の yml を用意
