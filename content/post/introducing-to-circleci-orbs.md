@@ -1,7 +1,7 @@
 +++
 tags = ["CircleCI"]
 date = "2018-11-10T17:47:00+09:00"
-title = "Circleci Orbs 入門"
+title = "CircleCI Orbs 入門"
 +++
 
 とうとう待望の CircleCI Orbs がリリースされたので一通り触ってみました。
