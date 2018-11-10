@@ -54,6 +54,10 @@ workflows:
 
 他にも Orb で commands や executors が提供されていれば同様に使うことができます。
 
+なお、CircleCI 2.1 の機能を使えるようにするためにビルド対象のプロジェクトの Adbanced Settings で `Enable build processing (preview)` を On にする必要があります。
+
+[![image](https://gyazo.com/94ca61b1918d93e28d34b655516fda2b.png)](https://gyazo.com/94ca61b1918d93e28d34b655516fda2b.png)
+
 詳しくは以下の公式チュートリアルをご覧ください。
 
 [Using Orbs \- CircleCI](https://circleci.com/docs/2.0/using-orbs/#section=configuration)
