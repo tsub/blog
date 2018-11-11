@@ -214,6 +214,55 @@ $ circleci local execute --help
 
 job 名の指定にも対応してもらえるとありがたいですね (`circleci/orb-tools` のリポジトリがどこにあるかわからず PR 投げれなかった)。
 
+**追記**
+
+はてブのコメントで `circleci/orb-tools` のリポジトリを教えていただきました。
+
+<blockquote class="hatena-bookmark-comment"><a class="comment-info" href="http://b.hatena.ne.jp/entry/373914771/comment/sue445" data-user-id="sue445" data-entry-url="http://b.hatena.ne.jp/entry/s/blog.tsub.me/post/introducing-to-circleci-orbs/" data-original-href="https://blog.tsub.me/post/introducing-to-circleci-orbs/" data-entry-favicon="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fblog.tsub.me%2F" data-user-icon="/users/sue445/profile.png">CircleCI Orbs 入門 | tsub's blog</a><ul class="comment-tag" style="list-style: none; margin: 0px;"><li style="float: left">[<a href="http://b.hatena.ne.jp/search/tag?q=circleci">circleci</a>]</li></ul><br><p style="clear: left">orbs-toolsのソースは <a href="https://github.com/CircleCI-Public/orb-tools-orb" target="_blank" rel="noopener nofollow">https://github.com/CircleCI-Public/orb-tools-orb</a> にありました</p><a class="datetime" href="http://b.hatena.ne.jp/sue445/20181111#bookmark-373914771"><span class="datetime-body">2018/11/11 18:03</span></a></blockquote><script src="https://b.st-hatena.com/js/comment-widget.js" charset="utf-8" async></script>
+
+さっそくリポジトリに PR を送ろうとコードを読んでいたところ、どうやら `$ circleci local execute` の `--job` オプションを使わなくとも良い方法があったようです。
+
+以下のようにテスト用の YAML で、テスト対象の Orb で定義している job を workflows の中で呼び出し、`name` パラメータに `build` を指定すると、実際にテスト実行される時には `build` という名前の job になるようです。
+
+```yaml
+# src/hello-world/test.yml
+version: "2.1"
+
+workflows:
+  test-hello-world:
+    jobs:
+      - hello-world/hello_world:
+          name: build
+```
+
+実際には以下の箇所で `$ circleci config process` コマンドにより YAML がローカル実行可能なものにコンパイルされるときに job 名が `build` に置き換えられます。
+
+[![image](https://gyazo.com/a77a0269634c7207751c35a6170810dc.png)](https://gyazo.com/a77a0269634c7207751c35a6170810dc.png)
+
+コンパイル後は以下のような YAML が生成されていました。これなら `$ circleci local execute` コマンドで実行できます (`workflows` は動かないが問題ない)。
+
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+    - image: busybox
+    steps:
+    - run:
+        command: echo hello
+        name: Echo "hello"
+    - run:
+        command: echo world
+        name: Echo "world"
+workflows:
+  test-hello-world:
+    jobs:
+    - build
+  version: 2
+```
+
+とはいえ Orb のソースコードや circleci コマンドの挙動を熟知していないと使えないので、だいぶ分かりづらいですね。
+
 ### Orb の自動デプロイ
 
 他にも、`publish` や `increment` という job が提供されていて、これを使うことで Orb の自動デプロイを簡単に実装することができます。
