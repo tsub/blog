@@ -2,6 +2,7 @@
 tags = ["AWS", "Alfred"]
 date = "2019-10-06T14:35:00+09:00"
 title = "「aws-vault loginでChromeのウィンドウをAWSアカウント毎に分離する」を Alfred 用に作った"
+images = ["https://i.gyazo.com/33341687e0419d3863f913a00997744c.gif"]
 +++
 
 <i class="fa fa-github"></i> [tsub/alfred\-aws\-vault\-workflow: A Alfred workflow to open the AWS Management Console with aws\-vault](https://github.com/tsub/alfred-aws-vault-workflow)
