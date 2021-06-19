@@ -4,7 +4,7 @@ date = 2021-06-19T08:41:36Z
 title = "Apple Silicon Mac で複数 Terraform バージョンを管理するために asdf-terraform-build を作った"
 +++
 
-<i class="fa fa-github"></i> [tsub/asdf\-terraform\-build: Terraform plugin with go build for the asdf version manager](https://github.com/tsub/asdf-terraform-build)
+[![tsub/asdf-terraform-build - GitHub](https://gh-card.dev/repos/tsub/asdf-terraform-build.svg?fullname=)](https://github.com/tsub/asdf-terraform-build)
 
 <!--more-->
 
@@ -28,7 +28,7 @@ title = "Apple Silicon Mac で複数 Terraform バージョンを管理するた
 
 そこで、ソースからビルドしてインストールする仕組みの asdf プラグインを今回作りました。
 
-<i class="fa fa-github"></i> [tsub/asdf\-terraform\-build: Terraform plugin with go build for the asdf version manager](https://github.com/tsub/asdf-terraform-build)
+[![tsub/asdf-terraform-build - GitHub](https://gh-card.dev/repos/tsub/asdf-terraform-build.svg?fullname=)](https://github.com/tsub/asdf-terraform-build)
 
 ## メンテナンスの方針
 
