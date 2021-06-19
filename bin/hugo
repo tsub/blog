@@ -4,4 +4,4 @@ set -eu
 
 ARGS=${@:-"--help"}
 
-docker-compose run --rm hugo $ARGS
+docker-compose exec hugo hugo $ARGS
