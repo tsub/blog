@@ -1,4 +1,4 @@
-# blog [![CircleCI](https://circleci.com/gh/tsub/blog.svg?style=svg&circle-token=a0245862ab624bb1211d85197913a3984f7bbdd9)](https://circleci.com/gh/tsub/blog)
+# blog ![deploy workflow](https://github.com/tsub/blog/actions/workflows/deploy.yml/badge.svg)
 
 ## Getting started
 
@@ -18,9 +18,3 @@ $ bin/hugo new post/post-title.md
 
 Hosted by GitHub Pages.
 When you commit to the `master` branch it will be deployed automatically.
-
-### Manual deployment
-
-```
-$ bin/deploy
-```
