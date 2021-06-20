@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Aws Lambda on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/aws-lambda/</link>
+    <description>Recent content in Aws Lambda on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Wed, 31 Jan 2018 23:15:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/aws-lambda/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AWS Lambda with Golang と SAM に入門した</title>
+      <link>https://blog.tsub.me/post/introduce-aws-lambda-with-golang-and-sam/</link>
+      <pubDate>Wed, 31 Jan 2018 23:15:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/introduce-aws-lambda-with-golang-and-sam/</guid>
+      <description>&lt;p&gt;先日 AWS Lambda の Golang サポートがリリースされました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/jp/blogs/compute/announcing-go-support-for-aws-lambda/&#34;&gt;Announcing Go Support for AWS Lambda | AWS Compute Blog&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;今回は AWS Lambda を Golang で書きつつ、&lt;a href=&#34;https://github.com/awslabs/serverless-application-model&#34;&gt;SAM&lt;/a&gt; へも入門したのでその辺りの知見とか作ったものについて紹介します。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

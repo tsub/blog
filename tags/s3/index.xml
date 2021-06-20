@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>S3 on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/s3/</link>
+    <description>Recent content in S3 on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Tue, 05 Sep 2017 22:30:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/s3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go で s3-edit という CLI アプリケーションを作った</title>
+      <link>https://blog.tsub.me/post/create-s3-edit/</link>
+      <pubDate>Tue, 05 Sep 2017 22:30:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/create-s3-edit/</guid>
+      <description>&lt;p&gt;最近 Rust を少し学んでいたが、難しくて少し挫折しかけたのと、結局仕事への導入を考えるなら Go のほうが既に書ける人が何人かいる、というのもあり Go を書き始めた。&lt;/p&gt;
+
+&lt;p&gt;手初めてに欲しい CLI アプリケーションがあったのでそれをサクッと Go で書いてみた。&lt;/p&gt;
+
+&lt;p&gt;&lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/tsub/s3-edit&#34;&gt;tsub/s3-edit: Edit directly a file on Amazon S3&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

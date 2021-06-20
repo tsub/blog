@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Datadog on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/datadog/</link>
+    <description>Recent content in Datadog on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 26 Nov 2017 16:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/datadog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go で Datadog の Alfred Workflow を作った</title>
+      <link>https://blog.tsub.me/post/create-alfred-workflow/</link>
+      <pubDate>Sun, 26 Nov 2017 16:00:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/create-alfred-workflow/</guid>
+      <description>&lt;p&gt;最近会社の同僚が &lt;a href=&#34;http://developer.feedforce.jp/entry/2017/11/13/085404&#34;&gt;Alfred Workflow を Go で書いたという LT を発表していて&lt;/a&gt;面白そうだったので、自分も書いてみました。&lt;/p&gt;
+
+&lt;p&gt;以下のリポジトリで配布しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/tsub/alfred-datadog-workflow&#34;&gt;tsub/alfred-datadog-workflow: A Alfred workflow to open Datadog pages&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Workflow のダウンロードリンクは&lt;a href=&#34;https://github.com/tsub/alfred-datadog-workflow/releases&#34;&gt;こちら&lt;/a&gt;から最新バージョンのものをどうぞ。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://gyazo.com/378dfd74e772c2d48776c5edd8ce6833.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

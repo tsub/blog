@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    neovimのterminal emulatorが便利すぎた | tsub&#39;s blog
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.tsub.me/post/neovim-on-terminal-emulator/"/>
+
+  
+  <link rel="stylesheet" href="/css/sanitize.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/highlight_monokai.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+  
+  <link href="https://blog.tsub.me/index.xml" rel="alternate" type="application/rss+xml" title="tsub&#39;s blog" />
+  <link href="https://blog.tsub.me/index.xml" rel="feed" type="application/rss+xml" title="tsub&#39;s blog" />
+
+  
+  
+
+  
+   
+    
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="https://blog.tsub.me/images/profile.jpg" />
+    
+  
+
+  
+  <meta name="twitter:title" content="neovimのterminal emulatorが便利すぎた"/>
+  <meta name="twitter:description" content="少し前にvimからneovimに移行したのですが、vimよりさくさくな気がする、程度でneovimの機能を特に活用していませんでした。
+
+実はneovimにはterminal emulatorという機能があり、vimの中でshellを起動することができます。
+
+例えばコードを書きつつ、rspecを実行したりpryやtigを使ったりなど、非常に便利です。
+
+
+
+"/>
+
+  
+    <meta name="twitter:site" content="@_tsub_"/>
+  
+
+  
+
+  
+  
+    <meta name="twitter:creator" content="@tsub"/>
+  
+
+
+  
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="https://blog.tsub.me/">tsub&#39;s blog</a></h1>
+        <h2>雑なメモ</h2>
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/_tsub_" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+          
+          <li><a href="https://github.com/tsub" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+          <li><a href="https://blog.tsub.me/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>neovimのterminal emulatorが便利すぎた</h1>
+      <div class="meta">
+        Jul 2, 2016 &nbsp;
+        
+          <a href="/tags/vim">#vim</a>&nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>少し前にvimからneovimに移行したのですが、vimよりさくさくな気がする、程度でneovimの機能を特に活用していませんでした。</p>
+
+<p>実はneovimにはterminal emulatorという機能があり、vimの中でshellを起動することができます。</p>
+
+<p>例えばコードを書きつつ、rspecを実行したりpryやtigを使ったりなど、非常に便利です。</p>
+
+<p><a href="https://gyazo.com/ca4b9ef1599801f1948721befe274654.png"><img src="https://i.gyazo.com/ca4b9ef1599801f1948721befe274654.png" alt="" /></a></p>
+
+<p></p>
+
+<h2 id="簡単な使い方の紹介">簡単な使い方の紹介</h2>
+
+<p>terminal emulatorを起動するには<code>:terminal</code>を実行します。</p>
+
+<p>起動すると最初はキーバインドがterminal modeになっています。</p>
+
+<p>そのままlsなどを実行すれば実行できると思います。</p>
+
+<p><code>&lt;C-\&gt;&lt;C-n&gt;</code>でcommand modeにすることができます。</p>
+
+<p>command modeから再びterminal modeにするには、insert modeに入るときのように<code>i</code>や<code>a</code>などでできます。</p>
+
+<p>terminal emulatorを終了したいときはterminal mode中にexitなどで普通にshellを終了させるか、command modeで<code>:q</code>などを使えばvimごと終了できます。</p>
+
+<h2 id="自分がやった設定">自分がやった設定</h2>
+
+<p>デフォルトのままでは使いづらいため、いくつか自分が設定した項目を紹介します。</p>
+
+<h3 id="デフォルトで起動するshellを変える">デフォルトで起動するshellを変える</h3>
+
+<p>terminal emulatorはデフォルトでshを起動しますので、普段使っているshell環境でなかったり、パスが通ってなかったりで使いづらいです。</p>
+
+<p>デフォルトで起動するshellは以下のように書くことで変えることができます。</p>
+
+<pre><code class="language-vim">&quot; ~/.config/nvim/init.vim
+
+set sh=zsh
+</code></pre>
+
+<h3 id="escでcommand-modeにする">ESCでcommand modeにする</h3>
+
+<p>terminal mode中は、insert modeなどと違い、command modeに戻るためのデフォルトのキーバインドが<code>&lt;C-\&gt;&lt;C-n&gt;</code>となっています。</p>
+
+<p>このままでは使いづらいので、ESCでcommand modeに戻れるように設定します。</p>
+
+<p>terminal mode内でkey mapを設定したい場合は<code>tnoremap</code>で設定できます。</p>
+
+<p><a href="https://neovim.io/doc/user/nvim_terminal_emulator.html">Vim documentation: nvim_terminal_emulator</a></p>
+
+<pre><code class="language-vim">&quot; ~/.config/nvim/init.vim
+
+tnoremap &lt;silent&gt; &lt;ESC&gt; &lt;C-\&gt;&lt;C-n&gt;
+</code></pre>
+
+<p>最初は<code>jj</code>でも戻れるように設定していたのですが、terminal mode内でtigなど、vimライクなキーバインドのツールを使うときに困ったため、ESCのみ設定しています。</p>
+
+<p>もしinsert modeと同じように<code>jj</code>でcommand modeにしたい場合は以下のように書けば良いと思います。</p>
+
+<pre><code class="language-vim">&quot; ~/.config/nvim/init.vim
+
+tnoremap &lt;silent&gt; jj &lt;C-\&gt;&lt;C-n&gt;
+</code></pre>
+
+<h3 id="neotermを使う">neotermを使う</h3>
+
+<p><a href="https://github.com/kassio/neoterm">kassio/neoterm</a></p>
+
+<p>上述したように特にvim pluginを入れずともneovimは<code>:terminal</code>でterminal emulatorを使うことができます。</p>
+
+<p>ただ、neotermを入れることで<code>:T tig</code>のように任意のコマンドを実行し、かつsplitウィンドウでterminalを起動することができるようになります。</p>
+
+<p>また私は使っていませんが、neoterm側でテストコマンドやREPLをサポートしており、いちいち<code>:T bundle exec rspec</code>や<code>:T bundle exec pry</code>のようにせずとも一発で立ち上げることもできます。</p>
+
+<h2 id="おまけ">おまけ</h2>
+
+<p>vimの中でemacsを起動する、という芸当もできます</p>
+
+<p><a href="https://gyazo.com/b97d25325e66dc121da6edb933354b2d.png"><img src="https://i.gyazo.com/b97d25325e66dc121da6edb933354b2d.png" alt="" /></a></p>
+      
+      
+      
+    </article>
+    
+
+
+  </main>
+  
+  <nav class="pagination-single">
+    
+      <span class="previous">&larr; <a href="https://blog.tsub.me/post/tokyo-ex-3-entry-report/" rel="prev">tokyo.ex #3 参加してきた</a></span>
+    
+    
+      <span class="next"><a href="https://blog.tsub.me/post/created-blog-by-hugo/" rel="next">はてなブログからHugo on Github Pagesに移行しました</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      <img src="/images/profile.jpg" width="64" height="64"><br>
+      Copyright 2016 tsub
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-63212158-2', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

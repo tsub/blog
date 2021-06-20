@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Serverspec on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/serverspec/</link>
+    <description>Recent content in Serverspec on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 25 Jun 2016 23:36:05 +0900</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/serverspec/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>serverspecで複数のdocker containerに対してテストしたい</title>
+      <link>https://blog.tsub.me/post/serverspec-for-several-container/</link>
+      <pubDate>Sat, 25 Jun 2016 23:36:05 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/serverspec-for-several-container/</guid>
+      <description>&lt;p&gt;前回の記事でdocker containerに対してserverspecでテストができるようになりました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://blog.tsub.me/post/serverspec-for-docker/&#34;&gt;serverspecでdocker containerに対してテストしたい&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;dockerを扱う以上、containerは複数立てるのが普通です。&lt;/p&gt;
+
+&lt;p&gt;今回は複数のcontainerを立てた時にそれぞれのcontainerに対してテストする方法について書いていきます。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>serverspecでdocker containerに対してテストしたい</title>
+      <link>https://blog.tsub.me/post/serverspec-for-docker/</link>
+      <pubDate>Sat, 25 Jun 2016 22:25:08 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/serverspec-for-docker/</guid>
+      <description>&lt;p&gt;仕事でこれからdockerを使い始めるので、dockerを触りつつメモがてら記事に残していきます。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

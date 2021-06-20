@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blox on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/blox/</link>
+    <description>Recent content in Blox on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Fri, 09 Dec 2016 00:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/blox/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Blox Introduction</title>
+      <link>https://blog.tsub.me/post/blox-introduction/</link>
+      <pubDate>Fri, 09 Dec 2016 00:00:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/blox-introduction/</guid>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;http://qiita.com/advent-calendar/2016/docker&#34;&gt;Docker Advent Calendar 2016&lt;/a&gt;の9日目の記事です。&lt;/p&gt;
+
+&lt;p&gt;先日AWSのre:Invent 2016で&lt;a href=&#34;https://blox.github.io/&#34;&gt;Blox&lt;/a&gt;が発表されました。&lt;/p&gt;
+
+&lt;p&gt;BloxはEC2 Container Service(ECS)関連のオープンソースのツール群のことです。&lt;/p&gt;
+
+&lt;p&gt;そしてそのツールとは主にECSのカスタムスケジューラを指します&lt;/p&gt;
+
+&lt;p&gt;ECSはマネージドなスケジューラとマネージャを標準で備えていますが、Bloxはそれとは別に自分でホスティングする必要があります。&lt;/p&gt;
+
+&lt;p&gt;しかし、ECSに足りない機能を補ってくれるため導入するメリットは大きいでしょう。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/jp/blogs/news/monitor-cluster-state-with-amazon-ecs-event-stream/&#34;&gt;先日リリースされた、CloudWatchEventsのECSイベントストリーム&lt;/a&gt;を利用することで、よりスムーズにECSのクラスタの状態を監視してカスタムスケジューラを作ることができるようになりました。&lt;/p&gt;
+
+&lt;p&gt;Bloxはこれを使った一例と言えます&lt;/p&gt;
+
+&lt;p&gt;この記事ではBloxについて試してみて分かった内容や所感について書いていきます&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://i.gyazo.com/4c00e85fca7b228d7aa0d5f1e6dd1d27.png&#34; alt=&#34;Blox thumbnail&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

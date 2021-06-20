@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubernetes on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/kubernetes/</link>
+    <description>Recent content in Kubernetes on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 16 Apr 2017 05:29:33 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ブログをGKEでの運用に移行した</title>
+      <link>https://blog.tsub.me/post/operate-blog-server-on-gke/</link>
+      <pubDate>Sun, 16 Apr 2017 05:29:33 +0000</pubDate>
+      
+      <guid>https://blog.tsub.me/post/operate-blog-server-on-gke/</guid>
+      <description>&lt;p&gt;このブログはGitHub pagesを使って公開していたが、GKEに移行することにした。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://blog.tsub.me/post/created-blog-by-hugo/&#34;&gt;はてなブログからHugo on Github Pagesに移行しました&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;これを聞いて、99%の人が、HugoでHTMLファイルを生成して公開しているならわざわざサーバーなんて必要ないんじゃないか？金の無駄じゃないか？と思うかもしれない。&lt;/p&gt;
+
+&lt;p&gt;自分もそう思う。&lt;/p&gt;
+
+&lt;p&gt;今回GKEを使ったのはGKEとk8sでのコンテナ運用を経験したかったことが非常に大きい。&lt;/p&gt;
+
+&lt;p&gt;会社ではECSを本番運用しているが、ECSに比べてk8sの方が良さそうな雰囲気しかないのでGKEの方も触っておこうかと思って移行した。&lt;/p&gt;
+
+&lt;p&gt;また、今のところブログ以外に個人で運用しているWebサービス等はないため、ブログがちょうどいい題材だった。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

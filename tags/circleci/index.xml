@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Circleci on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/circleci/</link>
+    <description>Recent content in Circleci on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 10 Nov 2018 17:47:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/circleci/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>CircleCI Orbs 入門</title>
+      <link>https://blog.tsub.me/post/introducing-to-circleci-orbs/</link>
+      <pubDate>Sat, 10 Nov 2018 17:47:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/introducing-to-circleci-orbs/</guid>
+      <description>&lt;p&gt;とうとう待望の CircleCI Orbs がリリースされたので一通り触ってみました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://circleci.com/blog/announcing-orbs-technology-partner-program/&#34;&gt;Announcing CircleCI Orbs and our new Technology Partner Program&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;今回作ったサンプルは以下のリポジトリにありますので手っ取り早く知りたい人は以下のコードを見ると良いかと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/tsub/circleci-orbs-sandbox&#34;&gt;tsub/circleci-orbs-sandbox&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go 1.11 の Modules (vgo) を CircleCI で使う</title>
+      <link>https://blog.tsub.me/post/go111-modules-in-circleci/</link>
+      <pubDate>Thu, 30 Aug 2018 05:33:00 +0000</pubDate>
+      
+      <guid>https://blog.tsub.me/post/go111-modules-in-circleci/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/tsub/s3-edit&#34;&gt;個人プロジェクト&lt;/a&gt;にて、先日リリースされた Go 1.11 の Modules (vgo) を使ってみました。&lt;/p&gt;
+
+&lt;p&gt;移行自体はスムーズにできたのですが、CircleCI でのキャッシュのやり方がそこそこ重要かも？と思ったので記事を書きました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

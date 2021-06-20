@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Go で Datadog の Alfred Workflow を作った | tsub&#39;s blog
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.tsub.me/post/create-alfred-workflow/"/>
+
+  
+  <link rel="stylesheet" href="/css/sanitize.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/highlight_monokai.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+  
+  <link href="https://blog.tsub.me/index.xml" rel="alternate" type="application/rss+xml" title="tsub&#39;s blog" />
+  <link href="https://blog.tsub.me/index.xml" rel="feed" type="application/rss+xml" title="tsub&#39;s blog" />
+
+  
+  
+
+  
+   
+    
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="https://blog.tsub.me/images/profile.jpg" />
+    
+  
+
+  
+  <meta name="twitter:title" content="Go で Datadog の Alfred Workflow を作った"/>
+  <meta name="twitter:description" content="最近会社の同僚が Alfred Workflow を Go で書いたという LT を発表していて面白そうだったので、自分も書いてみました。
+
+以下のリポジトリで配布しています。
+
+ tsub/alfred-datadog-workflow: A Alfred workflow to open Datadog pages
+
+Workflow のダウンロードリンクはこちらから最新バージョンのものをどうぞ。
+
+
+
+"/>
+
+  
+    <meta name="twitter:site" content="@_tsub_"/>
+  
+
+  
+
+  
+  
+    <meta name="twitter:creator" content="@tsub"/>
+  
+
+
+  
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="https://blog.tsub.me/">tsub&#39;s blog</a></h1>
+        <h2>雑なメモ</h2>
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/_tsub_" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+          
+          <li><a href="https://github.com/tsub" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+          <li><a href="https://blog.tsub.me/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Go で Datadog の Alfred Workflow を作った</h1>
+      <div class="meta">
+        Nov 26, 2017 &nbsp;
+        
+          <a href="/tags/go">#Go</a>&nbsp;
+        
+          <a href="/tags/datadog">#Datadog</a>&nbsp;
+        
+          <a href="/tags/alfred">#Alfred</a>&nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>最近会社の同僚が <a href="http://developer.feedforce.jp/entry/2017/11/13/085404">Alfred Workflow を Go で書いたという LT を発表していて</a>面白そうだったので、自分も書いてみました。</p>
+
+<p>以下のリポジトリで配布しています。</p>
+
+<p><i class="fa fa-github"></i> <a href="https://github.com/tsub/alfred-datadog-workflow">tsub/alfred-datadog-workflow: A Alfred workflow to open Datadog pages</a></p>
+
+<p>Workflow のダウンロードリンクは<a href="https://github.com/tsub/alfred-datadog-workflow/releases">こちら</a>から最新バージョンのものをどうぞ。</p>
+
+<p><img src="https://gyazo.com/378dfd74e772c2d48776c5edd8ce6833.png" alt="image" /></p>
+
+<p></p>
+
+<h2 id="go-を選んだ理由">Go を選んだ理由</h2>
+
+<p>Alfred Workflow は標準出力さえすればどの言語でも実装することができます。<br />
+ただし、インストールしたユーザー側の実行環境でスクリプトを実行するのでユーザーの実行環境に影響されます。</p>
+
+<p>実はわりと前に Alfred Workflow を書いていたことがありました。<br />
+その時は Ruby で書いていて、大まかな機能までは作ったのですが、結局完成まではいけませんでした。</p>
+
+<p>Ruby で書いていて困ったのが、ライブラリなどを利用する場合にワークフロー側にライブラリをバンドルするか、ユーザー側で gem install してもらう必要がありました。</p>
+
+<p>その点、Go ならライブラリも含め 1 バイナリにまとめることができるのでその辺りをあまり気にしなくても良いです。</p>
+
+<p>あとは単純に最近 Go を書いていたのが大きいです。</p>
+
+<h2 id="個人的に-alfred-workflow-に向いていると思うところ">個人的に Alfred Workflow に向いていると思うところ</h2>
+
+<p>Alfred に限らず CLI や Chrome 拡張、Slack bot など作業の効率化・自動化などは様々な選択肢があると思います。</p>
+
+<p>どのプラットフォームで作っても良いと思いますが、個人的に Alfred Workflow に向いているのは「何かのページの URL を開くこと」だと思います。</p>
+
+<p>私が一番よく使う Workflow は AWS のサービスの URL を開く Workflow と、GitHub のリポジトリの URL を開く Workflow です。</p>
+
+<ul>
+<li><i class="fa fa-github"></i> <a href="https://github.com/gharlan/alfred-github-workflow">gharlan/alfred-github-workflow: GitHub Workflow for Alfred 3</a></li>
+<li><i class="fa fa-github"></i> <a href="https://github.com/rkoval/alfred-aws-console-services-workflow">rkoval/alfred-aws-console-services-workflow: Very simple workflow to quickly open up AWS Console Services in your browser</a></li>
+</ul>
+
+<p>例えば後者の Workflow はこんな感じで AWS のサービスのページへ一発で飛ぶことができます。</p>
+
+<p><img src="https://gyazo.com/9ac87e0e710401c5bfd222cf7f6a5338.png" alt="image" /></p>
+
+<p>もちろん別の使い方をしている方も多いと思いますが、個人的にはこういった Workflow が一番便利に使えています。</p>
+
+<p>ですので、今回も Datadog のページを単に開くだけ、という Workflow を作りました。</p>
+
+<h2 id="面白かったポイントなど">面白かったポイントなど</h2>
+
+<p>Alfred Workflow を作る上で面白かったポイントをいくつか紹介します。</p>
+
+<h3 id="awgo-が便利">awgo が便利</h3>
+
+<p>今回は Alfred Workflow の開発にこちらのライブラリを使いました。</p>
+
+<p><i class="fa fa-github"></i> <a href="https://github.com/deanishe/awgo">deanishe/awgo: Go library for Alfred 3 workflows</a></p>
+
+<p>Alfred Workflow は XML か JSON で標準出力さえすれば良いので、ライブラリはなくても実装可能です。</p>
+
+<p>ただ、このライブラリを使うことでその辺りの実装を簡単にしてくれます。</p>
+
+<p>例えば、以下のコードを書くだけで動かすことができます。</p>
+
+<pre><code class="language-go">package main
+
+import &quot;github.com/deanishe/awgo&quot;
+
+func run() {
+    aw.NewItem(&quot;First result!&quot;)
+    aw.SendFeedback()
+}
+
+func main() {
+    aw.Run(run)
+}
+</code></pre>
+
+<p>awgo が Alfred 用の自動的に JSON を組み立ててくれます。</p>
+
+<p>その他、便利な Utility なども提供してくれて大変便利ですが今回はそこまで凝ったことはしなかったので使いませんでした。</p>
+
+<h3 id="コードは書いても書かなくても良い">コードは書いても書かなくても良い</h3>
+
+<p>Alfred Workflow の面白いところとして、ほとんど自前で実装することもできますし、Alfred Workflow の機能を使って実装を省くことも可能です。</p>
+
+<p>例えば、私が愛用している以下の Workflow はほとんど自前で実装しています。</p>
+
+<p><i class="fa fa-github"></i> <a href="https://github.com/gharlan/alfred-github-workflow">gharlan/alfred-github-workflow: GitHub Workflow for Alfred 3</a></p>
+
+<p>中身を見てみると、色々な機能があるのに Alfred 側は非常にシンプルでほとんどの処理を Run Script の部分で自前で実装していることが分かります。</p>
+
+<p><img src="https://gyazo.com/5abb5837caa844f1af0470e9f6e6a569.png" alt="image" /></p>
+
+<p>逆に今回私が作った Workflow はなるべくコードを書かずに Alfred の機能を使って実装しました。</p>
+
+<p><img src="https://gyazo.com/0bc6f22cd52e5824b27637580291ffbb.png" alt="image" /></p>
+
+<p>認証の部分は少し複雑で、以下の Workflow を大いに参考にしました。</p>
+
+<p><i class="fa fa-github"></i> <a href="https://github.com/KnVerey/alfred-datadog-dashes">KnVerey/alfred-datadog-dashes: List and filter your Datadog dashboards from Alfred3.</a></p>
+
+<p>Alfred の機能だけでこういった動きを作ることができます。</p>
+
+<p><img src="https://gyazo.com/73ecb027cb71ef4219c821659910b751.gif" alt="image" /></p>
+
+<h3 id="認証情報の保管先">認証情報の保管先</h3>
+
+<p>Alfred Workflow を作るときに API Key などをどこに保管するかはわりと問題になるようです。</p>
+
+<p>ローカルファイルに書き込んでも良いですが、私は macOS の <code>security</code> コマンドを使いました。<br />
+(こちらも <i class="fa fa-github"></i> <a href="https://github.com/KnVerey/alfred-datadog-dashes">KnVerey/alfred-datadog-dashes</a> を参考にしました)</p>
+
+<pre><code class="language-shell">$ security add-generic-password -a $USER -s dd-api-key -w $1 -U
+</code></pre>
+
+<p>上記のコマンドを実行すれば dd-api-key というキーで maxOS のキーチェーンに API Key を保管できるようです。</p>
+
+<p>また、保管した API Key の参照は以下のコマンドでできます。</p>
+
+<pre><code class="language-shell">$ security find-generic-password -a $USER -s dd-api-key -w
+</code></pre>
+
+<p>これで、Go で書いたコマンドを実行する際の引数として API Key などを渡してやれば良いだけです。</p>
+
+<pre><code class="language-bash">query=$1
+apikey=$(security find-generic-password -a $USER -s dd-api-key -w)
+appkey=$(security find-generic-password -a $USER -s dd-app-key -w)
+
+./alfred-datadog-workflow --apikey=$apikey --appkey=$appkey dashboard
+</code></pre>
+
+<h2 id="困ったところ">困ったところ</h2>
+
+<h3 id="開発時の動作確認やリリース手順が面倒">開発時の動作確認やリリース手順が面倒</h3>
+
+<p>良い方法があれば知りたいのですが、開発時に Go でコードを書いて Alfred Workflow の方にそれを毎回渡すのが面倒でした。</p>
+
+<p>自分は Makefile に以下のように書いてビルドしたバイナリを Workflow のディレクトリにコピーしていました。<br />
+(git 管理下には入れない)</p>
+
+<pre><code class="language-Makefile">build:
+	go build -o build/$(PROJECT)
+	cp assets/* build/
+	cp build/$(PROJECT) ~/...(snip)/alfred/Alfred.alfredpreferences/workflows/user.workflow.XXXX/
+.PHONY: build
+</code></pre>
+
+<p>同じくリリースについても、一度 Alfred 側にバイナリをコピーして、Alfred の GUI から Workflow の export をしてやる必要があります。</p>
+
+<p><img src="https://gyazo.com/a6e16fdc45e3555c25270b3223123881.png" alt="image" /></p>
+
+<p>これで、配布用の <code>.alfredworkflow</code> ファイルを作ることができるのでこれを GitHub releases に手動でアップロードしました。</p>
+
+<p><img src="https://gyazo.com/392b199360054a8bb331e6a7a99ce83a.png" alt="image" /></p>
+
+<p>そのため CI による自動化などはおそらくできないような気がします。</p>
+
+<h3 id="datadog-の-api-クライアントライブラリのバグ">Datadog の API クライアントライブラリのバグ</h3>
+
+<p>Datadog が公式で提供している Go のクライアントはあるのですが、Statsd の機能しか提供していないため今回は使えません。</p>
+
+<p><i class="fa fa-github"></i> <a href="https://github.com/DataDog/datadog-go">DataDog/datadog-go: go client library for datadog</a></p>
+
+<p>ですので、今回は以下のサードパーティライブラリを使いました。</p>
+
+<p><i class="fa fa-github"></i> <a href="https://github.com/zorkian/go-datadog-api">zorkian/go-datadog-api: A Go implementation of the Datadog API.</a></p>
+
+<p>ただ、こちらのライブラリで一点バグがあってそこで少しハマりました。</p>
+
+<ul>
+<li>Issue <i class="fa fa-github"></i> <a href="https://github.com/zorkian/go-datadog-api/issues/135">strconv.ParseInt: parsing &ldquo;null&rdquo;: invalid syntax when calling datadog.NewClient(apiKey, appKey).GetMonitors() · Issue #135 · zorkian/go-datadog-api</a></li>
+<li>PR <i class="fa fa-github"></i> <a href="https://github.com/zorkian/go-datadog-api/pull/129">Accept &ldquo;null&rdquo; in monitor NoDataTimeframe by dtan4 · Pull Request #129 · zorkian/go-datadog-api</a></li>
+</ul>
+
+<p>上記の内容に当たるバグです。<br />
+API のレスポンスで <code>null</code> という文字列が返ってくることを考慮できていなかったようです。Terraform を経由して作ると発生するのかな。</p>
+
+<p>最初は修正 PR を作ろとして PR を書いていたのですが、他の PR の 0 コメを参考にしようと見ていたら既に修正 PR が作成されていました。<br />
+惜しい..</p>
+
+<p>ですがまだマージされていなかったので、一旦は手元に pull してきたファイルを修正してビルドして使っています。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>Alfred Workflow はかなりサクッと作れるし、Go との相性も良いと思いました。</p>
+
+<p>普段仕事でこういうものが欲しいなぁと思ったらバシバシ作っていきたいと思います。</p>
+      
+      
+      
+    </article>
+    
+
+
+  </main>
+  
+  <nav class="pagination-single">
+    
+      <span class="previous">&larr; <a href="https://blog.tsub.me/post/create-s3-edit/" rel="prev">Go で s3-edit という CLI アプリケーションを作った</a></span>
+    
+    
+      <span class="next"><a href="https://blog.tsub.me/post/half-a-year-after-married/" rel="next">結婚して半年が経ったので工夫していることとか</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      <img src="/images/profile.jpg" width="64" height="64"><br>
+      Copyright 2016 tsub
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-63212158-2', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

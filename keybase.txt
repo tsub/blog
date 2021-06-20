@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/tsub
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://blog.tsub.me
+  * I am tsub (https://keybase.io/tsub) on keybase.
+  * I have a public key ASDvCT32kIM-W-kIJCn5ePMlvGNbd2DASrioCqY5dXQtaQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120ef093df690833e5be9082429f978f325bc635b7760c04ab8a80aa63975742d690a",
+      "host": "keybase.io",
+      "kid": "0120ef093df690833e5be9082429f978f325bc635b7760c04ab8a80aa63975742d690a",
+      "uid": "89a067ed021d017dd63b13b606b45719",
+      "username": "tsub"
+    },
+    "merkle_root": {
+      "ctime": 1553603215,
+      "hash": "7ebdf44c9bff3ec9ccfcc9d1e3b24d7f74a78ed0b84f91277afbe70232741411cd7d909984b590989ee3b98af876518161ceacdf328ec7a97c688a7f6b55800e",
+      "hash_meta": "6f90662627bdb8b38bc1c67f6e46b9e7fb72b0f6782b92b3842657512928baf5",
+      "seqno": 5024619
+    },
+    "service": {
+      "entropy": "Zac7CM1DBNpdnn3VsWAWN+9a",
+      "hostname": "blog.tsub.me",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "3.1.2"
+  },
+  "ctime": 1553603394,
+  "expire_in": 504576000,
+  "prev": "56bd8c321f8f65e001615a28fc19c6e170ea393fab578d2890a7abe6cc16b5e5",
+  "seqno": 10,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg7wk99pCDPlvpCCQp+XjzJbxjW3dgwEq4qAqmOXV0LWkKp3BheWxvYWTESpcCCsQgVr2MMh+PZeABYVoo/BnG4XDqOT+rV40okKer5swWteXEIHhNOcVH45kRP1Z4NGE74EwLs+sVWSyKixlGLvqZtC3xAgHCo3NpZ8RAvvTCtjhcmgVyEtCLUgv0RMd6UKx3SMtQzm6axTkb9JthfSKrgY0vvAW1JQhTmv7ggdytd9f9EVymUN+6H9ReCqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIAJ7XXApCkKUAEZ3YkOOkb43eS41DYk9OHR0C65gtv8Wo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/tsub
+
+==================================================================

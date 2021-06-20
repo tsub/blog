@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fzf on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/fzf/</link>
+    <description>Recent content in Fzf on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Wed, 03 May 2017 00:30:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/fzf/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>pecoからfzfに移行した</title>
+      <link>https://blog.tsub.me/post/move-from-peco-to-fzf/</link>
+      <pubDate>Wed, 03 May 2017 00:30:00 +0000</pubDate>
+      
+      <guid>https://blog.tsub.me/post/move-from-peco-to-fzf/</guid>
+      <description>&lt;p&gt;今までずっと &lt;a href=&#34;https://github.com/peco/peco&#34;&gt;peco&lt;/a&gt; を使ってきたが、そろそろ別のツールに変えてみるか&amp;hellip;と思い立ったので &lt;a href=&#34;https://github.com/junegunn/fzf&#34;&gt;fzf&lt;/a&gt; に移行した。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/junegunn/fzf&#34;&gt;junegunn/fzf: A command-line fuzzy finder written in Go&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;自分は基本的に飽き性なので、定期的に環境を変えたくなる時期が来るのだが fzf が思ってたより良かったので紹介したい。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

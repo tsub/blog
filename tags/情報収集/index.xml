@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>情報収集 on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/%E6%83%85%E5%A0%B1%E5%8F%8E%E9%9B%86/</link>
+    <description>Recent content in 情報収集 on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 17 Dec 2016 16:50:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/%E6%83%85%E5%A0%B1%E5%8F%8E%E9%9B%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ぼくの情報収集方法</title>
+      <link>https://blog.tsub.me/post/how-i-collect-information/</link>
+      <pubDate>Sat, 17 Dec 2016 16:50:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/how-i-collect-information/</guid>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;http://www.adventar.org/calendars/1427&#34;&gt;feedforce Advent Calender 2016&lt;/a&gt;の17日目の記事です。&lt;/p&gt;
+
+&lt;p&gt;前回の記事はpokotyamuによる&lt;a href=&#34;http://pokotyamu.hatenablog.com/entry/2016/12/16/095524&#34;&gt;HHKBを掃除した話&lt;/a&gt;でした&lt;/p&gt;
+
+&lt;p&gt;無刻印のキーだからといってどのキーでも当てはまると思って適当にやるとものすごい罠に引っかかっちゃうんですね。&lt;/p&gt;
+
+&lt;p&gt;さて、今回は多くのエンジニアにとって重要なキーワードである情報収集についてです。&lt;/p&gt;
+
+&lt;p&gt;自分は多分社内ではわりと情報収集よくやってる方だと思っているのですが、自分が普段どんな方法で情報収集してるかを共有したかったので今回まとめてみました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

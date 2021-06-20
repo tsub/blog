@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    serverspecでdocker containerに対してテストしたい | tsub&#39;s blog
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.tsub.me/post/serverspec-for-docker/"/>
+
+  
+  <link rel="stylesheet" href="/css/sanitize.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/highlight_monokai.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+  
+  <link href="https://blog.tsub.me/index.xml" rel="alternate" type="application/rss+xml" title="tsub&#39;s blog" />
+  <link href="https://blog.tsub.me/index.xml" rel="feed" type="application/rss+xml" title="tsub&#39;s blog" />
+
+  
+  
+
+  
+   
+    
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="https://blog.tsub.me/images/profile.jpg" />
+    
+  
+
+  
+  <meta name="twitter:title" content="serverspecでdocker containerに対してテストしたい"/>
+  <meta name="twitter:description" content="仕事でこれからdockerを使い始めるので、dockerを触りつつメモがてら記事に残していきます。
+
+"/>
+
+  
+    <meta name="twitter:site" content="@_tsub_"/>
+  
+
+  
+
+  
+  
+    <meta name="twitter:creator" content="@tsub"/>
+  
+
+
+  
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="https://blog.tsub.me/">tsub&#39;s blog</a></h1>
+        <h2>雑なメモ</h2>
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/_tsub_" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+          
+          <li><a href="https://github.com/tsub" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+          <li><a href="https://blog.tsub.me/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>serverspecでdocker containerに対してテストしたい</h1>
+      <div class="meta">
+        Jun 25, 2016 &nbsp;
+        
+          <a href="/tags/docker">#docker</a>&nbsp;
+        
+          <a href="/tags/serverspec">#serverspec</a>&nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>仕事でこれからdockerを使い始めるので、dockerを触りつつメモがてら記事に残していきます。</p>
+
+<p></p>
+
+<h2 id="やりたいこと">やりたいこと</h2>
+
+<p>docker containerに対してserverspecでテストしたい</p>
+
+<h2 id="docker-containerに対してテストする">docker containerに対してテストする</h2>
+
+<p>serverspecはバックエンドとして通常のsshやexec以外にもdockerをサポートしています。</p>
+
+<p>他にもdockerfileというバックエンドも使えるようですが、こちらは軽くソースを見たところDockerfileのADDやRUNなどの記述に対してのテストのように見えますので、serverspecの書き方も少し変わってくるかもしれません。
+ググッてもあまりdockerfileというバックエンドを使っている記事は見つからなかったのであまり使われていないようです。</p>
+
+<p>今回は既存のserverspecの資産をなるべくそのまま活かしていきたいのでdockerバックエンドを使います。</p>
+
+<p><a href="https://github.com/mizzy/specinfra/blob/master/lib/specinfra/backend/docker.rb">mizzy/specinfra/backend/docker.rb</a></p>
+
+<p>ServerspecのバックエンドとしてDockerを使うにはこちらのdocker-apiというgemをインストールする必要があります。</p>
+
+<p><a href="https://github.com/swipely/docker-api">swipely/docker-api</a></p>
+
+<p>このdocker-apiはDockerのRemote APIを叩くためのgemで、このgemを使ってserverspecがテストを実行してくれます。</p>
+
+<pre><code class="language-ruby"># Gemfile
+
+# frozen_string_literal: true
+source &quot;https://rubygems.org&quot;
+
+gem 'serverspec'
+gem 'docker-api'
+</code></pre>
+
+<p>spec_helperに<code>set :backend, :docker</code>と<code>set :docker_image, 'image_name'</code>を指定すると、
+serverspecがテストを実行するときに自動でdocker imageに対してdocker execコマンドを実行し、テストしてくれるようになります。</p>
+
+<pre><code class="language-ruby"># spec/spec_helper.rb
+
+require 'serverspec'
+require 'docker'
+
+set :backend, :docker
+set :docker_image, 'app'
+</code></pre>
+
+<p>さて、今回は以下のDockerfileを使います。</p>
+
+<pre><code class="language-dockerfile"># Dockerfile
+
+FROM ruby:2.3.1-alpine
+
+ADD app.rb .
+</code></pre>
+
+<p>実行したい<code>app.rb</code>を適当に作っておきます。</p>
+
+<pre><code class="language-ruby"># app.rb
+
+puts 'Hello, world!'
+</code></pre>
+
+<p>テストファイルも作っておきます。</p>
+
+<pre><code class="language-ruby"># spec/ruby_spec.rb
+
+describe command 'ruby -v' do
+  let(:disable_sudo) { true }
+  its(:stdout) { should match /ruby 2.3.1/ }
+end
+</code></pre>
+
+<p>spec_helperでdocker_imageと指定しているように、serverspecの実行にはdocker imageを作っておく必要があるため、事前にdocker buildしておきます。</p>
+
+<pre><code class="language-sh">$ docker build -t app .
+</code></pre>
+
+<p>さて、ここまでできたらserverspecを実行してみましょう。</p>
+
+<pre><code class="language-sh">$ bundle exec rspec
+Command &quot;ruby -v&quot;
+  stdout
+    should match /ruby 2.3.1/
+
+Finished in 2.37 seconds (files took 0.62684 seconds to load)
+1 example, 0 failures
+</code></pre>
+
+<p>無事にテストできました。</p>
+
+<h2 id="注意">注意</h2>
+
+<p>Dockerfileで最後にCMDとか書いておくと、なぜかserverspecでcontainerを見つけられません。</p>
+
+<pre><code class="language-dockerfile"># Dockerfile
+
+FROM ruby:2.3.1-alpine
+
+ADD app.rb .
+
+CMD [&quot;ruby&quot;, &quot;app.rb&quot;]
+</code></pre>
+
+<pre><code class="language-sh">$ bundle exec rspec
+Command &quot;ruby -v&quot;
+  stdout
+    example at ./spec/shared/ruby_spec.rb:4 (FAILED - 1)
+
+Failures:
+
+  1) worker behaves like ruby Command &quot;ruby -v&quot; stdout
+     Failure/Error: its(:stdout) { should match /ruby 2.3.1/ }
+     Docker::Error::ServerError:
+       Container 695ddb15d393210654720468c54924658569edbe4c00cf6832961443440e6969 is not running
+
+     Shared Example Group: &quot;ruby&quot; called from ./spec/ruby_spec.rb:3
+     # ./vendor/bundle/gems/docker-api-1.29.0/lib/docker/connection.rb:50:in `rescue in request'
+     # ./vendor/bundle/gems/docker-api-1.29.0/lib/docker/connection.rb:38:in `request'
+     # ./vendor/bundle/gems/docker-api-1.29.0/lib/docker/connection.rb:65:in `block (2 levels) in &lt;class:Connection&gt;'
+     # ./vendor/bundle/gems/docker-api-1.29.0/lib/docker/exec.rb:22:in `create'
+     # ./vendor/bundle/gems/docker-api-1.29.0/lib/docker/container.rb:64:in `exec'
+     # ./vendor/bundle/gems/specinfra-2.59.3/lib/specinfra/backend/docker.rb:94:in `docker_run!'
+     # ./vendor/bundle/gems/specinfra-2.59.3/lib/specinfra/backend/docker.rb:31:in `run_command'
+     # ./vendor/bundle/gems/specinfra-2.59.3/lib/specinfra/helper/detect_os.rb:13:in `run_command'
+     # ./vendor/bundle/gems/specinfra-2.59.3/lib/specinfra/helper/detect_os/redhat.rb:11:in `detect'
+     # ./vendor/bundle/gems/specinfra-2.59.3/lib/specinfra/helper/detect_os.rb:5:in `detect'
+     # ./vendor/bundle/gems/specinfra-2.59.3/lib/specinfra/helper/os.rb:24:in `block in detect_os'
+     # ./vendor/bundle/gems/specinfra-2.59.3/lib/specinfra/helper/os.rb:23:in `each'
+     # ./vendor/bundle/gems/specinfra-2.59.3/lib/specinfra/helper/os.rb:23:in `detect_os'
+     # ./vendor/bundle/gems/specinfra-2.59.3/lib/specinfra/helper/os.rb:9:in `os'
+     # ./vendor/bundle/gems/specinfra-2.59.3/lib/specinfra/runner.rb:7:in `method_missing'
+     # ./vendor/bundle/gems/serverspec-2.36.0/lib/serverspec/type/command.rb:17:in `command_result'
+     # ./vendor/bundle/gems/serverspec-2.36.0/lib/serverspec/type/command.rb:4:in `stdout'
+     # ./spec/shared/ruby_spec.rb:4:in `block (3 levels) in &lt;top (required)&gt;'
+     # ------------------
+     # --- Caused by: ---
+     # Excon::Errors::InternalServerError:
+     #   Expected([200, 201, 202, 203, 204, 304]) &lt;=&gt; Actual(500 InternalServerError)
+     #   ./vendor/bundle/gems/excon-0.49.0/lib/excon/middlewares/expects.rb:6:in `response_call'
+
+Finished in 0.9004 seconds (files took 1.01 seconds to load)
+1 example, 1 failure
+
+Failed examples:
+
+rspec ./spec/ruby_spec.rb:3 # Command &quot;ruby -v&quot; stdout
+</code></pre>
+
+<p>CMDではなく、docker runの引数に渡すようにすると良いと思います。</p>
+
+<pre><code class="language-dockerfile"># Dockerfile
+
+FROM ruby:2.3.1-alpine
+
+ADD app.rb .
+</code></pre>
+
+<pre><code class="language-sh">$ docker run --rm app ruby app.rb
+Hello, world!
+</code></pre>
+      
+      
+      
+    </article>
+    
+
+
+  </main>
+  
+  <nav class="pagination-single">
+    
+    
+      <span class="next"><a href="https://blog.tsub.me/post/serverspec-for-several-container/" rel="next">serverspecで複数のdocker containerに対してテストしたい</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      <img src="/images/profile.jpg" width="64" height="64"><br>
+      Copyright 2016 tsub
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-63212158-2', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

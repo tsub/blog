@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    ブログをGKEでの運用に移行した | tsub&#39;s blog
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.tsub.me/post/operate-blog-server-on-gke/"/>
+
+  
+  <link rel="stylesheet" href="/css/sanitize.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/highlight_monokai.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+  
+  <link href="https://blog.tsub.me/index.xml" rel="alternate" type="application/rss+xml" title="tsub&#39;s blog" />
+  <link href="https://blog.tsub.me/index.xml" rel="feed" type="application/rss+xml" title="tsub&#39;s blog" />
+
+  
+  
+
+  
+   
+    
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="https://blog.tsub.me/images/profile.jpg" />
+    
+  
+
+  
+  <meta name="twitter:title" content="ブログをGKEでの運用に移行した"/>
+  <meta name="twitter:description" content="このブログはGitHub pagesを使って公開していたが、GKEに移行することにした。
+
+はてなブログからHugo on Github Pagesに移行しました
+
+これを聞いて、99%の人が、HugoでHTMLファイルを生成して公開しているならわざわざサーバーなんて必要ないんじゃないか？金の無駄じゃないか？と思うかもしれない。
+
+自分もそう思う。
+
+今回GKEを使ったのはGKEとk8sでのコンテナ運用を経験したかったことが非常に大きい。
+
+会社ではECSを本番運用しているが、ECSに比べてk8sの方が良さそうな雰囲気しかないのでGKEの方も触っておこうかと思って移行した。
+
+また、今のところブログ以外に個人で運用しているWebサービス等はないため、ブログがちょうどいい題材だった。
+
+"/>
+
+  
+    <meta name="twitter:site" content="@_tsub_"/>
+  
+
+  
+
+  
+  
+    <meta name="twitter:creator" content="@tsub"/>
+  
+
+
+  
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="https://blog.tsub.me/">tsub&#39;s blog</a></h1>
+        <h2>雑なメモ</h2>
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/_tsub_" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+          
+          <li><a href="https://github.com/tsub" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+          <li><a href="https://blog.tsub.me/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>ブログをGKEでの運用に移行した</h1>
+      <div class="meta">
+        Apr 16, 2017 &nbsp;
+        
+          <a href="/tags/docker">#docker</a>&nbsp;
+        
+          <a href="/tags/gke">#GKE</a>&nbsp;
+        
+          <a href="/tags/kubernetes">#kubernetes</a>&nbsp;
+        
+          <a href="/tags/hugo">#hugo</a>&nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>このブログはGitHub pagesを使って公開していたが、GKEに移行することにした。</p>
+
+<p><a href="/post/created-blog-by-hugo/">はてなブログからHugo on Github Pagesに移行しました</a></p>
+
+<p>これを聞いて、99%の人が、HugoでHTMLファイルを生成して公開しているならわざわざサーバーなんて必要ないんじゃないか？金の無駄じゃないか？と思うかもしれない。</p>
+
+<p>自分もそう思う。</p>
+
+<p>今回GKEを使ったのはGKEとk8sでのコンテナ運用を経験したかったことが非常に大きい。</p>
+
+<p>会社ではECSを本番運用しているが、ECSに比べてk8sの方が良さそうな雰囲気しかないのでGKEの方も触っておこうかと思って移行した。</p>
+
+<p>また、今のところブログ以外に個人で運用しているWebサービス等はないため、ブログがちょうどいい題材だった。</p>
+
+<p></p>
+
+<h2 id="gkeとは">GKEとは</h2>
+
+<p>GCP(Google Cloud Platform)で提供されている、k8s(kubernetes)のフルマネージドサービスである。</p>
+
+<p><a href="https://cloud.google.com/container-engine/">Google Container Engine - Google Cloud Platform</a></p>
+
+<p>正式名称はGoogle Container Engineなのだが、Google Compute Engineと略称が被っているため、kubernetesの「K」を取って、「GKE」となったらしい。</p>
+
+<p>今回、GKEを使いたいというよりはk8sを使いたいという目的の方が強かったため、<a href="https://github.com/kubernetes-incubator/kube-aws">kube-aws</a>や<a href="https://github.com/kubernetes/kops">kops</a>などでも良かったとは思うが、GCP自体にも興味があったためGKEを採用した。</p>
+
+<p>ただし、一通り勉強しきってからの移行となると途中でモチベーションがなくなりそうになったため、k8sを軽く触れるようになったところで勢いで移行させた。</p>
+
+<p>そのため、GCPの基礎自体ほとんど分かっていないまま作ってしまったのでこの辺りは後から改善していきたい。</p>
+
+<h3 id="構成">構成</h3>
+
+<p>構成はだいたいこんな感じになった。</p>
+
+<p>多分だいぶ簡略化されているのと、k8sちゃんと理解していないので間違っているかもしれない。</p>
+
+<p><a href="#https対応">後述する</a>が、kube-legoというツールを使ってLoad Balancerに証明書を置いてhttps化しているため、blog Podは80番ポートのみ受け付けている。</p>
+
+<p><img src="https://i.gyazo.com/6fd4002f6618be4442b0f213b7bb92f3.png" alt="GKE blog structure" /></p>
+
+<h2 id="ブログのdockerイメージ">ブログのDockerイメージ</h2>
+
+<p>Hugoで生成したHTMLファイルをnginxで公開している。</p>
+
+<p>Dockerfileは以下のような構成</p>
+
+<pre><code class="language-dockerfile">FROM nginx:alpine
+LABEL maintainer &quot;tsubasatakayama511@gmail.com&quot;
+
+COPY public /usr/share/nginx/html
+COPY default.nginx /etc/nginx/conf.d/default.conf
+</code></pre>
+
+<p>また、別途Hugoをインストールしたイメージも作っている。</p>
+
+<pre><code class="language-dockerfile">FROM golang:1.8-alpine
+LABEL maintainer &quot;tsubasatakayama511@gmail.com&quot;
+
+ENV HUGO_DEPENDENCIES=&quot;git&quot;
+
+RUN apk add --update --no-cache \
+        ${HUGO_DEPENDENCIES} &amp;&amp; \
+    go get -v github.com/spf13/hugo &amp;&amp; \
+    apk del --purge \
+        ${HUGO_DEPENDENCIES}
+
+COPY . /app
+WORKDIR /app
+RUN hugo
+
+ENTRYPOINT [&quot;hugo&quot;]
+</code></pre>
+
+<p>Hugoのコンテナで生成したpublicディレクトリをdocker cpコマンドを使って取り出し、nginxのコンテナに含めている。</p>
+
+<p>この辺りはよく見るやり方だと思う。</p>
+
+<pre><code class="language-bash">#!/bin/bash
+
+set -x
+
+docker build -t tsub/blog:hugo -f Dockerfile-hugo .
+docker cp $(docker run -d tsub/blog:hugo):/app/public .
+docker build -t tsub/blog .
+</code></pre>
+
+<p>ちなみに、Docker 17.05で追加されるmultiple stage buildという機能により、1つのDockerfile内で複数のFROMを書くことでファイルの受け渡しができるようになるらしい。</p>
+
+<p><a href="http://qiita.com/minamijoyo/items/711704e85b45ff5d6405">Docker multi stage buildで変わるDockerfileの常識 - Qiita</a></p>
+
+<h3 id="開発環境">開発環境</h3>
+
+<p>開発環境も合わせてDockerizeしたので、ローカルにHugoをインストールする必要もない。</p>
+
+<p><code>$ docker-compose up -d</code>でコンテナを立ち上げ、localhost:1313にアクセスすればHugo serverにアクセスできるし、マウントしているのでファイルを書き換えたらすぐさま反映される。</p>
+
+<pre><code class="language-yaml">version: '3'
+services:
+  hugo:
+    build:
+      context: .
+      dockerfile: Dockerfile-hugo
+    command: [server, --bind=0.0.0.0]
+    container_name: hugo
+    image: tsub/blog:hugo
+    ports:
+      - 1313:1313
+    volumes:
+      - .:/app
+</code></pre>
+
+<h3 id="イメージのpush">イメージのPush</h3>
+
+<p>最終的にできたnginxのイメージはDockerHubに置いている。</p>
+
+<p><a href="https://hub.docker.com/r/tsub/blog/">https://hub.docker.com/r/tsub/blog/</a></p>
+
+<p>とりあえず公開した感じなのでdescriptionを何も書いてないし、後述のhttpsへのリダイレクトがあるためそのままは使えない。</p>
+
+<p>イメージのPushは、複数のDockerfileを使ってビルドしている関係で、DockerHubのAutomated Buildを使えないのでCircleCIを使ってビルドしてPushしている。</p>
+
+<pre><code class="language-yaml">checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init --recursive
+
+machine:
+  timezone: Asia/Tokyo
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker version
+    - docker info
+    - bin/build
+    - docker images
+
+test:
+  override:
+    - docker run -it tsub/blog echo 'Success to build tsub/blog image.'
+
+deployment:
+  release:
+    tag: /[0-9]+(\.[0-9]+)*/
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - bin/deploy
+      - bin/deploy $CIRCLE_TAG
+</code></pre>
+
+<p>tagを追加すると、DockerHubにそのタグのイメージがPushされる。</p>
+
+<p>また、同時にlatestタグのイメージもPushするようにしている。</p>
+
+<p>こちらは現在、CircleCI2.0に置き換える予定。</p>
+
+<h2 id="kubectlが超良かった">kubectlが超良かった</h2>
+
+<p>ECSに比べて一番感動した部分はこれ。</p>
+
+<p><a href="https://kubernetes.io/docs/user-guide/kubectl-overview/">kubectl Overview | Kubernetes</a></p>
+
+<p>ECSだと、<a href="https://github.com/aws/amazon-ecs-cli">ECS CLI</a>というものがあるが、これに比べると非常に使い勝手がいい。</p>
+
+<p>k8sの学習に<a href="https://github.com/kubernetes/minikube">minikube</a>を使ってローカルにクラスターを立てて触っていたのだが、ここでも勿論kubectlが使えるし、GKEでクラスターを立てても<a href="https://cloud.google.com/sdk/">Google Cloud SDK</a>を使って認証情報を取得すれば、同じようにkubectlを使うことができる。</p>
+
+<p>ブログのコンテナを動かすときはこのファイル(<code>deployment.yml</code>)を置いて、<code>$ kubectl create -f deployment.yml</code>を実行すればk8s上でコンテナが動き始める。</p>
+
+<pre><code class="language-yaml">apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: blog
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: blog
+    spec:
+      containers:
+      - image: tsub/blog
+        name: blog
+        ports:
+        - containerPort: 80
+</code></pre>
+
+<p><code>$ kubectl get pods</code>で実際に動いているPodの状態を確認できる。</p>
+
+<pre><code class="language-sh">$ kubectl get pods
+NAME                    READY     STATUS    RESTARTS   AGE
+blog-1654083343-bhfhz   1/1       Running   0          4d
+blog-1654083343-r826c   1/1       Running   0          4d
+blog-1654083343-sdx2v   1/1       Running   0          4d
+</code></pre>
+
+<p>また、コンテナを外部からアクセスさせたいときは同じように<code>$ kubectl create -f service.yaml</code>を実行してServiceを作ってやれば良い。</p>
+
+<pre><code class="language-yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: blog
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  selector:
+    app: blog
+  type: NodePort
+</code></pre>
+
+<p>こちらも、<code>$ kubectl get services</code>でServiceの状態を確認できる。</p>
+
+<pre><code class="language-sh">$ kubectl get services
+NAME            CLUSTER-IP    EXTERNAL-IP   PORT(S)          AGE
+blog            10.3.247.61   &lt;nodes&gt;       80:30415/TCP     6d
+kube-lego-gce   10.3.242.18   &lt;nodes&gt;       8080:32023/TCP   6d
+kubernetes      10.3.240.1    &lt;none&gt;        443/TCP          6d
+</code></pre>
+
+<p>こんな感じで、kubectlは非常に直感的なコマンドを提供していて、使っていて気持ちがいい。</p>
+
+<p>また、全ての操作がAPIでできるしyamlで定義できるところも良い。</p>
+
+<h3 id="新しいイメージのデプロイ">新しいイメージのデプロイ</h3>
+
+<p>ブログのDockerイメージは前述の通りtagを追加すればCircleCIでビルドされ、DockerHubにPushされる。</p>
+
+<p>そのため、デプロイする時はまずGitHubのリリースを作成すれば良い。</p>
+
+<p>DockerHubにイメージがPushされたら、以下のコマンドを実行すれば、新しいイメージのReplicaSetsが作られて順にコンテナが置き換わっていく。</p>
+
+<pre><code>$ kubectl set image -f blog/deployment.yaml blog=tsub/blog:1.0.10
+</code></pre>
+
+<p>ここのデプロイフローは今後自動化したい。</p>
+
+<h2 id="https対応">https対応</h2>
+
+<p>以前、GitHub pagesで公開していたときは、Cloudflareを使ってhttps化していたため、勿論https対応はしておきたい。</p>
+
+<p>k8sはkube-legoというツールがあり、これを使うことで非常に簡単にLet&rsquo;s Encryptを用いた証明書の取得とhttps化をやってくれる。</p>
+
+<p><a href="https://github.com/jetstack/kube-lego">jetstack/kube-lego: Kube-Lego automatically requests certificates for Kubernetes Ingress resources from Let&rsquo;s Encrypt</a></p>
+
+<p><a href="https://github.com/jetstack/kube-lego/tree/master/examples/gce/lego">exampleのyaml</a>をほとんどそのまま使えばk8s上にデプロイできる。</p>
+
+<p>kube-legoがデプロイされた状態でk8sのIngressを作成すれば、kube-legoがLoad Balancerに証明書を設定してくれる。</p>
+
+<pre><code class="language-yaml">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: blog
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: &quot;kubernetes-ingress&quot;
+    kubernetes.io/ingress.class: &quot;gce&quot;
+    kubernetes.io/tls-acme: &quot;true&quot;
+spec:
+  tls:
+  - secretName: kubernetes-ingress-tls
+    hosts:
+    - blog.tsub.me
+  rules:
+  - host: blog.tsub.me
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: blog
+          servicePort: 80
+</code></pre>
+
+<p>1つハマったポイントとして、<code>spec.rules[0].http.paths[0].path</code>は<code>/*</code>と指定する必要があった。</p>
+
+<p><a href="https://github.com/jetstack/kube-lego/blob/master/examples/gce/echoserver/ingress-tls.yaml#L18">サンプル通りだと、<code>/</code></a>なのだがこれだとLoad Balancerのpathのルールがおかしくなり、バックエンドに接続できなかった。</p>
+
+<p>PRが出ていたのでおそらく<code>/</code>は間違いなのだと思う。</p>
+
+<p><a href="https://github.com/jetstack/kube-lego/pull/132">Change ingress paths from / to /* in gce example by ianmartorell · Pull Request #132 · jetstack/kube-lego</a></p>
+
+<p>また、他にハマったところとしてhttpでアクセスされた時にhttpsにリダクレクトする設定をnginxに書いたのだが、それによってLoad Balancerのヘルスチェックが通らなくなってしまった。</p>
+
+<p>そのため、ヘルスチェック用のパスを用意し、そのパスのみリダイレクトを行わず、200 OKを返すようにした。</p>
+
+<pre><code class="language-nginx">...
+
+  location / {
+    if ($http_x_forwarded_proto != &quot;https&quot;) {
+      return 301 https://$host$request_uri;
+    }
+
+    root  /usr/share/nginx/html;
+    index index.html index.htm;
+  }
+
+  location = /healthz {
+    return 200 'ok';
+  }
+
+...
+</code></pre>
+
+<p>ただしIngressでヘルスチェックのパスを指定する方法がわからなかったため、k8sによって自動的に作成されたヘルスチェックのパスを後から変更することにした。</p>
+
+<pre><code class="language-sh">$ gcloud compute http-health-checks update &lt;NAME&gt; --request-path /healthz
+</code></pre>
+
+<h2 id="移行した感想">移行した感想</h2>
+
+<p>とりあえず、会社で使っていたECSに比べてまだまだ細かいところまで触っていないのでk8sの方がいい！とは言えないが、個人的にはkubectlがあるだけでもかなり便利だし、内部はk8sなのでminikubeで個人のローカル環境立てたりとかできて、超良かった。</p>
+
+<p>特にECSは内部の仕組みが公開されているわけではないので、k8sに比べるとコミュニティの勢いや盛り上がりに欠けるのかな、という印象。</p>
+
+<p>ただし、そもそも静的サイトをわざわざ運用するメリットはないに等しいのでHugoからghostに移行するなども検討したい。</p>
+
+<p>また、GCPはAWSより安い、というイメージが個人的にはあり、現時点の料金を見るとLoad BalancerはELBに比べた確かに安い気がするし、その他も多分安い</p>
+
+<p>ただし、まだ1ヶ月も動かしていないので料金の話はまた別でしたい。</p>
+
+<p>ちなみに自分がアカウントを作成した時は1年間の無料クーポンが3万円くらいもらえたのでとりあえずそれがなくなるまで運用してみて、高かったらまた別のプラットフォームに移行すると思う。</p>
+      
+      
+      
+    </article>
+    
+
+
+  </main>
+  
+  <nav class="pagination-single">
+    
+      <span class="previous">&larr; <a href="https://blog.tsub.me/post/how-i-collect-information/" rel="prev">ぼくの情報収集方法</a></span>
+    
+    
+      <span class="next"><a href="https://blog.tsub.me/post/move-from-peco-to-fzf/" rel="next">pecoからfzfに移行した</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      <img src="/images/profile.jpg" width="64" height="64"><br>
+      Copyright 2016 tsub
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-63212158-2', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Albert で GitHub リポジトリを開ける拡張を作った | tsub&#39;s blog
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.tsub.me/post/create-albert-github/"/>
+
+  
+  <link rel="stylesheet" href="/css/sanitize.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/highlight_monokai.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+  
+  <link href="https://blog.tsub.me/index.xml" rel="alternate" type="application/rss+xml" title="tsub&#39;s blog" />
+  <link href="https://blog.tsub.me/index.xml" rel="feed" type="application/rss+xml" title="tsub&#39;s blog" />
+
+  
+  
+
+  
+   
+    
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="https://blog.tsub.me/images/profile.jpg" />
+    
+  
+
+  
+  <meta name="twitter:title" content="Albert で GitHub リポジトリを開ける拡張を作った"/>
+  <meta name="twitter:description" content="先日プライベートの開発マシンを Linux にしたのですが、macOS の時に一番重宝していたものがなにかというと、実は Alfred だったことに気づきました。
+
+Alfred がないとストレスフルです。
+
+ただ Linux には Alternative Alfred がいくつかあり、その中でも Albert が比較的良さそうだったので Albert を使っていますが、Alfred で言う Workflow にあたるものが全然充実していませんでした。
+
+特に Alfred から GitHub を開く操作が一番多い気がするので、まずはそれを Albert でもできるようにするために、今回拡張を作りました。
+
+ tsub/albert-github: Open GitHub repository in browser with Albert
+
+
+
+"/>
+
+  
+    <meta name="twitter:site" content="@_tsub_"/>
+  
+
+  
+
+  
+  
+    <meta name="twitter:creator" content="@tsub"/>
+  
+
+
+  
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="https://blog.tsub.me/">tsub&#39;s blog</a></h1>
+        <h2>雑なメモ</h2>
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/_tsub_" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+          
+          <li><a href="https://github.com/tsub" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+          <li><a href="https://blog.tsub.me/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Albert で GitHub リポジトリを開ける拡張を作った</h1>
+      <div class="meta">
+        Oct 28, 2018 &nbsp;
+        
+          <a href="/tags/albert">#Albert</a>&nbsp;
+        
+          <a href="/tags/python">#Python</a>&nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>先日プライベートの開発マシンを Linux にしたのですが、macOS の時に一番重宝していたものがなにかというと、実は <a href="https://www.alfredapp.com/">Alfred</a> だったことに気づきました。</p>
+
+<p>Alfred がないとストレスフルです。</p>
+
+<p>ただ Linux には Alternative Alfred がいくつかあり、その中でも Albert が比較的良さそうだったので Albert を使っていますが、Alfred で言う Workflow にあたるものが全然充実していませんでした。</p>
+
+<p>特に Alfred から GitHub を開く操作が一番多い気がするので、まずはそれを Albert でもできるようにするために、今回拡張を作りました。</p>
+
+<p><i class="fa fa-github"></i> <a href="https://github.com/tsub/albert-github">tsub/albert-github: Open GitHub repository in browser with Albert</a></p>
+
+<p><img src="https://gyazo.com/fff7125ea22e33c863f6fd535d7f2b8b.png" alt="image" /></p>
+
+<p></p>
+
+<h2 id="albert-の拡張を作る方法">Albert の拡張を作る方法</h2>
+
+<p>Albert で自作の拡張を作るには Python のコードを指定されたディレクトリ内に配置すれば OK です。</p>
+
+<p>Albert が読み込んでくれるディレクトリはドキュメントに書かれています。</p>
+
+<blockquote>
+<ul>
+<li>~/.local/share/albert/org.albert.extension.python/modules</li>
+<li>/usr/local/share/albert/org.albert.extension.python/modules</li>
+<li>/usr/share/albert/org.albert.extension.python/modules</li>
+</ul>
+
+<p><a href="https://albertlauncher.github.io/docs/extensions/python/#deployment">https://albertlauncher.github.io/docs/extensions/python/#deployment</a></p>
+</blockquote>
+
+<p>ここに直接 Python のファイルを <code>GitHub.py</code> のように置いてもいいですし、<code>GitHub/__init__.py</code> のようにディレクトリを切ることもできます。</p>
+
+<pre><code class="language-sh">$ ls -l ~/.local/share/albert/org.albert.extension.python/modules/GitHub/
+.rw-r--r-- 5.1k tsub 28 Oct 17:26 __init__.py
+drwxr-xr-x    - tsub 28 Oct 17:26 __pycache__
+.rw-r--r--  898 tsub 27 Oct 18:08 GitHub.svg
+</code></pre>
+
+<p>アイコンファイルも一緒に置くことも考えると上記のようにディレクトリを切って置くと良いと思います。</p>
+
+<p>後は Albert が用意している Python モジュールを使って実装します。</p>
+
+<p>以下のドキュメントに使える関数などが定義されています。</p>
+
+<p><a href="https://albertlauncher.github.io/docs/extensions/python/#extension-interface-01">https://albertlauncher.github.io/docs/extensions/python/#extension-interface-01</a></p>
+
+<p>ただこれだけだと分からないので、自分は公式拡張のコードを参考にしました。</p>
+
+<p><i class="fa fa-github"></i> <a href="https://github.com/albertlauncher/python">albertlauncher/python: A repository for the official Python extensions</a></p>
+
+<p>ちなみに、Alfred の場合は標準出力さえ出せればどんな言語で実装しても良かったのですが、Albert は Python のみのようです。</p>
+
+<p>過去に Albert にも External plugin というものがあり、シェルスクリプトで書けたようなのですが、今は deprecated になっていました。</p>
+
+<p><i class="fa fa-github"></i> <a href="https://github.com/albertlauncher/external">albertlauncher/external: [deprecated] A repository for external plugins</a></p>
+
+<p>あと、Alfred のようなリッチな Workflow 開発環境はないので、Albert の場合はすべてコードで書かないといけません。</p>
+
+<p><img src="https://gyazo.com/0bc6f22cd52e5824b27637580291ffbb.png" alt="image" /></p>
+
+<h2 id="今後">今後</h2>
+
+<p>Alfred で重宝していた Workflow は他にもいくつかありますのでこれらと同じような操作を Albert でできるように拡張を作っていきたいと思います。</p>
+
+<ul>
+<li><i class="fa fa-github"></i> <a href="https://github.com/rkoval/alfred-aws-console-services-workflow">rkoval/alfred-aws-console-services-workflow: Very simple workflow to quickly open up AWS Console Services in your browser</a></li>
+<li><i class="fa fa-github"></i> <a href="https://github.com/tsub/alfred-datadog-workflow">tsub/alfred-datadog-workflow: A Alfred workflow to open Datadog pages</a></li>
+</ul>
+
+<p>なお今回作った GitHub の拡張自体もまだ作りきれてない部分があり、キャッシュの更新などの実装が残っています。</p>
+
+<p>現状一度リポジトリを取得するとそれ以降はキャッシュを使うので新しいリポジトリが増えても反映されません。</p>
+
+<p>そのためキャッシュの更新をする必要があるのですが、Albert で非同期に処理を書けるのかが現状不明です。</p>
+
+<p>基本的に Albert で一文字タイプするたびに 1 回 Python スクリプトが実行されるのですが、表示したい内容を <code>return</code> して実行終了、というようなサイクルになっています。</p>
+
+<p>そのため、リポジトリ一覧を表示しながら裏でキャッシュを更新し、更に表示も更新するというようなことができなさそうな気がしています。</p>
+
+<p>キャッシュの更新の他にも、初回表示時にリポジトリの取得が遅いという問題もあるのですが、これもページネーションしつつ取得できたものから順次表示などできるのか不明です。</p>
+
+<p>そこら辺はもう少し調べてみる予定です。</p>
+      
+      
+      
+    </article>
+    
+
+
+  </main>
+  
+  <nav class="pagination-single">
+    
+      <span class="previous">&larr; <a href="https://blog.tsub.me/post/go111-modules-in-circleci/" rel="prev">Go 1.11 の Modules (vgo) を CircleCI で使う</a></span>
+    
+    
+      <span class="next"><a href="https://blog.tsub.me/post/introducing-to-circleci-orbs/" rel="next">CircleCI Orbs 入門</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      <img src="/images/profile.jpg" width="64" height="64"><br>
+      Copyright 2016 tsub
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-63212158-2', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

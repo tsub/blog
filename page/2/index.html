@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta name="generator" content="Hugo 0.40.2" />
+
+  
+  <meta charset="UTF-8">
+  <title>
+    tsub&#39;s blog
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.tsub.me/"/>
+
+  
+  <link rel="stylesheet" href="/css/sanitize.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/highlight_monokai.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+  
+  <link href="https://blog.tsub.me/index.xml" rel="alternate" type="application/rss+xml" title="tsub&#39;s blog" />
+  <link href="https://blog.tsub.me/index.xml" rel="feed" type="application/rss+xml" title="tsub&#39;s blog" />
+
+  
+  
+
+  
+   
+    
+  <meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="@_tsub_"/>
+    <meta name="twitter:creator:id" content="@_tsub_"/>
+  
+
+  
+    <meta name="twitter:creator" content="@tsub"/>
+  
+
+  <meta name="twitter:title" content="tsub&#39;s blog"/>
+  <meta name="twitter:description" content="雑なメモ"/>
+
+  
+    <meta name="twitter:image" content="https://blog.tsub.me/images/profile.jpg" />
+  
+
+
+  
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="https://blog.tsub.me/">tsub&#39;s blog</a></h1>
+        <h2>雑なメモ</h2>
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/_tsub_" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+          
+          <li><a href="https://github.com/tsub" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+          <li><a href="https://blog.tsub.me/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+
+
+<main id="index" role="main">
+  <div class="article-header light-gray"><h1>Recent Articles</h1></div>
+  
+  
+  <div class="summary">
+    <h2><a href="https://blog.tsub.me/post/move-from-peco-to-fzf/">pecoからfzfに移行した </a></h2>
+    <div class="meta">
+      May 3, 2017 &nbsp;
+      
+        <a href="/tags/fzf">#fzf</a>&nbsp;
+      
+        <a href="/tags/zsh">#zsh</a>&nbsp;
+      
+        <a href="/tags/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83">#開発環境</a>&nbsp;
+      
+    </div>
+    <p>今までずっと <a href="https://github.com/peco/peco">peco</a> を使ってきたが、そろそろ別のツールに変えてみるか&hellip;と思い立ったので <a href="https://github.com/junegunn/fzf">fzf</a> に移行した。</p>
+
+<p><a href="https://github.com/junegunn/fzf">junegunn/fzf: A command-line fuzzy finder written in Go</a></p>
+
+<p>自分は基本的に飽き性なので、定期的に環境を変えたくなる時期が来るのだが fzf が思ってたより良かったので紹介したい。</p>
+
+<p></p>
+  </div>
+  
+  <div class="summary">
+    <h2><a href="https://blog.tsub.me/post/operate-blog-server-on-gke/">ブログをGKEでの運用に移行した </a></h2>
+    <div class="meta">
+      Apr 16, 2017 &nbsp;
+      
+        <a href="/tags/docker">#docker</a>&nbsp;
+      
+        <a href="/tags/gke">#GKE</a>&nbsp;
+      
+        <a href="/tags/kubernetes">#kubernetes</a>&nbsp;
+      
+        <a href="/tags/hugo">#hugo</a>&nbsp;
+      
+    </div>
+    <p>このブログはGitHub pagesを使って公開していたが、GKEに移行することにした。</p>
+
+<p><a href="/post/created-blog-by-hugo/">はてなブログからHugo on Github Pagesに移行しました</a></p>
+
+<p>これを聞いて、99%の人が、HugoでHTMLファイルを生成して公開しているならわざわざサーバーなんて必要ないんじゃないか？金の無駄じゃないか？と思うかもしれない。</p>
+
+<p>自分もそう思う。</p>
+
+<p>今回GKEを使ったのはGKEとk8sでのコンテナ運用を経験したかったことが非常に大きい。</p>
+
+<p>会社ではECSを本番運用しているが、ECSに比べてk8sの方が良さそうな雰囲気しかないのでGKEの方も触っておこうかと思って移行した。</p>
+
+<p>また、今のところブログ以外に個人で運用しているWebサービス等はないため、ブログがちょうどいい題材だった。</p>
+
+<p></p>
+  </div>
+  
+  <div class="summary">
+    <h2><a href="https://blog.tsub.me/post/how-i-collect-information/">ぼくの情報収集方法 </a></h2>
+    <div class="meta">
+      Dec 17, 2016 &nbsp;
+      
+        <a href="/tags/%E6%83%85%E5%A0%B1%E5%8F%8E%E9%9B%86">#情報収集</a>&nbsp;
+      
+    </div>
+    <p>この記事は<a href="http://www.adventar.org/calendars/1427">feedforce Advent Calender 2016</a>の17日目の記事です。</p>
+
+<p>前回の記事はpokotyamuによる<a href="http://pokotyamu.hatenablog.com/entry/2016/12/16/095524">HHKBを掃除した話</a>でした</p>
+
+<p>無刻印のキーだからといってどのキーでも当てはまると思って適当にやるとものすごい罠に引っかかっちゃうんですね。</p>
+
+<p>さて、今回は多くのエンジニアにとって重要なキーワードである情報収集についてです。</p>
+
+<p>自分は多分社内ではわりと情報収集よくやってる方だと思っているのですが、自分が普段どんな方法で情報収集してるかを共有したかったので今回まとめてみました。</p>
+
+<p></p>
+  </div>
+  
+  <div class="summary">
+    <h2><a href="https://blog.tsub.me/post/blox-introduction/">Blox Introduction </a></h2>
+    <div class="meta">
+      Dec 9, 2016 &nbsp;
+      
+        <a href="/tags/blox">#Blox</a>&nbsp;
+      
+        <a href="/tags/ecs">#ECS</a>&nbsp;
+      
+        <a href="/tags/docker">#docker</a>&nbsp;
+      
+        <a href="/tags/aws">#AWS</a>&nbsp;
+      
+    </div>
+    <p>この記事は<a href="http://qiita.com/advent-calendar/2016/docker">Docker Advent Calendar 2016</a>の9日目の記事です。</p>
+
+<p>先日AWSのre:Invent 2016で<a href="https://blox.github.io/">Blox</a>が発表されました。</p>
+
+<p>BloxはEC2 Container Service(ECS)関連のオープンソースのツール群のことです。</p>
+
+<p>そしてそのツールとは主にECSのカスタムスケジューラを指します</p>
+
+<p>ECSはマネージドなスケジューラとマネージャを標準で備えていますが、Bloxはそれとは別に自分でホスティングする必要があります。</p>
+
+<p>しかし、ECSに足りない機能を補ってくれるため導入するメリットは大きいでしょう。</p>
+
+<p><a href="https://aws.amazon.com/jp/blogs/news/monitor-cluster-state-with-amazon-ecs-event-stream/">先日リリースされた、CloudWatchEventsのECSイベントストリーム</a>を利用することで、よりスムーズにECSのクラスタの状態を監視してカスタムスケジューラを作ることができるようになりました。</p>
+
+<p>Bloxはこれを使った一例と言えます</p>
+
+<p>この記事ではBloxについて試してみて分かった内容や所感について書いていきます</p>
+
+<p><img src="https://i.gyazo.com/4c00e85fca7b228d7aa0d5f1e6dd1d27.png" alt="Blox thumbnail" /></p>
+
+<p></p>
+  </div>
+  
+  <div class="summary">
+    <h2><a href="https://blog.tsub.me/post/created-blog-by-hugo/">はてなブログからHugo on Github Pagesに移行しました </a></h2>
+    <div class="meta">
+      Aug 12, 2016 &nbsp;
+      
+        <a href="/tags/hugo">#hugo</a>&nbsp;
+      
+    </div>
+    <p>はてなブログをやめて、Hugo on Github Pagesに移行しました。</p>
+
+<p>といっても、走りだしのブログであまり記事は多くないんですが..</p>
+
+<p>移行した理由は、以前のブログを構築した際に、調子に乗ってはてなブログProに登録して独自ドメインを使っていたのですが、思ったよりも記事を書かずお金がちょっと勿体無いなーと思い始めてきたのでGithub Pagesに移行しました。</p>
+
+<p></p>
+  </div>
+  
+  <div class="summary">
+    <h2><a href="https://blog.tsub.me/post/neovim-on-terminal-emulator/">neovimのterminal emulatorが便利すぎた </a></h2>
+    <div class="meta">
+      Jul 2, 2016 &nbsp;
+      
+        <a href="/tags/vim">#vim</a>&nbsp;
+      
+    </div>
+    <p>少し前にvimからneovimに移行したのですが、vimよりさくさくな気がする、程度でneovimの機能を特に活用していませんでした。</p>
+
+<p>実はneovimにはterminal emulatorという機能があり、vimの中でshellを起動することができます。</p>
+
+<p>例えばコードを書きつつ、rspecを実行したりpryやtigを使ったりなど、非常に便利です。</p>
+
+<p><a href="https://gyazo.com/ca4b9ef1599801f1948721befe274654.png"><img src="https://i.gyazo.com/ca4b9ef1599801f1948721befe274654.png" alt="" /></a></p>
+
+<p></p>
+  </div>
+  
+  <div class="summary">
+    <h2><a href="https://blog.tsub.me/post/tokyo-ex-3-entry-report/">tokyo.ex #3 参加してきた </a></h2>
+    <div class="meta">
+      Jun 30, 2016 &nbsp;
+      
+        <a href="/tags/elixir">#elixir</a>&nbsp;
+      
+        <a href="/tags/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88">#イベントレポート</a>&nbsp;
+      
+    </div>
+    <p>tokyo.ex #3 に参加してきました。</p>
+
+<p><a href="http://beam-lang.connpass.com/event/32704/">tokyo.ex #3</a></p>
+
+<p>前々からtokyo.ex #1, #2と気にはなっていたんですが、気づいた時には定員が埋まってまして今回やっと参加できました。</p>
+
+<p>と思ってたらわりと席空いてたりキャンセル多かったり、定員超えてるからといって諦めなくても良かったみたいですね</p>
+
+<p>参加してみての全体的な感想ですが、正直最近elixirを触ってなかったのでいい刺激になりました。</p>
+
+<p>話の内容は非常にレベルが高く、大半は理解できませんでしたが、その分elixirの勢いとコミュニティの熱さは十分伝わってきました。</p>
+
+<p></p>
+  </div>
+  
+  <div class="summary">
+    <h2><a href="https://blog.tsub.me/post/serverspec-for-several-container/">serverspecで複数のdocker containerに対してテストしたい </a></h2>
+    <div class="meta">
+      Jun 25, 2016 &nbsp;
+      
+        <a href="/tags/docker">#docker</a>&nbsp;
+      
+        <a href="/tags/serverspec">#serverspec</a>&nbsp;
+      
+    </div>
+    <p>前回の記事でdocker containerに対してserverspecでテストができるようになりました。</p>
+
+<p><a href="/post/serverspec-for-docker/">serverspecでdocker containerに対してテストしたい</a></p>
+
+<p>dockerを扱う以上、containerは複数立てるのが普通です。</p>
+
+<p>今回は複数のcontainerを立てた時にそれぞれのcontainerに対してテストする方法について書いていきます。</p>
+
+<p></p>
+  </div>
+  
+  <div class="summary">
+    <h2><a href="https://blog.tsub.me/post/serverspec-for-docker/">serverspecでdocker containerに対してテストしたい </a></h2>
+    <div class="meta">
+      Jun 25, 2016 &nbsp;
+      
+        <a href="/tags/docker">#docker</a>&nbsp;
+      
+        <a href="/tags/serverspec">#serverspec</a>&nbsp;
+      
+    </div>
+    <p>仕事でこれからdockerを使い始めるので、dockerを触りつつメモがてら記事に残していきます。</p>
+
+<p></p>
+  </div>
+  
+</main>
+
+
+
+<nav>
+  
+  
+
+<ul class="pagination">
+    
+    <li>
+        <a href="/" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li
+    >
+    <a href="/" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li
+    ><a href="/">1</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li
+    class="active"><a href="/page/2/">2</a></li>
+    
+    
+    <li
+    class="disabled">
+    <a href="" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li>
+        <a href="/page/2/" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
+
+</nav>
+
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      <img src="/images/profile.jpg" width="64" height="64"><br>
+      Copyright 2016 tsub
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-63212158-2', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

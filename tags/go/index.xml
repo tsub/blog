@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/go/</link>
+    <description>Recent content in Go on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 30 Aug 2018 05:33:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go 1.11 の Modules (vgo) を CircleCI で使う</title>
+      <link>https://blog.tsub.me/post/go111-modules-in-circleci/</link>
+      <pubDate>Thu, 30 Aug 2018 05:33:00 +0000</pubDate>
+      
+      <guid>https://blog.tsub.me/post/go111-modules-in-circleci/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/tsub/s3-edit&#34;&gt;個人プロジェクト&lt;/a&gt;にて、先日リリースされた Go 1.11 の Modules (vgo) を使ってみました。&lt;/p&gt;
+
+&lt;p&gt;移行自体はスムーズにできたのですが、CircleCI でのキャッシュのやり方がそこそこ重要かも？と思ったので記事を書きました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>AWS Lambda with Golang と SAM に入門した</title>
+      <link>https://blog.tsub.me/post/introduce-aws-lambda-with-golang-and-sam/</link>
+      <pubDate>Wed, 31 Jan 2018 23:15:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/introduce-aws-lambda-with-golang-and-sam/</guid>
+      <description>&lt;p&gt;先日 AWS Lambda の Golang サポートがリリースされました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/jp/blogs/compute/announcing-go-support-for-aws-lambda/&#34;&gt;Announcing Go Support for AWS Lambda | AWS Compute Blog&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;今回は AWS Lambda を Golang で書きつつ、&lt;a href=&#34;https://github.com/awslabs/serverless-application-model&#34;&gt;SAM&lt;/a&gt; へも入門したのでその辺りの知見とか作ったものについて紹介します。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go で Datadog の Alfred Workflow を作った</title>
+      <link>https://blog.tsub.me/post/create-alfred-workflow/</link>
+      <pubDate>Sun, 26 Nov 2017 16:00:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/create-alfred-workflow/</guid>
+      <description>&lt;p&gt;最近会社の同僚が &lt;a href=&#34;http://developer.feedforce.jp/entry/2017/11/13/085404&#34;&gt;Alfred Workflow を Go で書いたという LT を発表していて&lt;/a&gt;面白そうだったので、自分も書いてみました。&lt;/p&gt;
+
+&lt;p&gt;以下のリポジトリで配布しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/tsub/alfred-datadog-workflow&#34;&gt;tsub/alfred-datadog-workflow: A Alfred workflow to open Datadog pages&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Workflow のダウンロードリンクは&lt;a href=&#34;https://github.com/tsub/alfred-datadog-workflow/releases&#34;&gt;こちら&lt;/a&gt;から最新バージョンのものをどうぞ。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://gyazo.com/378dfd74e772c2d48776c5edd8ce6833.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go で s3-edit という CLI アプリケーションを作った</title>
+      <link>https://blog.tsub.me/post/create-s3-edit/</link>
+      <pubDate>Tue, 05 Sep 2017 22:30:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/create-s3-edit/</guid>
+      <description>&lt;p&gt;最近 Rust を少し学んでいたが、難しくて少し挫折しかけたのと、結局仕事への導入を考えるなら Go のほうが既に書ける人が何人かいる、というのもあり Go を書き始めた。&lt;/p&gt;
+
+&lt;p&gt;手初めてに欲しい CLI アプリケーションがあったのでそれをサクッと Go で書いてみた。&lt;/p&gt;
+
+&lt;p&gt;&lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/tsub/s3-edit&#34;&gt;tsub/s3-edit: Edit directly a file on Amazon S3&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

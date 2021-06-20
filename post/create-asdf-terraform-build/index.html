@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Apple Silicon Mac で複数 Terraform バージョンを管理するために asdf-terraform-build を作った | tsub&#39;s blog
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.tsub.me/post/create-asdf-terraform-build/"/>
+
+  
+  <link rel="stylesheet" href="/css/sanitize.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/highlight_monokai.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+  
+  <link href="https://blog.tsub.me/index.xml" rel="alternate" type="application/rss+xml" title="tsub&#39;s blog" />
+  <link href="https://blog.tsub.me/index.xml" rel="feed" type="application/rss+xml" title="tsub&#39;s blog" />
+
+  
+  
+
+  
+   
+    
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="https://blog.tsub.me/images/profile.jpg" />
+    
+  
+
+  
+  <meta name="twitter:title" content="Apple Silicon Mac で複数 Terraform バージョンを管理するために asdf-terraform-build を作った"/>
+  <meta name="twitter:description" content="
+
+"/>
+
+  
+    <meta name="twitter:site" content="@_tsub_"/>
+  
+
+  
+
+  
+  
+    <meta name="twitter:creator" content="@tsub"/>
+  
+
+
+  
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="https://blog.tsub.me/">tsub&#39;s blog</a></h1>
+        <h2>雑なメモ</h2>
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/_tsub_" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+          
+          <li><a href="https://github.com/tsub" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+          <li><a href="https://blog.tsub.me/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Apple Silicon Mac で複数 Terraform バージョンを管理するために asdf-terraform-build を作った</h1>
+      <div class="meta">
+        Jun 19, 2021 &nbsp;
+        
+          <a href="/tags/terraform">#terraform</a>&nbsp;
+        
+          <a href="/tags/asdf">#asdf</a>&nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p><a href="https://github.com/tsub/asdf-terraform-build"><img src="https://gh-card.dev/repos/tsub/asdf-terraform-build.svg?fullname=" alt="tsub/asdf-terraform-build - GitHub" /></a></p>
+
+<p></p>
+
+<h2 id="作った動機">作った動機</h2>
+
+<p>今週から仕事で Apple Silicon Mac (M1 Mac) を使い始めました。</p>
+
+<p>基本的には今まで使っていたツールは大体問題なく動いた (dotfiles の変更内容は<a href="https://github.com/tsub/dotfiles/pull/2/files">こちら</a>) のですが、Terraform だけ少し困っていました。</p>
+
+<p>仕事で Terraform を使っていると複数バージョンをインストールしたいことがあります。</p>
+
+<p>複数の Terraform バージョンを管理する場合、asdf の <a href="https://github.com/asdf-community/asdf-hashicorp">terraform プラグイン</a>を使うか、<a href="https://github.com/tfutils/tfenv">tfenv</a> を使う場合が多いかと思います。</p>
+
+<p>ただ、どちらの場合も Terraform のビルド済みバイナリをインストールする仕組みになっております。</p>
+
+<p>実は 2021/06/19 現在、Terraform は Apple Silicon をサポートしたビルド済みバイナリを提供していないため、ソースからビルドする必要があります。</p>
+
+<p>(詳しくは <a href="https://github.com/hashicorp/terraform/issues/27257">https://github.com/hashicorp/terraform/issues/27257</a> を参照)</p>
+
+<p>そのため、複数バージョンの Terraform を管理する方法が事実上ありません。</p>
+
+<p>そこで、ソースからビルドしてインストールする仕組みの asdf プラグインを今回作りました。</p>
+
+<p><a href="https://github.com/tsub/asdf-terraform-build"><img src="https://gh-card.dev/repos/tsub/asdf-terraform-build.svg?fullname=" alt="tsub/asdf-terraform-build - GitHub" /></a></p>
+
+<h2 id="メンテナンスの方針">メンテナンスの方針</h2>
+
+<p>前述の通り、Terraform が Apple Silicon 向けのビルド済みバイナリを提供していないことが原因のため、公式に提供されるようになったらこのプラグインはお役御免となります。</p>
+
+<p>それまでの間一時的に使う用途ですので、最低限自分の環境で動くことしか確認しておらずちゃんと動くかは分かりません。</p>
+
+<p>同じ問題で困っている方で、使ってみたけど期待通りに動かなかったなどあれば遠慮なく Issue/PR を作っていただければと思います。</p>
+
+<p>Issue/PR を作るときは日本語で構いません。</p>
+      
+      
+      
+    </article>
+    
+
+
+  </main>
+  
+  <nav class="pagination-single">
+    
+      <span class="previous">&larr; <a href="https://blog.tsub.me/post/create-alfred-aws-vault-workflow/" rel="prev">「aws-vault loginでChromeのウィンドウをAWSアカウント毎に分離する」を Alfred 用に作った</a></span>
+    
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      <img src="/images/profile.jpg" width="64" height="64"><br>
+      Copyright 2016 tsub
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-63212158-2', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

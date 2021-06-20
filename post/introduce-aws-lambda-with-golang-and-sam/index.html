@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    AWS Lambda with Golang と SAM に入門した | tsub&#39;s blog
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.tsub.me/post/introduce-aws-lambda-with-golang-and-sam/"/>
+
+  
+  <link rel="stylesheet" href="/css/sanitize.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/highlight_monokai.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+  
+  <link href="https://blog.tsub.me/index.xml" rel="alternate" type="application/rss+xml" title="tsub&#39;s blog" />
+  <link href="https://blog.tsub.me/index.xml" rel="feed" type="application/rss+xml" title="tsub&#39;s blog" />
+
+  
+  
+
+  
+   
+    
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="https://blog.tsub.me/images/profile.jpg" />
+    
+  
+
+  
+  <meta name="twitter:title" content="AWS Lambda with Golang と SAM に入門した"/>
+  <meta name="twitter:description" content="先日 AWS Lambda の Golang サポートがリリースされました。
+
+Announcing Go Support for AWS Lambda | AWS Compute Blog
+
+今回は AWS Lambda を Golang で書きつつ、SAM へも入門したのでその辺りの知見とか作ったものについて紹介します。
+
+"/>
+
+  
+    <meta name="twitter:site" content="@_tsub_"/>
+  
+
+  
+
+  
+  
+    <meta name="twitter:creator" content="@tsub"/>
+  
+
+
+  
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="https://blog.tsub.me/">tsub&#39;s blog</a></h1>
+        <h2>雑なメモ</h2>
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/_tsub_" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+          
+          <li><a href="https://github.com/tsub" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+          <li><a href="https://blog.tsub.me/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>AWS Lambda with Golang と SAM に入門した</h1>
+      <div class="meta">
+        Jan 31, 2018 &nbsp;
+        
+          <a href="/tags/aws-lambda">#AWS Lambda</a>&nbsp;
+        
+          <a href="/tags/go">#Go</a>&nbsp;
+        
+          <a href="/tags/sam">#SAM</a>&nbsp;
+        
+          <a href="/tags/cloudformation">#CloudFormation</a>&nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>先日 AWS Lambda の Golang サポートがリリースされました。</p>
+
+<p><a href="https://aws.amazon.com/jp/blogs/compute/announcing-go-support-for-aws-lambda/">Announcing Go Support for AWS Lambda | AWS Compute Blog</a></p>
+
+<p>今回は AWS Lambda を Golang で書きつつ、<a href="https://github.com/awslabs/serverless-application-model">SAM</a> へも入門したのでその辺りの知見とか作ったものについて紹介します。</p>
+
+<p></p>
+
+<h2 id="作ったもの">作ったもの</h2>
+
+<p>手始めに、Qiita:Team のテンプレートを元に決まった時刻に自動的に記事を作ってくれる function を書きました。</p>
+
+<p><i class="fa fa-github"></i> <a href="https://github.com/tsub/serverless-qiita-team-template">tsub/serverless-qiita-team-template: [under development] Create a Qiita:Team new post from templates</a></p>
+
+<p><code>under development</code> と書いてありますが、一応動くものになってはいます。</p>
+
+<p>ただ、主に社内で使うために作ったのであまり汎用的に作れてはいません。</p>
+
+<p>弊社では技術コミュニティ的なものがいくつかあり、週に一回 Qiita:Team に記事を作り、事前に各自トピックを書いて、時間になったら集まって順番に発表しています。</p>
+
+<p>詳しくは会社の技術ブログにて紹介されています。</p>
+
+<p><a href="http://developer.feedforce.jp/entry/2017/12/12/213335">『ff_rookies.*』という社内新卒エンジニアの技術共有会をやってます - Feedforce Developer Blog</a></p>
+
+<p>この記事を定期的に作る、という作業を自動化するために今回 Lambda function を作りました。</p>
+
+<p>仕組みは簡単で、CloudWatch Events のスケジュール実行で指定した時刻に AWS Lambda を実行し、Qiita API を叩いてテンプレートを元に記事を投稿するだけです。</p>
+
+<pre><code>+-------------------+     +------------+     +------------+
+| CloudWatch Events | --&gt; | AWS Lambda | --&gt; | Qiita:Team |
++-------------------+     +------------+     +------------+
+</code></pre>
+
+<h2 id="aws-lambda-を-go-で書いてみて">AWS Lambda を Go で書いてみて</h2>
+
+<p>今回は Event から値を受け取って何かに使う、というような AWS Lambda らしいことをしていないため特に困ることはありませんでした。</p>
+
+<p>ハンドラー部分の処理も以下のように <code>HandleRequest</code> 関数内では普通に Go のコードを実行しているだけです。</p>
+
+<pre><code class="language-golang">func HandleRequest() (string, error) {
+    token, err := decrypt(os.Getenv(&quot;QIITA_ACCESS_TOKEN&quot;))
+    if err != nil {
+      return &quot;&quot;, err
+    }
+    team, err := decrypt(os.Getenv(&quot;QIITA_TEAM_NAME&quot;))
+    if err != nil {
+      return &quot;&quot;, err
+    }
+    templateID, err := decrypt(os.Getenv(&quot;QIITA_TEAM_TEMPLATE_ID&quot;))
+    if err != nil {
+      return &quot;&quot;, err
+    }
+
+    client := &amp;Client{
+      Token:      token,
+      Team:       team,
+      TemplateID: templateID,
+    }
+
+    template, err := client.GetTemplate()
+    if err != nil {
+      return &quot;&quot;, err
+    }
+
+    url, err := client.CreateItem(template.ExpandedTitle, template.ExpandedBody, template.ExpandedTags)
+    if err != nil {
+      return &quot;&quot;, err
+    }
+
+    return fmt.Sprintf(&quot;URL: %s&quot;, url), nil
+}
+
+func main() {
+	  lambda.Start(HandleRequest)
+}
+</code></pre>
+
+<p>今回 Go で書いてみた感想としては Node.js と違って同期的なコードなので普通に手続き型で書けるし、非同期処理を使う場合も goroutine を使うのでかなり簡単だし (今回は使ってない)、他の Lambda で使える静的型付け言語と比べると比較的簡単に始められるし、かなり AWS Lambda とマッチしていると思っています。</p>
+
+<p>今までも <a href="https://github.com/apex/ape://github.com/apex/apex">apex</a> や <a href="https://github.com/eawsy/aws-lambda-go-shim">aws-lambda-go-shim</a> というツールを使えば AWS Lambda で Go を使うことはできましたが、公式のサポートでもないのでどうにも会社で使う気にはなれませんでした..</p>
+
+<p>ただ、今回 SAM を選んだ理由は <a href="https://aws.amazon.com/jp/serverless/serverlessrepo/">Serverless Application Repository</a> が先日の Re:Invent 2017 で発表されたためです。</p>
+
+<p>Serverless Application Repository はまだプレビュー版のみの提供となりますが、SAM で定義した Lambda function なら公開でき、他ユーザーの導入が簡単になるらしいです。</p>
+
+<p>今まで <a href="https://github.com/tsub/circleci-build-trigge://github.com/tsub/circleci-build-trigger">Serverless Framework を使って function を作ったこと</a>はありますが、他ユーザーが利用するときのセットアップなどは少々手間がかかりました。</p>
+
+<p>その辺が Deploy to Heroku Button みたいに簡単にデプロイ出来るようになれば、OSS として公開するようなツールは SAM を使うのが主流になっていきそうですね。</p>
+
+<h2 id="今回得た知見など">今回得た知見など</h2>
+
+<h3 id="aws-sam-cfn-で環境変数を使う">AWS SAM (CFn) で環境変数を使う</h3>
+
+<p>SAM、というか CFn の話になりますが、開発者によって異なる値など、環境変数を使いたい場合 <code>Parameters</code> セクションを使うと実現できました。</p>
+
+<p>以下のように <code>Parameters</code> セクションをトップレベルで指定しておき、参照したい箇所で <code>!Ref &lt;パラメーター名&gt;</code> で参照します。</p>
+
+<pre><code class="language-yaml">...
+
+Parameters:
+  QiitaAccessToken:
+    Type: String
+  QiitaTeamName:
+    Type: String
+  QiitaTeamTemplateId:
+    Type: String
+  KmsKeyId:
+    Type: String
+  ScheduleExpression:
+    Type: String
+
+Resources:
+  App:
+    ...
+    Properties:
+      ...
+      Environment:
+        Variables:
+          QIITA_ACCESS_TOKEN: !Ref QiitaAccessToken
+          QIITA_TEAM_NAME: !Ref QiitaTeamName
+          QIITA_TEAM_TEMPLATE_ID: !Ref QiitaTeamTemplateId
+</code></pre>
+
+<p>そして、パッケージングした CFn テンプレートをデプロイするときにオプションで渡すことができます。</p>
+
+<pre><code>$ aws cloudformation deploy \
+    --template-file .template-output.yml \
+    --stack-name stack-name \
+    --capabilities CAPABILITY_IAM \
+    --parameter-overrides \
+        QiitaAccessToken=&quot;${QIITA_ACCESS_TOKEN}&quot; \
+        QiitaTeamName=&quot;${QIITA_TEAM_NAME}&quot; \
+        QiitaTeamTemplateId=&quot;${QIITA_TEAM_TEMPLATE_ID}&quot; \
+        KmsKeyId=&quot;${KMS_KEY_ID}&quot; \
+        ScheduleExpression=&quot;${SCHEDULE_EXPRESSION}&quot;
+</code></pre>
+
+<h3 id="kms-で環境変数を暗号化-復号化する">KMS で環境変数を暗号化/復号化する</h3>
+
+<p>AWS Lambda に環境変数を設定した時、会社のアカウントなど自分以外の人も環境変数を閲覧できてしまうため、今回は KMS を用いて環境変数を暗号化しました。</p>
+
+<p>今まで AWS Lambda 自体は Serverless Framework を使って利用していましたが、意識高く KMS で暗号化したのは初めてでした。</p>
+
+<p>ちなみに AWS Lambda の Encryption helper を使えば、実装が不要で楽になるみたいですが CFn や SAM では対応していないようだったので、自前で暗号化/復号化を行いました。<br />
+設定自体はコンソールからできるようです。</p>
+
+<p><img src="https://gyazo.com/4dfeaef5049867ceb590bf35b787b944.png" alt="image" /></p>
+
+<p>暗号化は <code>Makefile</code> の中でやりました。</p>
+
+<pre><code class="language-makefile">define encrypt
+  aws kms encrypt \
+    --key-id &quot;${KMS_KEY_ID}&quot; \
+    --query CiphertextBlob \
+    --output text \
+    --plaintext $(1)
+endef
+
+deploy:
+  aws cloudformation package \
+    --template-file template.yml \
+    --s3-bucket $(PROJECT) \
+    --output-template-file .template-output.yml
+  aws cloudformation deploy \
+    --template-file .template-output.yml \
+    --stack-name $(PROJECT) \
+    --capabilities CAPABILITY_IAM \
+    --parameter-overrides \
+      QiitaAccessToken=&quot;$(shell $(call encrypt, ${QIITA_ACCESS_TOKEN}))&quot; \
+      QiitaTeamName=&quot;$(shell $(call encrypt, ${QIITA_TEAM_NAME}))&quot; \
+      QiitaTeamTemplateId=&quot;$(shell $(call encrypt, ${QIITA_TEAM_TEMPLATE_ID}))&quot; \
+      KmsKeyId=&quot;${KMS_KEY_ID}&quot; \
+      ScheduleExpression=&quot;${SCHEDULE_EXPRESSION}&quot;
+.PHONY: deploy
+</code></pre>
+
+<p>復号化は function の中でやりました。</p>
+
+<pre><code class="language-golang">func decrypt(str string) (string, error) {
+	data, err := base64.StdEncoding.DecodeString(str)
+	if err != nil {
+		return &quot;&quot;, err
+	}
+
+	svc := kms.New(session.New())
+	input := &amp;kms.DecryptInput{
+		CiphertextBlob: data,
+	}
+
+	resp, err := svc.Decrypt(input)
+	if err != nil {
+		return &quot;&quot;, err
+	}
+
+	return string(resp.Plaintext[:]), nil
+}
+
+func HandleRequest() (string, error) {
+	token, err := decrypt(os.Getenv(&quot;QIITA_ACCESS_TOKEN&quot;))
+	if err != nil {
+		return &quot;&quot;, err
+	}
+	team, err := decrypt(os.Getenv(&quot;QIITA_TEAM_NAME&quot;))
+	if err != nil {
+		return &quot;&quot;, err
+	}
+	templateID, err := decrypt(os.Getenv(&quot;QIITA_TEAM_TEMPLATE_ID&quot;))
+	if err != nil {
+		return &quot;&quot;, err
+  }
+  ...
+}
+</code></pre>
+
+<p>これで安全に環境変数を Lambda に設定することができます。</p>
+
+<h3 id="aws-sam-local">AWS SAM Local</h3>
+
+<p>AWS Lambda の Golang サポートの発表から少し遅れて、先日 <a href="https://github.com/awslabs/aws-sam-local/">AWS SAM Local</a> も Golang をサポートしました。</p>
+
+<blockquote>
+<p>GoLang 1.x support!</p>
+
+<p><a href="https://github.com/awslabs/aws-sam-local/releases/tag/v0.2.6">Release v0.2.6 · awslabs/aws-sam-local</a></p>
+</blockquote>
+
+<p>SAM と合わせて SAM Local の利用は今回が初めてでしたが、かなり簡単に実行できました。</p>
+
+<p>標準入力または、<code>-e</code> オプションで Event の JSON ファイルを渡してあげれば実行できます。</p>
+
+<pre><code>$ sam local invoke -e &lt;Event の JSON ファイル名&gt; &lt;Logical ID&gt;
+</code></pre>
+
+<p>ちなみに今回作った function は Event を特に使わないので空文字を渡して実行できました。</p>
+
+<pre><code>$ echo '' | sam local invoke
+</code></pre>
+
+<p>ちなみに、YAML ファイルも <code>template.yaml</code> または <code>template.yml</code> という名前だったらファイル名を指定する必要もありません。</p>
+
+<p>function も 1 つだったら Logical ID を指定する必要もなかったです。</p>
+
+<p>上記コマンドを実行すると、Docker イメージを pull してコンテナ内で Lambda function を実行してくれました。</p>
+
+<p>それ以外はまだ試していませんが、API Gateway や DynamoDB なども扱えるようですね。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>今回初めて AWS Lambda を Golang で書き、SAM を使ってみました。</p>
+
+<p>特に有用な知見はなかったかもしれませんが、これから利用する方々の助けとなれば幸いです。</p>
+
+<p>ちなみに、Serverless Framework も Golang をサポートしたようですね。会社では Serverless Framework を使っているのでこちらも触っていきたいです。</p>
+
+<p><a href="https://qiita.com/horike37/items/86d1626b3ee1a2e86b9a#aws-go-support">Serverless Framework v1.26.0リリースノート - Qiita</a></p>
+      
+      
+      
+    </article>
+    
+
+
+  </main>
+  
+  <nav class="pagination-single">
+    
+      <span class="previous">&larr; <a href="https://blog.tsub.me/post/half-a-year-after-married/" rel="prev">結婚して半年が経ったので工夫していることとか</a></span>
+    
+    
+      <span class="next"><a href="https://blog.tsub.me/post/jaws-days-2018/" rel="next">JAWS DAYS 2018 に行ってきた</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      <img src="/images/profile.jpg" width="64" height="64"><br>
+      Copyright 2016 tsub
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-63212158-2', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

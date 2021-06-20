@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/post/</link>
+    <description>Recent content in Posts on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 19 Jun 2021 08:41:36 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Apple Silicon Mac で複数 Terraform バージョンを管理するために asdf-terraform-build を作った</title>
+      <link>https://blog.tsub.me/post/create-asdf-terraform-build/</link>
+      <pubDate>Sat, 19 Jun 2021 08:41:36 +0000</pubDate>
+      
+      <guid>https://blog.tsub.me/post/create-asdf-terraform-build/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/tsub/asdf-terraform-build&#34;&gt;&lt;img src=&#34;https://gh-card.dev/repos/tsub/asdf-terraform-build.svg?fullname=&#34; alt=&#34;tsub/asdf-terraform-build - GitHub&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>「aws-vault loginでChromeのウィンドウをAWSアカウント毎に分離する」を Alfred 用に作った</title>
+      <link>https://blog.tsub.me/post/create-alfred-aws-vault-workflow/</link>
+      <pubDate>Sun, 06 Oct 2019 14:35:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/create-alfred-aws-vault-workflow/</guid>
+      <description>&lt;p&gt;&lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/tsub/alfred-aws-vault-workflow&#34;&gt;tsub/alfred-aws-vault-workflow: A Alfred workflow to open the AWS Management Console with aws-vault&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Chrome 版&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://i.gyazo.com/33341687e0419d3863f913a00997744c.gif&#34; alt=&#34;Features for Google Chrome&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Firefox (&lt;a href=&#34;https://addons.mozilla.org/firefox/addon/multi-account-containers/&#34;&gt;Multi-Account Container&lt;/a&gt; extension) 版&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://i.gyazo.com/a68e0d4cd6f9a80b659cfc1694cd85dd.gif&#34; alt=&#34;Features for Firefox&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;aws-vault 自体今回初めて知ったのですが、以下の記事を読んで、複数の AWS アカウント使いには大変便利そうだったので Alfred 用のものをシュッと作りました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://qiita.com/minamijoyo/items/f3cbb003a34954a32970&#34;&gt;aws-vault loginでChromeのウィンドウをAWSアカウント毎に分離する - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CircleCI Orbs 入門</title>
+      <link>https://blog.tsub.me/post/introducing-to-circleci-orbs/</link>
+      <pubDate>Sat, 10 Nov 2018 17:47:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/introducing-to-circleci-orbs/</guid>
+      <description>&lt;p&gt;とうとう待望の CircleCI Orbs がリリースされたので一通り触ってみました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://circleci.com/blog/announcing-orbs-technology-partner-program/&#34;&gt;Announcing CircleCI Orbs and our new Technology Partner Program&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;今回作ったサンプルは以下のリポジトリにありますので手っ取り早く知りたい人は以下のコードを見ると良いかと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/tsub/circleci-orbs-sandbox&#34;&gt;tsub/circleci-orbs-sandbox&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Albert で GitHub リポジトリを開ける拡張を作った</title>
+      <link>https://blog.tsub.me/post/create-albert-github/</link>
+      <pubDate>Sun, 28 Oct 2018 18:35:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/create-albert-github/</guid>
+      <description>&lt;p&gt;先日プライベートの開発マシンを Linux にしたのですが、macOS の時に一番重宝していたものがなにかというと、実は &lt;a href=&#34;https://www.alfredapp.com/&#34;&gt;Alfred&lt;/a&gt; だったことに気づきました。&lt;/p&gt;
+
+&lt;p&gt;Alfred がないとストレスフルです。&lt;/p&gt;
+
+&lt;p&gt;ただ Linux には Alternative Alfred がいくつかあり、その中でも Albert が比較的良さそうだったので Albert を使っていますが、Alfred で言う Workflow にあたるものが全然充実していませんでした。&lt;/p&gt;
+
+&lt;p&gt;特に Alfred から GitHub を開く操作が一番多い気がするので、まずはそれを Albert でもできるようにするために、今回拡張を作りました。&lt;/p&gt;
+
+&lt;p&gt;&lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/tsub/albert-github&#34;&gt;tsub/albert-github: Open GitHub repository in browser with Albert&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://gyazo.com/fff7125ea22e33c863f6fd535d7f2b8b.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go 1.11 の Modules (vgo) を CircleCI で使う</title>
+      <link>https://blog.tsub.me/post/go111-modules-in-circleci/</link>
+      <pubDate>Thu, 30 Aug 2018 05:33:00 +0000</pubDate>
+      
+      <guid>https://blog.tsub.me/post/go111-modules-in-circleci/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/tsub/s3-edit&#34;&gt;個人プロジェクト&lt;/a&gt;にて、先日リリースされた Go 1.11 の Modules (vgo) を使ってみました。&lt;/p&gt;
+
+&lt;p&gt;移行自体はスムーズにできたのですが、CircleCI でのキャッシュのやり方がそこそこ重要かも？と思ったので記事を書きました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>JAWS DAYS 2018 に行ってきた</title>
+      <link>https://blog.tsub.me/post/jaws-days-2018/</link>
+      <pubDate>Sat, 17 Mar 2018 06:16:55 +0000</pubDate>
+      
+      <guid>https://blog.tsub.me/post/jaws-days-2018/</guid>
+      <description>&lt;p&gt;社内勉強会の準備などで忙しく、レポートを書くのが遅れてしまいましたが、先週の 03/10 (土) に &lt;a href=&#34;https://jawsdays2018.jaws-ug.jp/&#34;&gt;JAWS DAYS 2018&lt;/a&gt; へ行ってきました。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://gyazo.com/5dafdbb66c5c6fd5a78aafeb83bd49c8.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;今回が初参加でしたが、AWS ユーザーグループのお祭りという感じですごく盛り上がっていて楽しいイベントでした。&lt;/p&gt;
+
+&lt;p&gt;会社の同僚も 4 人ぐらい参加してました。&lt;/p&gt;
+
+&lt;p&gt;自分が参加したセッションと聞いた感想やメモをつらつら書いていきます。&lt;/p&gt;
+
+&lt;p&gt;(ただし Keynote は省きます)&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>AWS Lambda with Golang と SAM に入門した</title>
+      <link>https://blog.tsub.me/post/introduce-aws-lambda-with-golang-and-sam/</link>
+      <pubDate>Wed, 31 Jan 2018 23:15:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/introduce-aws-lambda-with-golang-and-sam/</guid>
+      <description>&lt;p&gt;先日 AWS Lambda の Golang サポートがリリースされました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/jp/blogs/compute/announcing-go-support-for-aws-lambda/&#34;&gt;Announcing Go Support for AWS Lambda | AWS Compute Blog&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;今回は AWS Lambda を Golang で書きつつ、&lt;a href=&#34;https://github.com/awslabs/serverless-application-model&#34;&gt;SAM&lt;/a&gt; へも入門したのでその辺りの知見とか作ったものについて紹介します。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>結婚して半年が経ったので工夫していることとか</title>
+      <link>https://blog.tsub.me/post/half-a-year-after-married/</link>
+      <pubDate>Sat, 09 Dec 2017 21:30:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/half-a-year-after-married/</guid>
+      <description>&lt;p&gt;この記事は &lt;a href=&#34;https://adventar.org/calendars/2155&#34;&gt;feedforce Advent Calendar 2017&lt;/a&gt; の 9 日目の記事です。&lt;/p&gt;
+
+&lt;p&gt;昨日の記事は tmd45 さんの &lt;a href=&#34;http://developer.feedforce.jp/entry/2017/12/08/090000&#34;&gt;TypeScript 社内勉強会 完遂報告 - Feedforce Developer Blog&lt;/a&gt; でした。&lt;br /&gt;
+TypeScript 社内勉強会には自分も参加していましたが、プロダクションのコードを書いているフロントエンドエンジニアの方から色々とアドバイスを頂いたり、他の言語の観点で議論が出来たりとても有意義な会でした！&lt;/p&gt;
+
+&lt;p&gt;さて、本題ですがワタクシ今年の 4 月に結婚をしました。&lt;/p&gt;
+
+&lt;p&gt;妻は Web コーダーで、割と Web サービスなどにも抵抗がなく普段から Slack や Kibela などを夫婦間で活用しています。&lt;/p&gt;
+
+&lt;p&gt;今回はその辺りで色々と工夫している部分を紹介できればと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go で Datadog の Alfred Workflow を作った</title>
+      <link>https://blog.tsub.me/post/create-alfred-workflow/</link>
+      <pubDate>Sun, 26 Nov 2017 16:00:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/create-alfred-workflow/</guid>
+      <description>&lt;p&gt;最近会社の同僚が &lt;a href=&#34;http://developer.feedforce.jp/entry/2017/11/13/085404&#34;&gt;Alfred Workflow を Go で書いたという LT を発表していて&lt;/a&gt;面白そうだったので、自分も書いてみました。&lt;/p&gt;
+
+&lt;p&gt;以下のリポジトリで配布しています。&lt;/p&gt;
+
+&lt;p&gt;&lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/tsub/alfred-datadog-workflow&#34;&gt;tsub/alfred-datadog-workflow: A Alfred workflow to open Datadog pages&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Workflow のダウンロードリンクは&lt;a href=&#34;https://github.com/tsub/alfred-datadog-workflow/releases&#34;&gt;こちら&lt;/a&gt;から最新バージョンのものをどうぞ。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://gyazo.com/378dfd74e772c2d48776c5edd8ce6833.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go で s3-edit という CLI アプリケーションを作った</title>
+      <link>https://blog.tsub.me/post/create-s3-edit/</link>
+      <pubDate>Tue, 05 Sep 2017 22:30:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/create-s3-edit/</guid>
+      <description>&lt;p&gt;最近 Rust を少し学んでいたが、難しくて少し挫折しかけたのと、結局仕事への導入を考えるなら Go のほうが既に書ける人が何人かいる、というのもあり Go を書き始めた。&lt;/p&gt;
+
+&lt;p&gt;手初めてに欲しい CLI アプリケーションがあったのでそれをサクッと Go で書いてみた。&lt;/p&gt;
+
+&lt;p&gt;&lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/tsub/s3-edit&#34;&gt;tsub/s3-edit: Edit directly a file on Amazon S3&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>pecoからfzfに移行した</title>
+      <link>https://blog.tsub.me/post/move-from-peco-to-fzf/</link>
+      <pubDate>Wed, 03 May 2017 00:30:00 +0000</pubDate>
+      
+      <guid>https://blog.tsub.me/post/move-from-peco-to-fzf/</guid>
+      <description>&lt;p&gt;今までずっと &lt;a href=&#34;https://github.com/peco/peco&#34;&gt;peco&lt;/a&gt; を使ってきたが、そろそろ別のツールに変えてみるか&amp;hellip;と思い立ったので &lt;a href=&#34;https://github.com/junegunn/fzf&#34;&gt;fzf&lt;/a&gt; に移行した。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/junegunn/fzf&#34;&gt;junegunn/fzf: A command-line fuzzy finder written in Go&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;自分は基本的に飽き性なので、定期的に環境を変えたくなる時期が来るのだが fzf が思ってたより良かったので紹介したい。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ブログをGKEでの運用に移行した</title>
+      <link>https://blog.tsub.me/post/operate-blog-server-on-gke/</link>
+      <pubDate>Sun, 16 Apr 2017 05:29:33 +0000</pubDate>
+      
+      <guid>https://blog.tsub.me/post/operate-blog-server-on-gke/</guid>
+      <description>&lt;p&gt;このブログはGitHub pagesを使って公開していたが、GKEに移行することにした。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://blog.tsub.me/post/created-blog-by-hugo/&#34;&gt;はてなブログからHugo on Github Pagesに移行しました&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;これを聞いて、99%の人が、HugoでHTMLファイルを生成して公開しているならわざわざサーバーなんて必要ないんじゃないか？金の無駄じゃないか？と思うかもしれない。&lt;/p&gt;
+
+&lt;p&gt;自分もそう思う。&lt;/p&gt;
+
+&lt;p&gt;今回GKEを使ったのはGKEとk8sでのコンテナ運用を経験したかったことが非常に大きい。&lt;/p&gt;
+
+&lt;p&gt;会社ではECSを本番運用しているが、ECSに比べてk8sの方が良さそうな雰囲気しかないのでGKEの方も触っておこうかと思って移行した。&lt;/p&gt;
+
+&lt;p&gt;また、今のところブログ以外に個人で運用しているWebサービス等はないため、ブログがちょうどいい題材だった。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ぼくの情報収集方法</title>
+      <link>https://blog.tsub.me/post/how-i-collect-information/</link>
+      <pubDate>Sat, 17 Dec 2016 16:50:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/how-i-collect-information/</guid>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;http://www.adventar.org/calendars/1427&#34;&gt;feedforce Advent Calender 2016&lt;/a&gt;の17日目の記事です。&lt;/p&gt;
+
+&lt;p&gt;前回の記事はpokotyamuによる&lt;a href=&#34;http://pokotyamu.hatenablog.com/entry/2016/12/16/095524&#34;&gt;HHKBを掃除した話&lt;/a&gt;でした&lt;/p&gt;
+
+&lt;p&gt;無刻印のキーだからといってどのキーでも当てはまると思って適当にやるとものすごい罠に引っかかっちゃうんですね。&lt;/p&gt;
+
+&lt;p&gt;さて、今回は多くのエンジニアにとって重要なキーワードである情報収集についてです。&lt;/p&gt;
+
+&lt;p&gt;自分は多分社内ではわりと情報収集よくやってる方だと思っているのですが、自分が普段どんな方法で情報収集してるかを共有したかったので今回まとめてみました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Blox Introduction</title>
+      <link>https://blog.tsub.me/post/blox-introduction/</link>
+      <pubDate>Fri, 09 Dec 2016 00:00:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/blox-introduction/</guid>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;http://qiita.com/advent-calendar/2016/docker&#34;&gt;Docker Advent Calendar 2016&lt;/a&gt;の9日目の記事です。&lt;/p&gt;
+
+&lt;p&gt;先日AWSのre:Invent 2016で&lt;a href=&#34;https://blox.github.io/&#34;&gt;Blox&lt;/a&gt;が発表されました。&lt;/p&gt;
+
+&lt;p&gt;BloxはEC2 Container Service(ECS)関連のオープンソースのツール群のことです。&lt;/p&gt;
+
+&lt;p&gt;そしてそのツールとは主にECSのカスタムスケジューラを指します&lt;/p&gt;
+
+&lt;p&gt;ECSはマネージドなスケジューラとマネージャを標準で備えていますが、Bloxはそれとは別に自分でホスティングする必要があります。&lt;/p&gt;
+
+&lt;p&gt;しかし、ECSに足りない機能を補ってくれるため導入するメリットは大きいでしょう。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/jp/blogs/news/monitor-cluster-state-with-amazon-ecs-event-stream/&#34;&gt;先日リリースされた、CloudWatchEventsのECSイベントストリーム&lt;/a&gt;を利用することで、よりスムーズにECSのクラスタの状態を監視してカスタムスケジューラを作ることができるようになりました。&lt;/p&gt;
+
+&lt;p&gt;Bloxはこれを使った一例と言えます&lt;/p&gt;
+
+&lt;p&gt;この記事ではBloxについて試してみて分かった内容や所感について書いていきます&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://i.gyazo.com/4c00e85fca7b228d7aa0d5f1e6dd1d27.png&#34; alt=&#34;Blox thumbnail&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>はてなブログからHugo on Github Pagesに移行しました</title>
+      <link>https://blog.tsub.me/post/created-blog-by-hugo/</link>
+      <pubDate>Fri, 12 Aug 2016 01:01:16 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/created-blog-by-hugo/</guid>
+      <description>&lt;p&gt;はてなブログをやめて、Hugo on Github Pagesに移行しました。&lt;/p&gt;
+
+&lt;p&gt;といっても、走りだしのブログであまり記事は多くないんですが..&lt;/p&gt;
+
+&lt;p&gt;移行した理由は、以前のブログを構築した際に、調子に乗ってはてなブログProに登録して独自ドメインを使っていたのですが、思ったよりも記事を書かずお金がちょっと勿体無いなーと思い始めてきたのでGithub Pagesに移行しました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>neovimのterminal emulatorが便利すぎた</title>
+      <link>https://blog.tsub.me/post/neovim-on-terminal-emulator/</link>
+      <pubDate>Sat, 02 Jul 2016 22:08:23 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/neovim-on-terminal-emulator/</guid>
+      <description>&lt;p&gt;少し前にvimからneovimに移行したのですが、vimよりさくさくな気がする、程度でneovimの機能を特に活用していませんでした。&lt;/p&gt;
+
+&lt;p&gt;実はneovimにはterminal emulatorという機能があり、vimの中でshellを起動することができます。&lt;/p&gt;
+
+&lt;p&gt;例えばコードを書きつつ、rspecを実行したりpryやtigを使ったりなど、非常に便利です。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://gyazo.com/ca4b9ef1599801f1948721befe274654.png&#34;&gt;&lt;img src=&#34;https://i.gyazo.com/ca4b9ef1599801f1948721befe274654.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>tokyo.ex #3 参加してきた</title>
+      <link>https://blog.tsub.me/post/tokyo-ex-3-entry-report/</link>
+      <pubDate>Thu, 30 Jun 2016 23:56:16 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/tokyo-ex-3-entry-report/</guid>
+      <description>&lt;p&gt;tokyo.ex #3 に参加してきました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://beam-lang.connpass.com/event/32704/&#34;&gt;tokyo.ex #3&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;前々からtokyo.ex #1, #2と気にはなっていたんですが、気づいた時には定員が埋まってまして今回やっと参加できました。&lt;/p&gt;
+
+&lt;p&gt;と思ってたらわりと席空いてたりキャンセル多かったり、定員超えてるからといって諦めなくても良かったみたいですね&lt;/p&gt;
+
+&lt;p&gt;参加してみての全体的な感想ですが、正直最近elixirを触ってなかったのでいい刺激になりました。&lt;/p&gt;
+
+&lt;p&gt;話の内容は非常にレベルが高く、大半は理解できませんでしたが、その分elixirの勢いとコミュニティの熱さは十分伝わってきました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>serverspecで複数のdocker containerに対してテストしたい</title>
+      <link>https://blog.tsub.me/post/serverspec-for-several-container/</link>
+      <pubDate>Sat, 25 Jun 2016 23:36:05 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/serverspec-for-several-container/</guid>
+      <description>&lt;p&gt;前回の記事でdocker containerに対してserverspecでテストができるようになりました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://blog.tsub.me/post/serverspec-for-docker/&#34;&gt;serverspecでdocker containerに対してテストしたい&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;dockerを扱う以上、containerは複数立てるのが普通です。&lt;/p&gt;
+
+&lt;p&gt;今回は複数のcontainerを立てた時にそれぞれのcontainerに対してテストする方法について書いていきます。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>serverspecでdocker containerに対してテストしたい</title>
+      <link>https://blog.tsub.me/post/serverspec-for-docker/</link>
+      <pubDate>Sat, 25 Jun 2016 22:25:08 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/serverspec-for-docker/</guid>
+      <description>&lt;p&gt;仕事でこれからdockerを使い始めるので、dockerを触りつつメモがてら記事に残していきます。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,545 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    CircleCI Orbs 入門 | tsub&#39;s blog
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.tsub.me/post/introducing-to-circleci-orbs/"/>
+
+  
+  <link rel="stylesheet" href="/css/sanitize.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/highlight_monokai.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+  
+  <link href="https://blog.tsub.me/index.xml" rel="alternate" type="application/rss+xml" title="tsub&#39;s blog" />
+  <link href="https://blog.tsub.me/index.xml" rel="feed" type="application/rss+xml" title="tsub&#39;s blog" />
+
+  
+  
+
+  
+   
+    
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="https://blog.tsub.me/images/profile.jpg" />
+    
+  
+
+  
+  <meta name="twitter:title" content="CircleCI Orbs 入門"/>
+  <meta name="twitter:description" content="とうとう待望の CircleCI Orbs がリリースされたので一通り触ってみました。
+
+Announcing CircleCI Orbs and our new Technology Partner Program
+
+今回作ったサンプルは以下のリポジトリにありますので手っ取り早く知りたい人は以下のコードを見ると良いかと思います。
+
+ tsub/circleci-orbs-sandbox
+
+"/>
+
+  
+    <meta name="twitter:site" content="@_tsub_"/>
+  
+
+  
+
+  
+  
+    <meta name="twitter:creator" content="@tsub"/>
+  
+
+
+  
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="https://blog.tsub.me/">tsub&#39;s blog</a></h1>
+        <h2>雑なメモ</h2>
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/_tsub_" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+          
+          <li><a href="https://github.com/tsub" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+          <li><a href="https://blog.tsub.me/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>CircleCI Orbs 入門</h1>
+      <div class="meta">
+        Nov 10, 2018 &nbsp;
+        
+          <a href="/tags/circleci">#CircleCI</a>&nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>とうとう待望の CircleCI Orbs がリリースされたので一通り触ってみました。</p>
+
+<p><a href="https://circleci.com/blog/announcing-orbs-technology-partner-program/">Announcing CircleCI Orbs and our new Technology Partner Program</a></p>
+
+<p>今回作ったサンプルは以下のリポジトリにありますので手っ取り早く知りたい人は以下のコードを見ると良いかと思います。</p>
+
+<p><i class="fa fa-github"></i> <a href="https://github.com/tsub/circleci-orbs-sandbox">tsub/circleci-orbs-sandbox</a></p>
+
+<p></p>
+
+<h2 id="circleci-orbs-とは">CircleCI Orbs とは</h2>
+
+<p>CircleCI の commands や jobs, executors をパッケージとして使い回すことのできる仕組みです。</p>
+
+<p>公開されている Orb は Orbs Registry にあります。</p>
+
+<p><a href="https://circleci.com/orbs/registry/">CircleCI Orb Registry</a></p>
+
+<p>公開されている Orb を使うには例えば以下のように書くことで自分の CircleCI のビルドで使うことができます。</p>
+
+<pre><code class="language-yaml">version: 2.1
+
+orbs:
+  hello: circleci/hello-build@0.0.5
+
+workflows:
+  &quot;Hello Workflow&quot;:
+    jobs:
+      - hello/hello-build
+</code></pre>
+
+<p>基本的な使い方としては、以下で Orb の呼び出しと名前付けをし、</p>
+
+<pre><code class="language-yaml">orbs:
+  hello: circleci/hello-build@0.0.5
+</code></pre>
+
+<p>使いたい箇所で <code>&lt;自分で付けた Orb の名前&gt;/&lt;job 名&gt;</code> などで使うことができます。</p>
+
+<pre><code>workflows:
+  &quot;Hello Workflow&quot;:
+    jobs:
+      - hello/hello-build
+</code></pre>
+
+<p>他にも Orb で commands や executors が提供されていれば同様に使うことができます。</p>
+
+<p>なお、CircleCI 2.1 の機能を使えるようにするためにビルド対象のプロジェクトの Adbanced Settings で <code>Enable build processing (preview)</code> を On にする必要があります。</p>
+
+<p><a href="https://gyazo.com/94ca61b1918d93e28d34b655516fda2b.png"><img src="https://gyazo.com/94ca61b1918d93e28d34b655516fda2b.png" alt="image" /></a></p>
+
+<p>詳しくは以下の公式チュートリアルをご覧ください。</p>
+
+<p><a href="https://circleci.com/docs/2.0/using-orbs/#section=configuration">Using Orbs - CircleCI</a></p>
+
+<h2 id="orb-を公開するには">Orb を公開するには</h2>
+
+<p>さて、この記事の本題です。</p>
+
+<p>Orbs は使うだけでなく、誰でも公開することができます。</p>
+
+<p>以下の公式チュートリアルを見ればなんとなく分かります。</p>
+
+<p><a href="https://circleci.com/docs/2.0/creating-orbs/#section=configuration">Creating Orbs - CircleCI</a></p>
+
+<p>が、公式チュートリアルの説明が若干分かりづらかったと思ったので、(おそらく) 最小の公開手順を載せておきます。</p>
+
+<ol>
+<li><p>CircleCI 2.1 を使えるようにするためにビルド対象のプロジェクトの Adbanced Settings で <code>Enable build processing (preview)</code> を On にする</p>
+
+<p><a href="https://gyazo.com/94ca61b1918d93e28d34b655516fda2b.png"><img src="https://gyazo.com/94ca61b1918d93e28d34b655516fda2b.png" alt="image" /></a></p></li>
+
+<li><p><a href="#">https://circleci.com/gh/organizations/&lt;オーガニゼーション名&gt;/settings#security</a> から CircleCI のオーガニゼーションの管理者がサードパーティ Orb の利用を許可する</p>
+
+<p><img src="https://gyazo.com/c5416c34c5b55a92dd7c998c46c82760.png" alt="image" /></p></li>
+
+<li><p><a href="https://github.com/CircleCI-Public/circleci-cli">circleci-cli</a> をインストール</p>
+
+<ul>
+<li>すでにインストール済みの場合は <code>$ circleci update install</code> でアップデートしておくと良い</li>
+</ul></li>
+
+<li><p><a href="https://circleci.com/account/api">こちらから</a> CircleCI の Personal API Token を生成</p></li>
+
+<li><p><code>$ circleci setup</code> を実行して Personal API Token を入力</p></li>
+
+<li><p>GitHub にリポジトリを作っておく</p></li>
+
+<li><p><code>$ circleci namespace create &lt;任意の Orb のネームスペース&gt; &lt;VCS プロパイダ名&gt; &lt;CircleCI のオーガニゼーション名&gt;</code> を実行</p>
+
+<ul>
+<li>例: <code>$ circleci namespace create tsub github tsub</code></li>
+</ul></li>
+
+<li><p>公開したい Orb の yml を用意</p>
+
+<pre><code class="language-yaml"># orb.yml
+version: &quot;2.1&quot;
+description: &quot;a sample orb&quot;
+</code></pre></li>
+
+<li><p><code>$ circleci orb publish orb.yml &lt;Orb のネームスペース&gt;/&lt;任意の Orb 名&gt;@&lt;任意の Orb のバージョン&gt;</code> を実行してリリース</p>
+
+<ul>
+<li>例: <code>$ circleci orb publish orb.yml tsub/sandbox@0.0.1</code></li>
+</ul></li>
+</ol>
+
+<p>ちなみに Orb 公開時のバージョンに <code>dev:&lt;任意の名前&gt;</code> を付けると開発用リリースとなり、同名のバージョンが 90 日以上リリースされなければ自動削除されます。</p>
+
+<pre><code>$ circleci orb publish src/hello-world/orb.yml tsub/hello-world@dev:test-branch
+Orb `tsub/hello-world@dev:test-branch` was published.
+Please note that this is an open orb and is world-readable.
+Note that your dev label `dev:test-branch` can be overwritten by anyone in your organization.
+Your dev orb will expire in 90 days unless a new version is published on the label `dev:test-branch`.
+</code></pre>
+
+<p>なお、現時点では公開した Orb は全てパブリックとなるので、注意が必要です。</p>
+
+<blockquote>
+<p>[WARNING] Orbs are always world-readable. All published orbs (production and development) can be read and used by anyone. They are not limited to just the members of your organization. In general, CircleCI strongly recommends that you do not put secrets or other sensitive variables into your configuration. Instead, use contexts or project environment variables and reference the names of those environment variables in your orbs.</p>
+
+<p><a href="https://circleci.com/docs/2.0/creating-orbs/#publishing-an-orb">https://circleci.com/docs/2.0/creating-orbs/#publishing-an-orb</a></p>
+</blockquote>
+
+<h2 id="orb-の開発-デプロイに便利な-orb">Orb の開発・デプロイに便利な Orb</h2>
+
+<p>公式から Orb の開発やデプロイに便利に使える <a href="https://circleci.com/orbs/registry/orb/circleci/orb-tools">circleci/orb-tools</a> という Orb が提供されています。</p>
+
+<h3 id="orb-のテスト実行">Orb のテスト実行</h3>
+
+<p>例えば <code>test-in-builds</code> job を使えば自分で書いた Orb のローカル実行を CI することができます。</p>
+
+<p>(ちなみに <code>test-in-builds</code> job と内部で使う <code>local-test-build</code> command だけ使い方が非常に分かりづらく、Orb のコードを読み解く必要がありました)</p>
+
+<p>以下の YAML を用意します。</p>
+
+<pre><code class="language-yaml"># .circleci/config.yml
+version: &quot;2.1&quot;
+
+orbs:
+  orb-tools: circleci/orb-tools@2.0.2
+
+workflows:
+  version: &quot;2&quot;
+
+  test_orb:
+    jobs:
+      - orb-tools/test-in-builds:
+          orb-location: src/hello-world/orb.yml
+          orb-name: hello-world
+          test-steps:
+            - orb-tools/local-test-build:
+                test-config-location: src/hello-world/test.yml
+</code></pre>
+
+<pre><code class="language-yaml"># src/hello-world/orb.yml
+version: &quot;2.1&quot;
+description: &quot;a sample orb&quot;
+
+commands:
+  hello:
+    steps:
+      - run:
+          name: Echo &quot;hello&quot;
+          command: echo hello
+
+  world:
+    steps:
+      - run:
+          name: Echo &quot;world&quot;
+          command: echo world
+
+executors:
+  default:
+    docker:
+      - image: busybox
+
+jobs:
+  hello_world:
+    executor: default
+    steps:
+      - hello
+      - world
+</code></pre>
+
+<pre><code class="language-yaml"># src/hello-world/test.yml
+version: &quot;2.1&quot;
+
+jobs:
+  build:
+    executor: hello-world/default
+    steps:
+      - hello-world/hello
+      - hello-world/world
+</code></pre>
+
+<p>すると、CI で <code>src/hello-world/orb.yml</code> を <code>$ circleci local execute</code> を使ってローカル実行してくれます。</p>
+
+<blockquote>
+<p><a href="https://gyazo.com/b7b861910a880d021fe6ced5840bd447.png"><img src="https://gyazo.com/b7b861910a880d021fe6ced5840bd447.png" alt="image" /></a></p>
+
+<p><a href="https://circleci.com/gh/tsub/circleci-orbs-sandbox/36">https://circleci.com/gh/tsub/circleci-orbs-sandbox/36</a></p>
+</blockquote>
+
+<p>注意点としては、<code>$ circleci local execute</code> コマンドなので、Workflows には対応していないのと、job 名はデフォルトの <code>build</code> 固定になっています。</p>
+
+<blockquote>
+<p><strong>Note</strong>: This command will only run a single job, it does not run a workflow.</p>
+
+<p><a href="https://circleci.com/docs/2.0/local-cli/#run-a-job-in-a-container-on-the-local-machine">https://circleci.com/docs/2.0/local-cli/#run-a-job-in-a-container-on-the-local-machine</a></p>
+</blockquote>
+
+<pre><code>$ circleci local execute --help
+...
+      --job string            job to be executed (default &quot;build&quot;)
+...
+</code></pre>
+
+<p>そのため、現時点では Orb で定義した jobs のテストはできず、commands や executors しかテストできません。</p>
+
+<p>job 名の指定にも対応してもらえるとありがたいですね (<code>circleci/orb-tools</code> のリポジトリがどこにあるかわからず PR 投げれなかった)。</p>
+
+<p><strong>追記</strong></p>
+
+<p>はてブのコメントで <code>circleci/orb-tools</code> のリポジトリを教えていただきました。</p>
+
+<p><blockquote class="hatena-bookmark-comment"><a class="comment-info" href="http://b.hatena.ne.jp/entry/373914771/comment/sue445" data-user-id="sue445" data-entry-url="http://b.hatena.ne.jp/entry/s/blog.tsub.me/post/introducing-to-circleci-orbs/" data-original-href="https://blog.tsub.me/post/introducing-to-circleci-orbs/" data-entry-favicon="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fblog.tsub.me%2F" data-user-icon="/users/sue445/profile.png">CircleCI Orbs 入門 | tsub&rsquo;s blog</a><ul class="comment-tag" style="list-style: none; margin: 0px;"><li style="float: left">[<a href="http://b.hatena.ne.jp/search/tag?q=circleci">circleci</a>]</li></ul><br><p style="clear: left">orbs-toolsのソースは <a href="https://github.com/CircleCI-Public/orb-tools-orb" target="_blank" rel="noopener nofollow"><a href="https://github.com/CircleCI-Public/orb-tools-orb">https://github.com/CircleCI-Public/orb-tools-orb</a></a> にありました</p><a class="datetime" href="http://b.hatena.ne.jp/sue445/20181111#bookmark-373914771"><span class="datetime-body">2018/11/11 18:03</span></a></blockquote><script src="https://b.st-hatena.com/js/comment-widget.js" charset="utf-8" async></script></p>
+
+<p>さっそくリポジトリに PR を送ろうとコードを読んでいたところ、どうやら <code>$ circleci local execute</code> の <code>--job</code> オプションを使わなくとも良い方法があったようです。</p>
+
+<p>以下のようにテスト用の YAML で、テスト対象の Orb で定義している job を workflows の中で呼び出し、<code>name</code> パラメータに <code>build</code> を指定すると、実際にテスト実行される時には <code>build</code> という名前の job になるようです。</p>
+
+<pre><code class="language-yaml"># src/hello-world/test.yml
+version: &quot;2.1&quot;
+
+workflows:
+  test-hello-world:
+    jobs:
+      - hello-world/hello_world:
+          name: build
+</code></pre>
+
+<p>実際には以下の箇所で <code>$ circleci config process</code> コマンドにより YAML がローカル実行可能なものにコンパイルされるときに job 名が <code>build</code> に置き換えられます。</p>
+
+<p><a href="https://gyazo.com/a77a0269634c7207751c35a6170810dc.png"><img src="https://gyazo.com/a77a0269634c7207751c35a6170810dc.png" alt="image" /></a></p>
+
+<p>コンパイル後は以下のような YAML が生成されていました。これなら <code>$ circleci local execute</code> コマンドで実行できます (<code>workflows</code> は動かないが問題ない)。</p>
+
+<pre><code class="language-yaml">version: 2
+jobs:
+  build:
+    docker:
+    - image: busybox
+    steps:
+    - run:
+        command: echo hello
+        name: Echo &quot;hello&quot;
+    - run:
+        command: echo world
+        name: Echo &quot;world&quot;
+workflows:
+  test-hello-world:
+    jobs:
+    - build
+  version: 2
+</code></pre>
+
+<p>とはいえ Orb のソースコードや circleci コマンドの挙動を熟知していないと使えないので、だいぶ分かりづらいですね。</p>
+
+<h3 id="orb-の自動デプロイ">Orb の自動デプロイ</h3>
+
+<p>他にも、<code>publish</code> や <code>increment</code> という job が提供されていて、これを使うことで Orb の自動デプロイを簡単に実装することができます。</p>
+
+<p>先ほどの YAML を使いまわしつつ、<code>.circleci/config.yml</code> を以下のように書き換えます。</p>
+
+<pre><code class="language-yaml"># .circleci/config.yml
+version: &quot;2.1&quot;
+
+orbs:
+  orb-tools: circleci/orb-tools@2.0.2
+  slack: circleci/slack@0.1.1
+
+executors:
+  default:
+    docker:
+      - image: circleci/buildpack-deps
+
+jobs:
+  send-approval-link:
+    executor: default
+    steps:
+      - slack/notify:
+          message: |
+            Please check and approve Job to deploy.
+            https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}
+
+workflows:
+  version: &quot;2&quot;
+
+  build_test_deploy:
+    jobs:
+      - orb-tools/test-in-builds:
+          orb-location: src/hello-world/orb.yml
+          orb-name: hello-world
+          test-steps:
+            - orb-tools/local-test-build:
+                test-config-location: src/hello-world/test.yml
+
+      - orb-tools/publish:
+          requires:
+            - orb-tools/test-in-builds
+          filters:
+            branches:
+              ignore: master
+          orb-path: src/hello-world/orb.yml
+          orb-ref: tsub/hello-world@dev:${CIRCLE_BRANCH}
+          publish-token-variable: &quot;$ORB_PUBLISHING_TOKEN&quot;
+
+      - send-approval-link:
+          requires:
+            - orb-tools/test-in-builds
+          filters:
+            branches:
+              only: master
+
+      - manual-approval:
+          type: approval
+          requires:
+            - send-approval-link
+          filters:
+            branches:
+              only: master
+
+      - orb-tools/increment:
+          requires:
+            - manual-approval
+          filters:
+            branches:
+              only: master
+          orb-path: src/hello-world/orb.yml
+          orb-ref: tsub/hello-world
+          segment: patch
+          publish-token-variable: &quot;$ORB_PUBLISHING_TOKEN&quot;
+</code></pre>
+
+<p>ついでに、デプロイ前に Manual Approval と、Slack 通知もやっています。</p>
+
+<p>Slack 通知も Orb として配布されているものを使うことで簡単に利用できます。</p>
+
+<p>これで、master ブランチにコミットすると、自動で Slack に Workflow のリンクが飛び、Approve すれば Orb が自動デプロイされます。</p>
+
+<p><a href="https://gyazo.com/34205c870203a322991f0e6d2a4f3fb2.png"><img src="https://gyazo.com/34205c870203a322991f0e6d2a4f3fb2.png" alt="image" /></a></p>
+
+<p><a href="https://gyazo.com/31b98eff308522645cb4c55f5b429a1a.png"><img src="https://gyazo.com/31b98eff308522645cb4c55f5b429a1a.png" alt="image" /></a></p>
+
+<p><a href="https://gyazo.com/5e0131bedf463c3038b92b4989beae87.png"><img src="https://gyazo.com/5e0131bedf463c3038b92b4989beae87.png" alt="image" /></a></p>
+
+<p>ちなみに、<code>increment</code> job で使われている <code>$ circleci orb publish increment</code> コマンドを使うことで、セマンティックバージョニングに基づいて自動でバージョンをインクリメントしてリリースしてくれます。</p>
+
+<pre><code class="language-sh">$ circleci orb publish increment --help
+Increment a released version of an orb.
+Please note that at this time all orbs incremented within the registry are world-readable.
+
+Example: 'circleci orb publish increment foo/orb.yml foo/bar minor' =&gt; foo/bar@1.1.0
+
+
+Usage:
+  circleci orb publish increment &lt;path&gt; &lt;namespace&gt;/&lt;orb&gt; &lt;segment&gt; [flags]
+Aliases:
+  increment, inc
+
+Args:
+  &lt;path&gt;      The path to your orb (use &quot;-&quot; for STDIN)
+    &lt;segment&gt;   &quot;major&quot;|&quot;minor&quot;|&quot;patch&quot;
+
+
+Flags:
+  -h, --help   help for increment
+
+Global Flags:
+      --host string    URL to your CircleCI host (default &quot;https://circleci.com&quot;)
+      --token string   your token for using CircleCI
+</code></pre>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>CircleCI Orbs を一通り試してみましたが、非常に夢のある機能だと思うので、今後どんどん便利な Orb が増えていくと良いですね。</p>
+
+<p>自分も仕事でよく同じような CircleCI の設定ファイルを書くことが多かったので、Orb にして記述量を減らすことができると便利だなぁと思います。</p>
+
+<p>もちろん、Orb は現時点では全てパブリックになってしまいますので、汎用的な Orb にする必要があることは注意です。</p>
+      
+      
+      
+    </article>
+    
+
+
+  </main>
+  
+  <nav class="pagination-single">
+    
+      <span class="previous">&larr; <a href="https://blog.tsub.me/post/create-albert-github/" rel="prev">Albert で GitHub リポジトリを開ける拡張を作った</a></span>
+    
+    
+      <span class="next"><a href="https://blog.tsub.me/post/create-alfred-aws-vault-workflow/" rel="next">「aws-vault loginでChromeのウィンドウをAWSアカウント毎に分離する」を Alfred 用に作った</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      <img src="/images/profile.jpg" width="64" height="64"><br>
+      Copyright 2016 tsub
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-63212158-2', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    serverspecで複数のdocker containerに対してテストしたい | tsub&#39;s blog
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.tsub.me/post/serverspec-for-several-container/"/>
+
+  
+  <link rel="stylesheet" href="/css/sanitize.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/highlight_monokai.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+  
+  <link href="https://blog.tsub.me/index.xml" rel="alternate" type="application/rss+xml" title="tsub&#39;s blog" />
+  <link href="https://blog.tsub.me/index.xml" rel="feed" type="application/rss+xml" title="tsub&#39;s blog" />
+
+  
+  
+
+  
+   
+    
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="https://blog.tsub.me/images/profile.jpg" />
+    
+  
+
+  
+  <meta name="twitter:title" content="serverspecで複数のdocker containerに対してテストしたい"/>
+  <meta name="twitter:description" content="前回の記事でdocker containerに対してserverspecでテストができるようになりました。
+
+serverspecでdocker containerに対してテストしたい
+
+dockerを扱う以上、containerは複数立てるのが普通です。
+
+今回は複数のcontainerを立てた時にそれぞれのcontainerに対してテストする方法について書いていきます。
+
+"/>
+
+  
+    <meta name="twitter:site" content="@_tsub_"/>
+  
+
+  
+
+  
+  
+    <meta name="twitter:creator" content="@tsub"/>
+  
+
+
+  
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="https://blog.tsub.me/">tsub&#39;s blog</a></h1>
+        <h2>雑なメモ</h2>
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/_tsub_" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+          
+          <li><a href="https://github.com/tsub" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+          <li><a href="https://blog.tsub.me/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>serverspecで複数のdocker containerに対してテストしたい</h1>
+      <div class="meta">
+        Jun 25, 2016 &nbsp;
+        
+          <a href="/tags/docker">#docker</a>&nbsp;
+        
+          <a href="/tags/serverspec">#serverspec</a>&nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>前回の記事でdocker containerに対してserverspecでテストができるようになりました。</p>
+
+<p><a href="/post/serverspec-for-docker/">serverspecでdocker containerに対してテストしたい</a></p>
+
+<p>dockerを扱う以上、containerは複数立てるのが普通です。</p>
+
+<p>今回は複数のcontainerを立てた時にそれぞれのcontainerに対してテストする方法について書いていきます。</p>
+
+<p></p>
+
+<h2 id="やりたいこと">やりたいこと</h2>
+
+<p>docker-composeで管理している複数のdocker containerに対してテストしたい</p>
+
+<h2 id="docker-composeで複数のcontainerを管理する">docker-composeで複数のcontainerを管理する</h2>
+
+<p>前回のrubyを動かすcontainerに加えて今回はnginxのcontainerを動かしていきます。</p>
+
+<p>まずは、ruby用のDockerfileと実行するrubyスクリプトを配置します。</p>
+
+<pre><code class="language-dockerfile"># Dockerfile
+
+FROM ruby:2.3.1-alpine
+
+ADD app.rb .
+</code></pre>
+
+<pre><code class="language-ruby"># app.rb
+
+puts 'Hello, world!'
+</code></pre>
+
+<p>そして、以下のような<code>docker-compose.yml</code>を配置します。</p>
+
+<pre><code class="language-yaml"># docker-compose.yml
+
+app:
+  build: .
+  command: [ruby, app.rb]
+</code></pre>
+
+<p>この時点で<code>$ docker-compose up</code>すると、<code>Hello, world</code>と表示されるはずです。</p>
+
+<p>次に、上記のrubyを実行するcontainerとは全く関係ありませんが、nginx containerを別で追加します。</p>
+
+<p>nginxというディレクトリを切り、nginx用のDockerfileと表示するための適当な<code>index.html</code>を作ります。</p>
+
+<pre><code class="language-dockerfile"># nginx/Dockerfile
+
+FROM nginx:stable-alpine
+
+COPY index.html /usr/share/nginx/html
+</code></pre>
+
+<pre><code class="language-html">&lt;!-- nginx/index.html --&gt;
+
+&lt;strong&gt;Hello, world!&lt;/strong&gt;
+</code></pre>
+
+<p>そうしたら、<code>docker-compose.yml</code>にnginx serviceの記述も追加しましょう。
+私の環境では80をすでに使っていたため、nginxのportは8080にforwardしておきます。</p>
+
+<pre><code class="language-yaml">app:
+  build: .
+  command: [ruby, app.rb]
+web:
+  build: nginx/
+  ports:
+    - &quot;8080:80&quot;
+</code></pre>
+
+<p>appとwebのcontainerを立ち上げます。</p>
+
+<pre><code class="language-sh">$ docker-compose up --build
+Building web
+Step 1 : FROM nginx:stable-alpine
+ ---&gt; c6b7a3ab1800
+Step 2 : COPY index.html /usr/share/nginx/html
+ ---&gt; Using cache
+ ---&gt; 4a0b194d5d82
+Successfully built 4a0b194d5d82
+Building app
+Step 1 : FROM ruby:2.3.1-alpine
+ ---&gt; c872d09a2f2e
+Step 2 : ADD app.rb .
+ ---&gt; Using cache
+ ---&gt; 8eb82eb96cf9
+Successfully built 8eb82eb96cf9
+Starting dockerforblogpost20160625_web_1
+Starting dockerforblogpost20160625_app_1
+Attaching to dockerforblogpost20160625_app_1, dockerforblogpost20160625_web_1
+app_1  | Hello, world!
+dockerforblogpost20160625_app_1 exited with code 0
+</code></pre>
+
+<p>これで、app containerが立ち上がり、rubyのスクリプトを実行し、nginx containerも同時に立ち上がりました。</p>
+
+<p><code>http://localhost:8080</code>にアクセスしてnginxが立ち上がっているか確認しておきます。</p>
+
+<p><a href="https://gyazo.com/2babcf88a2fa4a4093a337e80370ba81.png"><img src="https://i.gyazo.com/2babcf88a2fa4a4093a337e80370ba81.png" alt="" /></a></p>
+
+<h2 id="複数のdocker-containerに対してテストする">複数のdocker containerに対してテストする</h2>
+
+<p>それでは、本題の複数のdocker containerに対してserverspecでテストを実行できる環境を作りましょう。</p>
+
+<p>まずはGemfileを追加します。
+今回は複数のdocker containerに対してserverspecを実行するためにrakeも使います。</p>
+
+<pre><code class="language-ruby"># Gemfile
+
+# frozen_string_literal: true
+
+source &quot;https://rubygems.org&quot;
+
+gem 'serverspec'
+gem 'docker-api'
+gem 'rake'
+</code></pre>
+
+<p>specディレクトリは以下のように作成します。
+<code>spec/roles</code>以下に各container毎のテストを書いていきます。</p>
+
+<pre><code class="language-sh">$ tree spec/
+spec/
+├── roles
+│   ├── app_spec.rb
+│   └── web_spec.rb
+└── spec_helper.rb
+
+1 directory, 3 files
+</code></pre>
+
+<pre><code class="language-ruby"># spec/roles/app_spec.rb
+
+require 'spec_helper'
+
+describe 'app' do
+  describe command 'ruby -v' do
+    let(:disable_sudo) { true }
+    its(:stdout) { should match /ruby 2.3.1/ }
+  end
+end
+</code></pre>
+
+<pre><code class="language-ruby"># spec/roles/web_spec.rb
+
+require 'spec_helper'
+
+describe 'web' do
+  describe file('/usr/share/nginx/html/index.html') do
+    it { should exist }
+  end
+end
+</code></pre>
+
+<p>また、<code>spec_helper.rb</code>は以下のように書きます。</p>
+
+<p>docker_imageに指定するimageは環境変数を指定するようにします。
+これで、rakeタスクから動的にserverspecを実行するdocker containerを切り替えることができます。</p>
+
+<pre><code class="language-ruby"># spec/spec_helper.rb
+
+require 'serverspec'
+require 'docker'
+
+set :backend, :docker
+set :docker_image, ENV['DOCKER_IMAGE_NAME']
+</code></pre>
+
+<p>さて、最後にRakefileを作成します。
+hostsの中にdocker containerを定義することで、それぞれのcontainerに対してserverspecを実行できます。</p>
+
+<p>nameにはdocker-composeで作成されたimage名、short_nameはrake taskで使う名前、roleは<code>spec/roles</code>以下に配置するファイル名を指定します。</p>
+
+<p>serverspec実行時のENVにそれぞれのimage名を渡してあげます。</p>
+
+<pre><code class="language-ruby"># Rakefile
+
+require 'rake'
+require 'rspec/core/rake_task'
+
+hosts = [
+  {
+    name:       'dockersandbox_app',
+    short_name: 'app',
+    roles:      'app',
+  },
+  {
+    name:       'dockersandbox_web',
+    short_name: 'web',
+    roles:      'web',
+  }
+]
+
+class ServerspecTask &lt; RSpec::Core::RakeTask
+  attr_accessor :target
+
+  def spec_command
+    cmd = super
+    &quot;env DOCKER_IMAGE_NAME=#{target} #{cmd}&quot;
+  end
+end
+
+task default: :spec
+
+desc 'Run serverspec to all hosts'
+task spec: hosts.map { |h| &quot;spec:#{h[:short_name]}&quot; }
+
+namespace :spec do
+  hosts.each do |host|
+    desc &quot;Run serverspec to #{host[:name]}&quot;
+    ServerspecTask.new(host[:short_name].to_sym) do |t|
+      t.target = host[:name]
+      t.pattern = &quot;spec/roles/#{host[:roles]}_spec.rb&quot;
+    end
+  end
+end
+</code></pre>
+
+<p>これで、<code>spec/roles</code>以下に置かれたファイルごとにserverspecが実行されます。</p>
+
+<pre><code class="language-sh">$ bundle exec rake spec
+app
+  Command &quot;ruby -v&quot;
+    stdout
+      should match /ruby 2.3.1/
+
+Finished in 3.29 seconds (files took 0.83075 seconds to load)
+1 example, 0 failures
+
+web
+  File &quot;/usr/share/nginx/html/index.html&quot;
+    should exist
+
+Finished in 3.18 seconds (files took 0.64689 seconds to load)
+1 example, 0 failures
+</code></pre>
+      
+      
+      
+    </article>
+    
+
+
+  </main>
+  
+  <nav class="pagination-single">
+    
+      <span class="previous">&larr; <a href="https://blog.tsub.me/post/serverspec-for-docker/" rel="prev">serverspecでdocker containerに対してテストしたい</a></span>
+    
+    
+      <span class="next"><a href="https://blog.tsub.me/post/tokyo-ex-3-entry-report/" rel="next">tokyo.ex #3 参加してきた</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      <img src="/images/profile.jpg" width="64" height="64"><br>
+      Copyright 2016 tsub
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-63212158-2', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

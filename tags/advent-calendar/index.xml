@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Advent Calendar on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/advent-calendar/</link>
+    <description>Recent content in Advent Calendar on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 09 Dec 2017 21:30:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/advent-calendar/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>結婚して半年が経ったので工夫していることとか</title>
+      <link>https://blog.tsub.me/post/half-a-year-after-married/</link>
+      <pubDate>Sat, 09 Dec 2017 21:30:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/half-a-year-after-married/</guid>
+      <description>&lt;p&gt;この記事は &lt;a href=&#34;https://adventar.org/calendars/2155&#34;&gt;feedforce Advent Calendar 2017&lt;/a&gt; の 9 日目の記事です。&lt;/p&gt;
+
+&lt;p&gt;昨日の記事は tmd45 さんの &lt;a href=&#34;http://developer.feedforce.jp/entry/2017/12/08/090000&#34;&gt;TypeScript 社内勉強会 完遂報告 - Feedforce Developer Blog&lt;/a&gt; でした。&lt;br /&gt;
+TypeScript 社内勉強会には自分も参加していましたが、プロダクションのコードを書いているフロントエンドエンジニアの方から色々とアドバイスを頂いたり、他の言語の観点で議論が出来たりとても有意義な会でした！&lt;/p&gt;
+
+&lt;p&gt;さて、本題ですがワタクシ今年の 4 月に結婚をしました。&lt;/p&gt;
+
+&lt;p&gt;妻は Web コーダーで、割と Web サービスなどにも抵抗がなく普段から Slack や Kibela などを夫婦間で活用しています。&lt;/p&gt;
+
+&lt;p&gt;今回はその辺りで色々と工夫している部分を紹介できればと思います。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

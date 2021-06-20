@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    pecoからfzfに移行した | tsub&#39;s blog
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.tsub.me/post/move-from-peco-to-fzf/"/>
+
+  
+  <link rel="stylesheet" href="/css/sanitize.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/highlight_monokai.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+  
+  <link href="https://blog.tsub.me/index.xml" rel="alternate" type="application/rss+xml" title="tsub&#39;s blog" />
+  <link href="https://blog.tsub.me/index.xml" rel="feed" type="application/rss+xml" title="tsub&#39;s blog" />
+
+  
+  
+
+  
+   
+    
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="https://blog.tsub.me/images/profile.jpg" />
+    
+  
+
+  
+  <meta name="twitter:title" content="pecoからfzfに移行した"/>
+  <meta name="twitter:description" content="今までずっと peco を使ってきたが、そろそろ別のツールに変えてみるか&hellip;と思い立ったので fzf に移行した。
+
+junegunn/fzf: A command-line fuzzy finder written in Go
+
+自分は基本的に飽き性なので、定期的に環境を変えたくなる時期が来るのだが fzf が思ってたより良かったので紹介したい。
+
+"/>
+
+  
+    <meta name="twitter:site" content="@_tsub_"/>
+  
+
+  
+
+  
+  
+    <meta name="twitter:creator" content="@tsub"/>
+  
+
+
+  
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="https://blog.tsub.me/">tsub&#39;s blog</a></h1>
+        <h2>雑なメモ</h2>
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/_tsub_" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+          
+          <li><a href="https://github.com/tsub" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+          <li><a href="https://blog.tsub.me/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>pecoからfzfに移行した</h1>
+      <div class="meta">
+        May 3, 2017 &nbsp;
+        
+          <a href="/tags/fzf">#fzf</a>&nbsp;
+        
+          <a href="/tags/zsh">#zsh</a>&nbsp;
+        
+          <a href="/tags/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83">#開発環境</a>&nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>今までずっと <a href="https://github.com/peco/peco">peco</a> を使ってきたが、そろそろ別のツールに変えてみるか&hellip;と思い立ったので <a href="https://github.com/junegunn/fzf">fzf</a> に移行した。</p>
+
+<p><a href="https://github.com/junegunn/fzf">junegunn/fzf: A command-line fuzzy finder written in Go</a></p>
+
+<p>自分は基本的に飽き性なので、定期的に環境を変えたくなる時期が来るのだが fzf が思ってたより良かったので紹介したい。</p>
+
+<p></p>
+
+<h2 id="fzfとは">fzfとは</h2>
+
+<p>こちらの記事が参考になる。</p>
+
+<p><a href="http://qiita.com/b4b4r07/items/9e1bbffb1be70b6ce033">おい、peco もいいけど fzf 使えよ - Qiita</a></p>
+
+<p>peco と同じく golang 製の command line fuzzy finder である。</p>
+
+<p>インストールは brew で一発でできる。</p>
+
+<pre><code>$ brew install fzf
+</code></pre>
+
+<p>本当は zplug を使ってインストールしたかったのだが fzf にバンドルされている fzf-tmux が使えなさそうだったので brew で入れた。</p>
+
+<p>ただ fzf-tmux よりも通常の fzf の方が好きなので結果的には zplug でインストールしても良かったかもしれない。</p>
+
+<p>zplug の場合はこのように書く。</p>
+
+<pre><code class="language-zsh">zplug &quot;junegunn/fzf-bin&quot;, \
+    from:gh-r, \
+    as:command, \
+    rename-to:fzf, \
+    use:&quot;*darwin*amd64*&quot;
+</code></pre>
+
+<p>何気に <code>from:gh-r</code> でコマンドをインストールするのは初めてだった。</p>
+
+<p>これを使わないと zplug を使うメリットが全くないと思うので自然に使っていきたい。</p>
+
+<h2 id="どこが良かったか">どこが良かったか</h2>
+
+<p>主にかっこよさ、見た目の部分。</p>
+
+<p>かっこいいとテンションが上がってコードを書くモチベーションが上がるので非常に大事なこと。</p>
+
+<p>なぜか peco よりも使っていて気持ち良かった。まだ使い始めて1日も経ってないけど。</p>
+
+<p><a href="https://gyazo.com/379d26198bb54dae277122effca4cbab"><img src="https://i.gyazo.com/379d26198bb54dae277122effca4cbab.gif" alt="https://gyazo.com/379d26198bb54dae277122effca4cbab" /></a></p>
+
+<p>あと peco は画面を全て占領するのだが fzf は画面下部にそのまま出てくれる。これがすこぶる良い。</p>
+
+<p>視線の移動が少ないため、負荷が少ない。</p>
+
+<p><a href="https://gyazo.com/f975b8292153cbbac0d0dbe02853d982"><img src="https://i.gyazo.com/f975b8292153cbbac0d0dbe02853d982.gif" alt="https://gyazo.com/f975b8292153cbbac0d0dbe02853d982" /></a></p>
+
+<h2 id="既存の-peco-関連のスクリプトを-fzf-用に書き換えた">既存の peco 関連のスクリプトを fzf 用に書き換えた</h2>
+
+<p>多分 <code>$FILTER</code> とか環境変数に入れて置けばいちいち書き換える必要もないんだろうけど、どうせしばらく fzf 使うだろうしそのまま書き換えてしまった。</p>
+
+<script src="https://gist.github.com/tsub/29bebc4e1e82ad76504b1287b4afba7c.js"></script>
+
+<script src="https://gist.github.com/tsub/90e63082aa227d3bd7eb4b535ade82a0.js"></script>
+
+<script src="https://gist.github.com/tsub/81ac9b881cf2475977c9cb619021ef3c.js"></script>
+
+<script src="https://gist.github.com/tsub/f4036e067a59b242a161fc3c8a5f01dd.js"></script>
+
+<script src="https://gist.github.com/tsub/4448666a276b088bce3f19005f512c15.js"></script>
+
+<h2 id="zplug-b4b4r07-gist-が良かった">zplug + b4b4r07/gist が良かった</h2>
+
+<p>今回 zsh の function を gist に置いて <a href="https://github.com/zplug/zplug">zplug</a> で管理する、ということをやってみた。</p>
+
+<pre><code class="language-zsh">zplug &quot;tsub/4448666a276b088bce3f19005f512c15&quot;, from:gist # ghq-fzf.zsh
+zplug &quot;tsub/f4036e067a59b242a161fc3c8a5f01dd&quot;, from:gist # history-fzf.zsh
+zplug &quot;tsub/81ac9b881cf2475977c9cb619021ef3c&quot;, from:gist # ssh-fzf.zsh
+zplug &quot;tsub/90e63082aa227d3bd7eb4b535ade82a0&quot;, from:gist # git-branch-fzf.zsh
+zplug &quot;tsub/29bebc4e1e82ad76504b1287b4afba7c&quot;, from:gist # tree-fzf.zsh
+</code></pre>
+
+<p>こうすると zplug が gist からファイルを読み込んでくれて非常に便利だった。</p>
+
+<p>また、 gist の管理は <a href="https://github.com/b4b4r07/gist">b4b4r07/gist</a> を使った。</p>
+
+<p>b4b4r07/gist は zplug でインストールした。こちらは brew で配布されていなかった。</p>
+
+<pre><code class="language-zsh">zplug &quot;b4b4r07/gist&quot;, from:gh-r, as:command, use:&quot;*darwin*amd64*&quot;
+</code></pre>
+
+<p>新規 gist の作成と、 その後の zsh function の編集などが非常に楽だった。</p>
+
+<p><code>$ gist edit</code> で gist 一覧が表示され、その中からファイルを選択するとエディターが立ち上がる。保存して終了すればすぐさまアップロードされる。</p>
+
+<p><a href="https://gyazo.com/dd4eaf166313a242872de95a86a2a5cd"><img src="https://i.gyazo.com/dd4eaf166313a242872de95a86a2a5cd.gif" alt="https://gyazo.com/dd4eaf166313a242872de95a86a2a5cd" /></a></p>
+
+<p>そして <code>$ zplug update</code> を実行すればローカルに clone してきた gist が更新される。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>ということで fzf + zplug + b4b4r07/gist が非常に素晴らしかったので使っていく。</p>
+
+<p>また飽きたら他のツールを巡ろうと思う。</p>
+      
+      
+      
+    </article>
+    
+
+
+  </main>
+  
+  <nav class="pagination-single">
+    
+      <span class="previous">&larr; <a href="https://blog.tsub.me/post/operate-blog-server-on-gke/" rel="prev">ブログをGKEでの運用に移行した</a></span>
+    
+    
+      <span class="next"><a href="https://blog.tsub.me/post/create-s3-edit/" rel="next">Go で s3-edit という CLI アプリケーションを作った</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      <img src="/images/profile.jpg" width="64" height="64"><br>
+      Copyright 2016 tsub
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-63212158-2', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

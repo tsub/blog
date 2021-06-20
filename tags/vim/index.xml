@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vim on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/vim/</link>
+    <description>Recent content in Vim on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sat, 02 Jul 2016 22:08:23 +0900</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>neovimのterminal emulatorが便利すぎた</title>
+      <link>https://blog.tsub.me/post/neovim-on-terminal-emulator/</link>
+      <pubDate>Sat, 02 Jul 2016 22:08:23 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/neovim-on-terminal-emulator/</guid>
+      <description>&lt;p&gt;少し前にvimからneovimに移行したのですが、vimよりさくさくな気がする、程度でneovimの機能を特に活用していませんでした。&lt;/p&gt;
+
+&lt;p&gt;実はneovimにはterminal emulatorという機能があり、vimの中でshellを起動することができます。&lt;/p&gt;
+
+&lt;p&gt;例えばコードを書きつつ、rspecを実行したりpryやtigを使ったりなど、非常に便利です。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://gyazo.com/ca4b9ef1599801f1948721befe274654.png&#34;&gt;&lt;img src=&#34;https://i.gyazo.com/ca4b9ef1599801f1948721befe274654.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    Go で s3-edit という CLI アプリケーションを作った | tsub&#39;s blog
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.tsub.me/post/create-s3-edit/"/>
+
+  
+  <link rel="stylesheet" href="/css/sanitize.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/highlight_monokai.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+  
+  <link href="https://blog.tsub.me/index.xml" rel="alternate" type="application/rss+xml" title="tsub&#39;s blog" />
+  <link href="https://blog.tsub.me/index.xml" rel="feed" type="application/rss+xml" title="tsub&#39;s blog" />
+
+  
+  
+
+  
+   
+    
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="https://blog.tsub.me/images/profile.jpg" />
+    
+  
+
+  
+  <meta name="twitter:title" content="Go で s3-edit という CLI アプリケーションを作った"/>
+  <meta name="twitter:description" content="最近 Rust を少し学んでいたが、難しくて少し挫折しかけたのと、結局仕事への導入を考えるなら Go のほうが既に書ける人が何人かいる、というのもあり Go を書き始めた。
+
+手初めてに欲しい CLI アプリケーションがあったのでそれをサクッと Go で書いてみた。
+
+ tsub/s3-edit: Edit directly a file on Amazon S3
+
+"/>
+
+  
+    <meta name="twitter:site" content="@_tsub_"/>
+  
+
+  
+
+  
+  
+    <meta name="twitter:creator" content="@tsub"/>
+  
+
+
+  
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="https://blog.tsub.me/">tsub&#39;s blog</a></h1>
+        <h2>雑なメモ</h2>
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/_tsub_" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+          
+          <li><a href="https://github.com/tsub" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+          <li><a href="https://blog.tsub.me/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>Go で s3-edit という CLI アプリケーションを作った</h1>
+      <div class="meta">
+        Sep 5, 2017 &nbsp;
+        
+          <a href="/tags/go">#Go</a>&nbsp;
+        
+          <a href="/tags/aws">#AWS</a>&nbsp;
+        
+          <a href="/tags/s3">#S3</a>&nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>最近 Rust を少し学んでいたが、難しくて少し挫折しかけたのと、結局仕事への導入を考えるなら Go のほうが既に書ける人が何人かいる、というのもあり Go を書き始めた。</p>
+
+<p>手初めてに欲しい CLI アプリケーションがあったのでそれをサクッと Go で書いてみた。</p>
+
+<p><i class="fa fa-github"></i> <a href="https://github.com/tsub/s3-edit">tsub/s3-edit: Edit directly a file on Amazon S3</a></p>
+
+<p></p>
+
+<h2 id="モチベーション">モチベーション</h2>
+
+<p>仕事で S3 に環境変数を置いておいてそれを開発環境なり本番環境なりで使うことがあるのだが、そのファイルを編集する際に aws-cli を使って以下のコマンドを叩くのが面倒だった。</p>
+
+<pre><code class="language-sh">$ aws s3 cp s3://mybucket/myenvfile ./
+
+# エディタでファイルを編集
+$ nvim myenvfile
+
+$ aws s3 cp myenvfile s3://mybucket/myenvfile
+</code></pre>
+
+<p>そこで、 S3 からファイルをダウンロードしてきてエディタを開いた後、編集してエディタを閉じたら S3 に再びアップロードしてくれる、というツールを作った。</p>
+
+<pre><code class="language-sh">$ s3-edit edit s3://mybucket/myenvfile
+</code></pre>
+
+<p>上記一コマンドだけで完結できる。</p>
+
+<h2 id="cobra-が良かった">cobra が良かった</h2>
+
+<p>多くの CLI アプリケーションで採用されている cobra というライブラリが非常に良かった。</p>
+
+<p><i class="fa fa-github"></i> <a href="https://github.com/spf13/cobra">spf13/cobra: A Commander for modern Go CLI interactions</a></p>
+
+<p>公式の README にも書かれている通り、kubectl や hugo, docker など色々なツールで採用されている。</p>
+
+<p>個人的にはこれらのツールのインターフェースは非常に使いやすいと感じていたため、それと全く同じような構成が cobra を使えば簡単に作れるのには驚いた。</p>
+
+<p>ちょっと記述するだけで以下のようなインタフェースとヘルプメッセージなどを提供してくれる。</p>
+
+<pre><code class="language-sh">$ s3-edit --help
+Edit directly a file on Amazon S3
+
+Usage:
+  s3-edit [flags]
+  s3-edit [command]
+
+Available Commands:
+  edit        Edit directly a file on S3
+  help        Help about any command
+  version     Print the version of s3-edit
+
+Flags:
+  -h, --help      help for s3-edit
+  -v, --version   print the version of s3-edit
+
+Use &quot;s3-edit [command] --help&quot; for more information about a command.
+</code></pre>
+
+<p>今後も CLI アプリケーションを作る際は cobra を使っていきたいところ。</p>
+
+<h2 id="躓いたところ">躓いたところ</h2>
+
+<p>S3 から受け取ったファイルの中身をどうやってローカルファイルに書き込むか、というところでわりと躓いた。</p>
+
+<p>ドキュメントで言うと <code>s3.GetObjectOutput</code> の <code>Body</code> が <code>io.ReadCloser</code> 型のインターフェースを返すのだが、それをどうやってファイルに書き込めばいいのだろう？というところ。</p>
+
+<p><a href="http://docs.aws.amazon.com/sdk-for-go/api/service/s3/#GetObjectOutput">http://docs.aws.amazon.com/sdk-for-go/api/service/s3/#GetObjectOutput</a></p>
+
+<p><code>io.ReadCloser</code> インターフェースは <code>Reader</code> と <code>Closer</code> インターフェースを持っていて、それぞれ <code>Read()</code> と <code>Close()</code> という関数が実装されていれば良い、というところまでは理解した。</p>
+
+<p><a href="https://golang.org/pkg/io/#ReadCloser">https://golang.org/pkg/io/#ReadCloser</a></p>
+
+<p>ただ、具体的に <code>s3.GetObjectOutput.Body</code> からどう値を取ればいいんだろうか、というところで困った。</p>
+
+<p>調べていくと <code>bytes.Buffer</code> の <code>ReadFrom()</code> 関数の引数が <code>io.Reader</code> 型だったためそこに渡せば良さそう、というところに辿りついたのでやってみたらなんとかできた。</p>
+
+<p><a href="https://golang.org/pkg/bytes/#Buffer.ReadFrom">https://golang.org/pkg/bytes/#Buffer.ReadFrom</a></p>
+
+<p>s3-edit の実装でいうとこの辺り。</p>
+
+<pre><code class="language-go">// https://github.com/tsub/s3-edit/blob/v0.0.5/cli/s3/object.go#L26-L31
+	buf := new(bytes.Buffer)
+	if _, err := buf.ReadFrom(res.Body); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	return buf.Bytes()
+}
+</code></pre>
+
+<p>こういった、io の扱いとかが自分はまだ理解できていない。</p>
+
+<p>以下の記事を読んだ感じでは、おそらく今回とった方法もあまり効率的ではない気もする。</p>
+
+<p><a href="http://christina04.hatenablog.com/entry/2017/01/06/190000">Golangでのstreamの扱い方を学ぶ - Carpe Diem</a></p>
+
+<h2 id="楽しかったところ">楽しかったところ</h2>
+
+<p>Go のダックタイピングが個人的には楽しかった。</p>
+
+<p>S3 周りのテストを書いていてモックを作る時、ああこうやって書けばいいのか、というのを理解した時の楽しさはやばかった。</p>
+
+<p>s3-edit の実装でいうとこの辺り。</p>
+
+<pre><code class="language-go">// https://github.com/tsub/s3-edit/blob/v0.0.5/cli/s3/object_test.go#L12-L26
+type mockedGetObject struct {
+	s3iface.S3API
+	Resp []byte
+}
+
+func (m *mockedGetObject) GetObject(input *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	pr, pw := io.Pipe()
+
+	go func() {
+		pw.Write(m.Resp)
+		pw.Close()
+	}()
+
+	return &amp;s3.GetObjectOutput{Body: pr}, nil
+}
+</code></pre>
+
+<pre><code class="language-go">// https://github.com/tsub/s3-edit/blob/v0.0.5/cli/s3/object.go#L15
+func GetObject(svc s3iface.S3API, path Path) []byte {
+</code></pre>
+
+<p>関数の引数にインターフェースを受け取ることで、テスト側でそのインターフェースを拡張して引数として渡せば任意の処理ができてしまう。</p>
+
+<p>最近仕事で Ruby を書いていて Dependency injection やダックタイピングなどを意識してコードを書いているが、Ruby ではいまいち納得感がない。</p>
+
+<p>Go で書いたらそれらがすんなりと理解できた感じがある。</p>
+
+<h2 id="リリースフロー">リリースフロー</h2>
+
+<p>リリースフローは以下の手順で行うようにした。</p>
+
+<ol>
+<li>GitHub で release を作る</li>
+<li>dep で依存ライブラリをダウンロード</li>
+<li>gox でクロスコンパイル (CircleCI)</li>
+<li>各バイナリを tar.gz に圧縮</li>
+<li>CHECKSUMS ファイルを生成</li>
+<li>ghr から 1 で作った release にバイナリをアップロード (CircleCI)</li>
+</ol>
+
+<p>なお、CircleCI 内で扱う dep, gox, ghr は全て Docker でコンテナを動かす形にしてみた。</p>
+
+<p>Go と直接関係ないが CircleCI では以下のところでハマった。</p>
+
+<h3 id="v-オプションによるローカルファイルのマウントができない"><code>-v</code> オプションによるローカルファイルのマウントができない</h3>
+
+<p>CircleCI 2.0 ではコンテナ内にファイルをマウントする場合に <code>-v</code> オプションが使えない。</p>
+
+<p>そのため、公式のドキュメントに書いてあるような方法をとる必要がある。</p>
+
+<p><a href="https://circleci.com/docs/2.0/building-docker-images/#mounting-folders">https://circleci.com/docs/2.0/building-docker-images/#mounting-folders</a></p>
+
+<p><code>docker create</code> でボリュームをマウントするためのコンテナを動かし、<code>docker cp</code> でそこにローカルファイルをコピーする。</p>
+
+<p>その後、 <code>--volumes-from</code> オプションでコンテナ間でファイルをマウントすればようやく参照できる。</p>
+
+<p>自分が書いた設定だと以下のようになった。</p>
+
+<pre><code class="language-yaml"># https://github.com/tsub/s3-edit/blob/v0.0.5/.circleci/config.yml#L18-L26
+      - run: &amp;create_dummy_container
+          name: Create dummy container for mounting files and copy project files
+          command: |
+            docker create -v /go/src/github.com/tsub --name project busybox /bin/true
+            docker cp $PWD project:/go/src/github.com/tsub/s3-edit
+      - run:
+          name: Vendoring go packages
+          command: docker run --volumes-from project -w /go/src/github.com/tsub/s3-edit supinf/go-dep ensure
+</code></pre>
+
+<h3 id="git-tag-でビルドをキックする">Git tag でビルドをキックする</h3>
+
+<p>CircleCI 2.0 では Git tag によるビルドのキックは少し癖がある。</p>
+
+<p>まず、Workflows を使う必要がある。</p>
+
+<p><a href="https://circleci.com/docs/2.0/workflows/#git-tag-job-execution">https://circleci.com/docs/2.0/workflows/#git-tag-job-execution</a></p>
+
+<p>Workflows で <code>filters.tags.only</code> を指定しなければデフォルトでは Git tag を付けてもビルドがキックされない。</p>
+
+<p>さらにハマりどころなのが、Workflows で複数の job を指定する際に tag によって制限したい job が依存している job にも <code>filters.tags.only</code> を指定する必要がある。</p>
+
+<p>自分が書いた設定だと以下のようになった。</p>
+
+<pre><code class="language-yaml"># https://github.com/tsub/s3-edit/blob/v0.0.5/.circleci/config.yml#L78-L94
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - deploy:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
+</code></pre>
+
+<p>なお、branch で動かしたくない場合は <code>fiters.branches.ignore</code> の指定も必要である。</p>
+
+<p>Git tag が付いた時だけビルドを動かしたいだけなのにわりと書くことが多くややこしい。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>とまあ、Go の話というより CircleCI の話になってしまったが、とりあえず作りたいものがサクッと作れたし、楽しく書けたので Go は今後もやっていく予定。</p>
+
+<p>次は Go で何を作ろうか考え中&hellip;</p>
+      
+      
+      
+    </article>
+    
+
+
+  </main>
+  
+  <nav class="pagination-single">
+    
+      <span class="previous">&larr; <a href="https://blog.tsub.me/post/move-from-peco-to-fzf/" rel="prev">pecoからfzfに移行した</a></span>
+    
+    
+      <span class="next"><a href="https://blog.tsub.me/post/create-alfred-workflow/" rel="next">Go で Datadog の Alfred Workflow を作った</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      <img src="/images/profile.jpg" width="64" height="64"><br>
+      Copyright 2016 tsub
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-63212158-2', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

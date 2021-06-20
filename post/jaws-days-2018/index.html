@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  
+  <meta charset="UTF-8">
+  <title>
+    JAWS DAYS 2018 に行ってきた | tsub&#39;s blog
+  </title>
+
+
+  
+  <meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.tsub.me/post/jaws-days-2018/"/>
+
+  
+  <link rel="stylesheet" href="/css/sanitize.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/highlight_monokai.css">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  
+  
+  <link href="https://blog.tsub.me/index.xml" rel="alternate" type="application/rss+xml" title="tsub&#39;s blog" />
+  <link href="https://blog.tsub.me/index.xml" rel="feed" type="application/rss+xml" title="tsub&#39;s blog" />
+
+  
+  
+
+  
+   
+    
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="https://blog.tsub.me/images/profile.jpg" />
+    
+  
+
+  
+  <meta name="twitter:title" content="JAWS DAYS 2018 に行ってきた"/>
+  <meta name="twitter:description" content="社内勉強会の準備などで忙しく、レポートを書くのが遅れてしまいましたが、先週の 03/10 (土) に JAWS DAYS 2018 へ行ってきました。
+
+
+
+今回が初参加でしたが、AWS ユーザーグループのお祭りという感じですごく盛り上がっていて楽しいイベントでした。
+
+会社の同僚も 4 人ぐらい参加してました。
+
+自分が参加したセッションと聞いた感想やメモをつらつら書いていきます。
+
+(ただし Keynote は省きます)
+
+"/>
+
+  
+    <meta name="twitter:site" content="@_tsub_"/>
+  
+
+  
+
+  
+  
+    <meta name="twitter:creator" content="@tsub"/>
+  
+
+
+  
+
+
+</head>
+
+
+
+<body>
+<div class="container">
+
+  
+  <header role="banner">
+    <div class="row gutters">
+      <div id="site-title" class="col span_6">
+        <h1><a href="https://blog.tsub.me/">tsub&#39;s blog</a></h1>
+        <h2>雑なメモ</h2>
+      </div>
+      <div id="social" class="col span_6">
+        <ul>
+          <li><a href="https://twitter.com/_tsub_" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+          
+          <li><a href="https://github.com/tsub" target="_blank"><i class="fa fa-github"></i> GitHub</a></li>
+          <li><a href="https://blog.tsub.me/index.xml" type="application/rss+xml" target="_blank"><i class="fa fa-rss"></i> RSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  
+  <main id="single" role="main">
+    <div class="article-header">
+      <h1>JAWS DAYS 2018 に行ってきた</h1>
+      <div class="meta">
+        Mar 17, 2018 &nbsp;
+        
+          <a href="/tags/aws">#AWS</a>&nbsp;
+        
+          <a href="/tags/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88">#イベントレポート</a>&nbsp;
+        
+      </div>
+    </div>
+    <article>
+      <p>社内勉強会の準備などで忙しく、レポートを書くのが遅れてしまいましたが、先週の 03/10 (土) に <a href="https://jawsdays2018.jaws-ug.jp/">JAWS DAYS 2018</a> へ行ってきました。</p>
+
+<p><img src="https://gyazo.com/5dafdbb66c5c6fd5a78aafeb83bd49c8.png" alt="image" /></p>
+
+<p>今回が初参加でしたが、AWS ユーザーグループのお祭りという感じですごく盛り上がっていて楽しいイベントでした。</p>
+
+<p>会社の同僚も 4 人ぐらい参加してました。</p>
+
+<p>自分が参加したセッションと聞いた感想やメモをつらつら書いていきます。</p>
+
+<p>(ただし Keynote は省きます)</p>
+
+<p></p>
+
+<h2 id="コンテナでウェイウェイ-仮">コンテナでウェイウェイ（仮）</h2>
+
+<p>(スライドは見つからなかった。<a href="https://jawsdays2018.jaws-ug.jp/session/756/">公式のセッションページはこちら</a>)</p>
+
+<p>このセッションは前半後半でそれぞれ違う発表でした。</p>
+
+<p><strong>前半</strong></p>
+
+<ul>
+<li>AWS の人から見た Fargate と Lambda の使い分けの視点を聞けたのは良かった
+
+<ul>
+<li>Fargate では難しいもの
+
+<ul>
+<li>Windows Container</li>
+<li>GPU</li>
+<li>docker exec</li>
+<li>Spot や RI</li>
+<li>Task のメトリクス</li>
+</ul></li>
+<li>Lambda を使った方が良い場合
+
+<ul>
+<li>イベントドリブン</li>
+<li>ms単位</li>
+<li>ランタイム管理をしたくない</li>
+<li>分散バッチコンピューティング</li>
+</ul></li>
+</ul></li>
+<li>最近 EC2 や ECS, Fargate の SLA が 99.99% に引き上げられたとのこと</li>
+</ul>
+
+<p><strong>後半</strong></p>
+
+<ul>
+<li>Segment.io 社の大規模な ECS 利用状況を聞けたのは良かった
+
+<ul>
+<li>そのぐらいの規模でも ECS で運用できるというのが知れて安心した</li>
+</ul></li>
+<li>Segment.io の ECS 利用状況が凄まじい
+
+<ul>
+<li>秒間40万リクエスト、15000個のコンテナ</li>
+<li>インスタンスは c5.9xlarge</li>
+</ul></li>
+<li>ECS Optimized AMI を使ってないのはびっくり
+
+<ul>
+<li>Ubuntu 16.04 の Systemd で Docker Daemon を動かし、ecs-agent を動かしているらしい</li>
+</ul></li>
+<li>cluster の分け方は少し参考になった
+
+<ul>
+<li>common という cluster を用意しているらしい。megapool と呼んでいた</li>
+<li>雑にコンテナを動かす場合とかは common cluster で動かすのかな？</li>
+</ul></li>
+<li>オートスケールのポリシーが聞けたのも良かった
+
+<ul>
+<li>Service は CPU かメモリが 90% を超えたらスケールアウト、70 % を切ったらスケールダウン</li>
+<li>インスタンスは reservation 値を元にスケール</li>
+</ul></li>
+<li>ECS 周りのツールでいくつか知らないものもあったので聞けて良かった
+
+<ul>
+<li><a href="https://github.com/segmentio/ecs-logs">https://github.com/segmentio/ecs-logs</a></li>
+<li><a href="https://github.com/stripe/veneur">https://github.com/stripe/veneur</a></li>
+<li>veneur の方は DogStatsD へメトリクスを送るためのグローバルなアグリゲーターらしい。大規模なアプリケーションになってくると必要になりそう</li>
+</ul></li>
+</ul>
+
+<h2 id="ユーザー企業におけるサーバレスシステムへの移行">ユーザー企業におけるサーバレスシステムへの移行</h2>
+
+<script async class="speakerdeck-embed" data-id="12e6e70cf25a4486967aebc2456e5436" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+<ul>
+<li>組織の状況やユースケースにサーバーレスアーキテクチャがぴったりハマっていて技術選定のセンスがすごいと思った</li>
+<li>以前はサーバーを設置するために土地や建屋、非常電源なども管理していたとのこと。すごい..
+
+<ul>
+<li>今はクラウドにしたことでその辺りの管理コストが減った。サーバーレスなアーキテクチャにしたことでサーバーの管理コストも減った</li>
+</ul></li>
+<li>AWS のサービス周りで色々な知見を聞けたのは良かった
+
+<ul>
+<li>S3 はデータを大量に移動させようとすると一部移動されないものがあるらしい。移動されなかったデータはポーリングして拾っているとのこと</li>
+<li>S3 は同じようなファイル名にすると検索が遅いので、ファイル名の先頭にランダムな値を付けて検索を早くしたとのこと</li>
+<li>DynamoDB で Lambda で並列処理をすると書き込みキャパシティが足りなくなったので Lambda の同時実行数を制限してキャパシティを超えないようにしたとのこと</li>
+</ul></li>
+<li>sam-local などを動かしたら開発マシンのスペックが足りない人が増えたので、Cloud9 を使い始めたとのこと</li>
+</ul>
+
+<h2 id="コンテナを守る技術-2018">コンテナを守る技術 2018</h2>
+
+<script async class="speakerdeck-embed" data-id="52ba967a84094efdb39fc582318a28f5" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+
+<ul>
+<li>全体的に知らない情報が多かった
+
+<ul>
+<li>コンテナでここまでセキュリティを意識している事例はあまりないんじゃないだろうか..すごく良い内容だった</li>
+</ul></li>
+<li>IAM Role のポリシーに関しては耳が痛い..最小限にすべきなところをついつい面倒臭がって FullAccess とかを付けてしまいがち</li>
+<li><a href="https://github.com/docker/docker-bench-security">https://github.com/docker/docker-bench-security</a> 知らなかった
+
+<ul>
+<li>ホストのセキュリティ状況をチェックできるスクリプト</li>
+<li>自動化するなら Lambda で SSM の RunCmd を叩き、実行する ログは CloudWatch Logs に送り、CloudWatch からアラートを送るだけなので簡単</li>
+</ul></li>
+<li>Docker イメージのセキュリティチェックとかはやりたいなと思っていた。具体的なツール名も知れて良かった
+
+<ul>
+<li><a href="https://github.com/coreos/clair">https://github.com/coreos/clair</a></li>
+<li><a href="https://github.com/eliasgranderubio/dagda">https://github.com/eliasgranderubio/dagda</a></li>
+</ul></li>
+<li>NeuVector のデモすごかった
+
+<ul>
+<li>アプリケーションが利用する正常な通信径路を設定しておくと、想定外な通信が走った場合は警告が出て画面上で通信を遮断できる</li>
+<li>NeuVector で十分すごいのに aqua がおすすめらしい。aqua のデモも見たかった</li>
+</ul></li>
+<li>12 factor app に従ってなんでも環境変数で渡しがちだけど、DB のパスワードなどを環境変数で渡すと色々なところで見えてしまう
+
+<ul>
+<li>SSM のパラメータストアを使うのがおすすめらしい</li>
+</ul></li>
+</ul>
+
+<h2 id="reusable-serverless-components-accross-projects-via-terraform">Reusable serverless components accross Projects via Terraform</h2>
+
+<p><iframe src="//www.slideshare.net/slideshow/embed_code/key/wrvsVW81dgoWbp" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/dav009/terraforming-90492064" title="Terraforming " target="_blank">Terraforming </a> </strong> from <strong><a href="https://www.slideshare.net/dav009" target="_blank">David Przybilla</a></strong> </div></p>
+
+<ul>
+<li>会社で Terraform を使っているので参考になった</li>
+<li>module 化によって中身が隠蔽されたので覚えることが少なくなったとのこと</li>
+<li>terraform plan の結果が Slack に届き、Approve したら terraform apply されるらしい
+
+<ul>
+<li>Terraform のデプロイパイプラインは正直整えてないので、こういうの自分もやりたい</li>
+</ul></li>
+<li><code>.tfversion</code> というファイルが見慣れなかったので調べたけど、自前？
+
+<ul>
+<li>調べてたら <a href="https://github.com/kamatama41/tfenv">https://github.com/kamatama41/tfenv</a> というツールを見つけた。xxenv 系のいつものやつっぽい</li>
+</ul></li>
+</ul>
+
+<h2 id="lambdaとstepfunctionsを使った新しい負荷試験のカタチ">LambdaとStepFunctionsを使った新しい負荷試験のカタチ</h2>
+
+<script async class="speakerdeck-embed" data-id="01c3d4b2311e45f1a88a3f2d17091f75" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+
+<ul>
+<li>負荷試験をやりたいけどまだやれてないので参考になればと思って聞いた</li>
+<li>何より驚いたのがコストの部分。秒間 200 万アクセスを出せるのにたったの $1.251 しかかからないらしい</li>
+<li>API Gateway からのリクエストを受けて動的に StepFunctions のステートマシンを作っているのは面白かった</li>
+<li>Fargate を使うとオーバーヘッドがあって攻撃タイミングがずれるとのこと。ここは盲点だった</li>
+<li>OSS 化は期待</li>
+</ul>
+
+<h2 id="全体的な感想">全体的な感想</h2>
+
+<ul>
+<li>知らない情報がたくさん聞けたので参加して良かった</li>
+<li>ただし丸一日イベントはやっぱり疲れる。会場が自宅から遠く、朝も早いのでちょっと辛かった</li>
+<li>基本的にコンテナの話を聞きたかったけど、あまり多くはなかった。コンテナよりもサーバーレスが盛り上がっている感じだろうか</li>
+</ul>
+      
+      
+      
+    </article>
+    
+
+
+  </main>
+  
+  <nav class="pagination-single">
+    
+      <span class="previous">&larr; <a href="https://blog.tsub.me/post/introduce-aws-lambda-with-golang-and-sam/" rel="prev">AWS Lambda with Golang と SAM に入門した</a></span>
+    
+    
+      <span class="next"><a href="https://blog.tsub.me/post/go111-modules-in-circleci/" rel="next">Go 1.11 の Modules (vgo) を CircleCI で使う</a> &rarr;</span>
+    
+  </nav>
+
+
+  
+  <footer role="contentinfo">
+    <div style="text-align:center;">
+      <img src="/images/profile.jpg" width="64" height="64"><br>
+      Copyright 2016 tsub
+    </div>
+  </footer>
+
+
+</div>
+
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-63212158-2', 'auto');
+	ga('send', 'pageview');
+</script>
+
+</body>
+</html>
+

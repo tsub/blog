@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elixir on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/elixir/</link>
+    <description>Recent content in Elixir on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Thu, 30 Jun 2016 23:56:16 +0900</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/elixir/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>tokyo.ex #3 参加してきた</title>
+      <link>https://blog.tsub.me/post/tokyo-ex-3-entry-report/</link>
+      <pubDate>Thu, 30 Jun 2016 23:56:16 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/tokyo-ex-3-entry-report/</guid>
+      <description>&lt;p&gt;tokyo.ex #3 に参加してきました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://beam-lang.connpass.com/event/32704/&#34;&gt;tokyo.ex #3&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;前々からtokyo.ex #1, #2と気にはなっていたんですが、気づいた時には定員が埋まってまして今回やっと参加できました。&lt;/p&gt;
+
+&lt;p&gt;と思ってたらわりと席空いてたりキャンセル多かったり、定員超えてるからといって諦めなくても良かったみたいですね&lt;/p&gt;
+
+&lt;p&gt;参加してみての全体的な感想ですが、正直最近elixirを触ってなかったのでいい刺激になりました。&lt;/p&gt;
+
+&lt;p&gt;話の内容は非常にレベルが高く、大半は理解できませんでしたが、その分elixirの勢いとコミュニティの熱さは十分伝わってきました。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

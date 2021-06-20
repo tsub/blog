@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/docker/</link>
+    <description>Recent content in Docker on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 16 Apr 2017 05:29:33 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ブログをGKEでの運用に移行した</title>
+      <link>https://blog.tsub.me/post/operate-blog-server-on-gke/</link>
+      <pubDate>Sun, 16 Apr 2017 05:29:33 +0000</pubDate>
+      
+      <guid>https://blog.tsub.me/post/operate-blog-server-on-gke/</guid>
+      <description>&lt;p&gt;このブログはGitHub pagesを使って公開していたが、GKEに移行することにした。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://blog.tsub.me/post/created-blog-by-hugo/&#34;&gt;はてなブログからHugo on Github Pagesに移行しました&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;これを聞いて、99%の人が、HugoでHTMLファイルを生成して公開しているならわざわざサーバーなんて必要ないんじゃないか？金の無駄じゃないか？と思うかもしれない。&lt;/p&gt;
+
+&lt;p&gt;自分もそう思う。&lt;/p&gt;
+
+&lt;p&gt;今回GKEを使ったのはGKEとk8sでのコンテナ運用を経験したかったことが非常に大きい。&lt;/p&gt;
+
+&lt;p&gt;会社ではECSを本番運用しているが、ECSに比べてk8sの方が良さそうな雰囲気しかないのでGKEの方も触っておこうかと思って移行した。&lt;/p&gt;
+
+&lt;p&gt;また、今のところブログ以外に個人で運用しているWebサービス等はないため、ブログがちょうどいい題材だった。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Blox Introduction</title>
+      <link>https://blog.tsub.me/post/blox-introduction/</link>
+      <pubDate>Fri, 09 Dec 2016 00:00:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/blox-introduction/</guid>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;http://qiita.com/advent-calendar/2016/docker&#34;&gt;Docker Advent Calendar 2016&lt;/a&gt;の9日目の記事です。&lt;/p&gt;
+
+&lt;p&gt;先日AWSのre:Invent 2016で&lt;a href=&#34;https://blox.github.io/&#34;&gt;Blox&lt;/a&gt;が発表されました。&lt;/p&gt;
+
+&lt;p&gt;BloxはEC2 Container Service(ECS)関連のオープンソースのツール群のことです。&lt;/p&gt;
+
+&lt;p&gt;そしてそのツールとは主にECSのカスタムスケジューラを指します&lt;/p&gt;
+
+&lt;p&gt;ECSはマネージドなスケジューラとマネージャを標準で備えていますが、Bloxはそれとは別に自分でホスティングする必要があります。&lt;/p&gt;
+
+&lt;p&gt;しかし、ECSに足りない機能を補ってくれるため導入するメリットは大きいでしょう。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/jp/blogs/news/monitor-cluster-state-with-amazon-ecs-event-stream/&#34;&gt;先日リリースされた、CloudWatchEventsのECSイベントストリーム&lt;/a&gt;を利用することで、よりスムーズにECSのクラスタの状態を監視してカスタムスケジューラを作ることができるようになりました。&lt;/p&gt;
+
+&lt;p&gt;Bloxはこれを使った一例と言えます&lt;/p&gt;
+
+&lt;p&gt;この記事ではBloxについて試してみて分かった内容や所感について書いていきます&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://i.gyazo.com/4c00e85fca7b228d7aa0d5f1e6dd1d27.png&#34; alt=&#34;Blox thumbnail&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>serverspecで複数のdocker containerに対してテストしたい</title>
+      <link>https://blog.tsub.me/post/serverspec-for-several-container/</link>
+      <pubDate>Sat, 25 Jun 2016 23:36:05 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/serverspec-for-several-container/</guid>
+      <description>&lt;p&gt;前回の記事でdocker containerに対してserverspecでテストができるようになりました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://blog.tsub.me/post/serverspec-for-docker/&#34;&gt;serverspecでdocker containerに対してテストしたい&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;dockerを扱う以上、containerは複数立てるのが普通です。&lt;/p&gt;
+
+&lt;p&gt;今回は複数のcontainerを立てた時にそれぞれのcontainerに対してテストする方法について書いていきます。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>serverspecでdocker containerに対してテストしたい</title>
+      <link>https://blog.tsub.me/post/serverspec-for-docker/</link>
+      <pubDate>Sat, 25 Jun 2016 22:25:08 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/serverspec-for-docker/</guid>
+      <description>&lt;p&gt;仕事でこれからdockerを使い始めるので、dockerを触りつつメモがてら記事に残していきます。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

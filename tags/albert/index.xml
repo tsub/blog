@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Albert on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/albert/</link>
+    <description>Recent content in Albert on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 28 Oct 2018 18:35:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/albert/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Albert で GitHub リポジトリを開ける拡張を作った</title>
+      <link>https://blog.tsub.me/post/create-albert-github/</link>
+      <pubDate>Sun, 28 Oct 2018 18:35:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/create-albert-github/</guid>
+      <description>&lt;p&gt;先日プライベートの開発マシンを Linux にしたのですが、macOS の時に一番重宝していたものがなにかというと、実は &lt;a href=&#34;https://www.alfredapp.com/&#34;&gt;Alfred&lt;/a&gt; だったことに気づきました。&lt;/p&gt;
+
+&lt;p&gt;Alfred がないとストレスフルです。&lt;/p&gt;
+
+&lt;p&gt;ただ Linux には Alternative Alfred がいくつかあり、その中でも Albert が比較的良さそうだったので Albert を使っていますが、Alfred で言う Workflow にあたるものが全然充実していませんでした。&lt;/p&gt;
+
+&lt;p&gt;特に Alfred から GitHub を開く操作が一番多い気がするので、まずはそれを Albert でもできるようにするために、今回拡張を作りました。&lt;/p&gt;
+
+&lt;p&gt;&lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/tsub/albert-github&#34;&gt;tsub/albert-github: Open GitHub repository in browser with Albert&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://gyazo.com/fff7125ea22e33c863f6fd535d7f2b8b.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

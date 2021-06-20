@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Aws on tsub&#39;s blog</title>
+    <link>https://blog.tsub.me/tags/aws/</link>
+    <description>Recent content in Aws on tsub&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 06 Oct 2019 14:35:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://blog.tsub.me/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>「aws-vault loginでChromeのウィンドウをAWSアカウント毎に分離する」を Alfred 用に作った</title>
+      <link>https://blog.tsub.me/post/create-alfred-aws-vault-workflow/</link>
+      <pubDate>Sun, 06 Oct 2019 14:35:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/create-alfred-aws-vault-workflow/</guid>
+      <description>&lt;p&gt;&lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/tsub/alfred-aws-vault-workflow&#34;&gt;tsub/alfred-aws-vault-workflow: A Alfred workflow to open the AWS Management Console with aws-vault&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Chrome 版&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://i.gyazo.com/33341687e0419d3863f913a00997744c.gif&#34; alt=&#34;Features for Google Chrome&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Firefox (&lt;a href=&#34;https://addons.mozilla.org/firefox/addon/multi-account-containers/&#34;&gt;Multi-Account Container&lt;/a&gt; extension) 版&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://i.gyazo.com/a68e0d4cd6f9a80b659cfc1694cd85dd.gif&#34; alt=&#34;Features for Firefox&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;aws-vault 自体今回初めて知ったのですが、以下の記事を読んで、複数の AWS アカウント使いには大変便利そうだったので Alfred 用のものをシュッと作りました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://qiita.com/minamijoyo/items/f3cbb003a34954a32970&#34;&gt;aws-vault loginでChromeのウィンドウをAWSアカウント毎に分離する - Qiita&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>JAWS DAYS 2018 に行ってきた</title>
+      <link>https://blog.tsub.me/post/jaws-days-2018/</link>
+      <pubDate>Sat, 17 Mar 2018 06:16:55 +0000</pubDate>
+      
+      <guid>https://blog.tsub.me/post/jaws-days-2018/</guid>
+      <description>&lt;p&gt;社内勉強会の準備などで忙しく、レポートを書くのが遅れてしまいましたが、先週の 03/10 (土) に &lt;a href=&#34;https://jawsdays2018.jaws-ug.jp/&#34;&gt;JAWS DAYS 2018&lt;/a&gt; へ行ってきました。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://gyazo.com/5dafdbb66c5c6fd5a78aafeb83bd49c8.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;今回が初参加でしたが、AWS ユーザーグループのお祭りという感じですごく盛り上がっていて楽しいイベントでした。&lt;/p&gt;
+
+&lt;p&gt;会社の同僚も 4 人ぐらい参加してました。&lt;/p&gt;
+
+&lt;p&gt;自分が参加したセッションと聞いた感想やメモをつらつら書いていきます。&lt;/p&gt;
+
+&lt;p&gt;(ただし Keynote は省きます)&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Go で s3-edit という CLI アプリケーションを作った</title>
+      <link>https://blog.tsub.me/post/create-s3-edit/</link>
+      <pubDate>Tue, 05 Sep 2017 22:30:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/create-s3-edit/</guid>
+      <description>&lt;p&gt;最近 Rust を少し学んでいたが、難しくて少し挫折しかけたのと、結局仕事への導入を考えるなら Go のほうが既に書ける人が何人かいる、というのもあり Go を書き始めた。&lt;/p&gt;
+
+&lt;p&gt;手初めてに欲しい CLI アプリケーションがあったのでそれをサクッと Go で書いてみた。&lt;/p&gt;
+
+&lt;p&gt;&lt;i class=&#34;fa fa-github&#34;&gt;&lt;/i&gt; &lt;a href=&#34;https://github.com/tsub/s3-edit&#34;&gt;tsub/s3-edit: Edit directly a file on Amazon S3&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Blox Introduction</title>
+      <link>https://blog.tsub.me/post/blox-introduction/</link>
+      <pubDate>Fri, 09 Dec 2016 00:00:00 +0900</pubDate>
+      
+      <guid>https://blog.tsub.me/post/blox-introduction/</guid>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;http://qiita.com/advent-calendar/2016/docker&#34;&gt;Docker Advent Calendar 2016&lt;/a&gt;の9日目の記事です。&lt;/p&gt;
+
+&lt;p&gt;先日AWSのre:Invent 2016で&lt;a href=&#34;https://blox.github.io/&#34;&gt;Blox&lt;/a&gt;が発表されました。&lt;/p&gt;
+
+&lt;p&gt;BloxはEC2 Container Service(ECS)関連のオープンソースのツール群のことです。&lt;/p&gt;
+
+&lt;p&gt;そしてそのツールとは主にECSのカスタムスケジューラを指します&lt;/p&gt;
+
+&lt;p&gt;ECSはマネージドなスケジューラとマネージャを標準で備えていますが、Bloxはそれとは別に自分でホスティングする必要があります。&lt;/p&gt;
+
+&lt;p&gt;しかし、ECSに足りない機能を補ってくれるため導入するメリットは大きいでしょう。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/jp/blogs/news/monitor-cluster-state-with-amazon-ecs-event-stream/&#34;&gt;先日リリースされた、CloudWatchEventsのECSイベントストリーム&lt;/a&gt;を利用することで、よりスムーズにECSのクラスタの状態を監視してカスタムスケジューラを作ることができるようになりました。&lt;/p&gt;
+
+&lt;p&gt;Bloxはこれを使った一例と言えます&lt;/p&gt;
+
+&lt;p&gt;この記事ではBloxについて試してみて分かった内容や所感について書いていきます&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://i.gyazo.com/4c00e85fca7b228d7aa0d5f1e6dd1d27.png&#34; alt=&#34;Blox thumbnail&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
